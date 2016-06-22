@@ -15,9 +15,14 @@
     <article>
         <section class="row">
             <div class="col-xs-12">
+                <input type="checkbox" id="Fundamental" name="Fundamental" ng-model="ModelData.Fundamental"/> Fundamental
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <table class="table">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th class="alpha" >Token</th>
@@ -27,10 +32,11 @@
                             </thead>
                             <tbody>
                                 <!-- <pre ng-bind="item.isolatePercent"/> -->
-                                <tr ng-repeat="item in x">
+                                <tr ng-repeat="item in x" ng-show="ModelData.Fundamental">
                                     <td class="alpha"  ng-bind="item.vocabListRow.token.baseForm"/>
-                                    <td class="number" ng-bind="item.isolatePercent"/>
-                                    <td class="number" ng-bind="item.cumulativePercent"/>
+                                    <!-- http://stackoverflow.com/questions/16134391/restrict-number-of-decimals-in-html5-type-number-input-field-with-angularjs-m -->
+                                    <td class="number"  ng-bind="{{ 100 * item.isolatePercent | number : 2}} + '%'"/>
+                                    <td class="number" ng-bind="{{ 100 * item.cumulativePercent | number : 2}} + '%'"/>
                                 </tr>
                             </tbody>
                         </table>
