@@ -1,3 +1,10 @@
+.number {
+  text-align: right;
+}
+.alpha {
+  text-align: left;
+}
+
 .massive{
     color:black;
     /*font-family: "MS PGothic", sans-serif;*/

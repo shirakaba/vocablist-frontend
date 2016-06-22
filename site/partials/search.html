@@ -12,20 +12,40 @@
           </div>
       </div>
     </nav>
+    <article>
+        <section class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="alpha" >Token</th>
+                                    <th class="number">Lone</th>
+                                    <th class="number">Cumulative</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <pre ng-bind="item.isolatePercent"/> -->
+                                <tr ng-repeat="item in x">
+                                    <td class="alpha"  ng-bind="item.isolatePercent"/>
+                                    <td class="number" ng-bind="item.isolatePercent"/>
+                                    <td class="number" ng-bind="item.cumulativePercent"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
 
-    <!-- <pre ng-bind="x | json"/> -->
-    <div ng-repeat="item in x">
-      <pre ng-bind="item | json"/>
-    </div>
-
-    <article class="ng-hide houdini" data-ng-show="kanjidicReadingResults.length &amp;&amp; !hideMe">
+    <!-- <article class="ng-hide houdini" data-ng-show="kanjidicReadingResults.length &amp;&amp; !hideMe">
       <h2>Results</h2>
       <section class="row">
           <div class="col-xs-12">
-              <!-- 'data-ng-show' displays this panel only if the search result evaluates as TRUE. -->
               <div class="panel panel-default">
                   <div class="panel-body">
-                      <!-- The panel brings its own padding, so this row is needed to subtract some padding. -->
                       <div class="definition-left-column">
                           <span class="massive" data-ng-bind="searchQuery"></span>
                       </div>
@@ -40,7 +60,6 @@
                               </dd>
                               <dt>Reading</dt>
                               <dd>
-                                  <!-- data-ng-repeats can be optimised by 'track by $index', which tracks by the index of the data in the array. -->
                                   <span data-ng-repeat="readingIterator in kanjidicReadingResults track by $index">
                                     <span data-ng-bind="readingIterator"></span><span data-ng-hide="$last">, </span>
                                   </span>
@@ -82,7 +101,6 @@
                           <dd data-ng-bind="hkanjiPageOnlyResult"></dd>
                           <dt>Henshall index</dt>
                           <dd data-ng-bind="hkanjiIndexOnlyResult"></dd>
-                          <!-- Unicode only available 1945 kanji (from Henshall); can be decoded from kanjidic_json (base64), or directly -->
                           <dt>Unicode</dt>
                           <dd data-ng-bind="hkanjiCodePointOnlyResult.unicode"></dd>
                           <dt>JIS</dt>
@@ -92,7 +110,7 @@
               </div>
           </div>
       </section>
-    </article>
+    </article> -->
 
     <footer>
       <section class="row">
