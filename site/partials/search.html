@@ -16,6 +16,10 @@
         <section class="row">
             <div class="col-xs-12">
                 <input type="checkbox" id="fundamental" ng-model="fundChecked"/> Fundamental
+                <input type="checkbox" id="jlpt4" ng-model="jlpt4Checked"/> JLPT4
+                <input type="checkbox" id="jlpt3" ng-model="jlpt3Checked"/> JLPT3
+                <input type="checkbox" id="jlpt2" ng-model="jlpt2Checked"/> JLPT2
+                <input type="checkbox" id="jlpt1" ng-model="jlpt1Checked"/> JLPT1
             </div>
         </section>
         <section class="row">
@@ -33,9 +37,18 @@
                             <tbody>
                                 <!-- <pre ng-bind="item.isolatePercent"/> -->
                                 <tr
-                                ng-repeat="item in x | filter:fundamentalsFilter"
+                                ng-repeat="item in x
+                                | filter:fundamentalsFilter
+                                | filter:jlpt4Filter
+                                | filter:jlpt3Filter
+                                | filter:jlpt2Filter
+                                | filter:jlpt1Filter"
                                 ng-class="{
-                                'fundamentalRow': item.fundamental
+                                'fundamentalRow': item.fundamental,
+                                'jlpt4Row': item.jlpt4,
+                                'jlpt3Row': item.jlpt3,
+                                'jlpt2Row': item.jlpt2,
+                                'jlpt1Row': item.jlpt1
                                 }">
                                     <td class="alpha"  ng-bind="item.vocabListRow.token.baseForm"/>
                                     <!-- http://stackoverflow.com/questions/16134391/restrict-number-of-decimals-in-html5-type-number-input-field-with-angularjs-m -->

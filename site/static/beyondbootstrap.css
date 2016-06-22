@@ -2,6 +2,22 @@
   background-color: red;
 }
 
+.jlpt4Row {
+  background-color: orange;
+}
+
+.jlpt3Row {
+  background-color: yellow;
+}
+
+.jlpt2Row {
+  background-color: green;
+}
+
+.jlpt1Row {
+  background-color: blue;
+}
+
 .number {
   text-align: right;
 }

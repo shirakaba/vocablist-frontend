@@ -16,15 +16,39 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                 controller: ["$scope", "$http", function(sc, $http) {
                     angular.extend(sc, {
                         fundChecked: true,
+                        jlpt4Checked: true,
+                        jlpt3Checked: true,
+                        jlpt2Checked: true,
+                        jlpt1Checked: true,
                         fundamentalsFilter: function(item) {
                             // console.log(sc.fundChecked);
                             return sc.fundChecked || !item.fundamental;
-                        }
+                        },
+                        jlpt4Filter: function(item) {
+                            console.log(item);
+                            return sc.jlpt4Checked || !item.jlpt4;
+                        },
+                        jlpt3Filter: function(item) {
+                            // console.log(sc.fundChecked);
+                            return sc.jlpt3Checked || !item.jlpt3;
+                        },
+                        jlpt2Filter: function(item) {
+                            // console.log(sc.fundChecked);
+                            return sc.jlpt2Checked || !item.jlpt2;
+                        },
+                        jlpt1Filter: function(item) {
+                            // console.log(sc.fundChecked);
+                            return sc.jlpt1Checked || !item.jlpt1;
+                        },
+                        mySearch: "生",
+                        currentRow: [],
+                        kanjidicReadingResults: [],
+                        hideMe: false
                     });
-                    sc.mySearch = "生"; // the input field's value is bound to the value of this variable.
-                    sc.currentRow = [];
-                    sc.kanjidicReadingResults = [];
-                    sc.hideMe = false; // We declare this one only because our ng-show interacts with it. It's more about being explicit for documentation.
+                    // sc.mySearch = "生"; // the input field's value is bound to the value of this variable.
+                    // sc.currentRow = [];
+                    // sc.kanjidicReadingResults = [];
+                    // sc.hideMe = false; // We declare this one only because our ng-show interacts with it. It's more about being explicit for documentation.
 
             //         sc.submit = function(query) {
             //             sc.mySearch = query;
@@ -76,7 +100,6 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                         "ただし、「練馬」が都内最高気温であったと報じられることについては、気象庁のアメダス観測所の配置[1]にも留意する必要がある。「練馬」の気温とは、当区に設置されたアメダス観測所[2]の観測データのことであり、23区内のアメダス観測所は「練馬」のほかには、東京（千代田区）、世田谷（世田谷区）、江戸川臨海（江戸川区）、羽田（大田区）のみの設置である。あくまでもこれらの観測所のデータとの比較でしかないため、「練馬」が都内最高気温であったと報じられた場合でも、練馬区近隣の区が練馬区より気温が高くなかったとは必ずしも言い切れない。アメダス観測所については、近年高層マンションが建ち並んだ事で風通しが悪くなった為、2012年12月、武蔵大学・江古田キャンパスから日本銀行石神井運動場跡地へ、7km西に移転した。" +
                         "尚、年間降水量は約1,000mmから約2,000mmの間で増減しており、顕著な傾向は見られない。" +
                         "しかし、近年は夏場に多く発生するゲリラ豪雨による冠水や浸水の被害が報告されることもあり、その対策の一環として雨水貯留施設を埋設する工事を進めている。[9]"
-
                         $http.get('http://localhost:8080/test6?input='+encodeURIComponent(input))
                         .then(function(response) {
                             // console.log(response.data.cumulative);
@@ -88,6 +111,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                             console.error(response);
                         });
                     };
+
+                    sc.submit();
                 }]
             })
             .state({
