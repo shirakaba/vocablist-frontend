@@ -1,0 +1,100 @@
+html {
+  min-height: 100%;
+}
+
+body{
+  width: 100%;
+  min-width:630px;
+  margin:auto;
+  background-color: rgba(216, 175, 222, 0.5);
+}
+
+p{
+  font-size: 18px;
+}
+
+header, nav, aside, article, footer{
+  width: 90%;
+  margin: auto 5%;
+}
+
+form input.btn {
+  display:block;
+  margin:0;
+  padding:0;
+  width: 50px;
+  height: 50px;
+  background-image: url("svg/MagnifierOptimised.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: lightpink;
+  border:none;
+  border-radius: 0px;
+}
+
+div.input-group, input.form-control{
+  height: 50px;
+}
+
+nav{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.orange .clicked a,.orange .default a, .orange .clicked a:hover, .orange .default a:hover{
+  margin: 0;
+  border:none;
+  border-radius: 0px;
+  font-size:18px;
+}
+
+.nav>li>a:hover, .nav>li>a:focus {
+    text-decoration: initial !important;
+    background-color: pink !important;
+}
+
+.orange .clicked a, .orange .clicked a:hover{
+  background-color: lightpink;
+  color: white;
+}
+
+form input.form-control{
+  font-size:20px;
+  border-radius: 0px;
+}
+
+.nav-pills>li+li , .orange .default a {
+  margin:0;
+  background-color: white;
+  color: lightpink;
+  opacity: 0.90;
+}
+
+.orange .default a:hover{
+  background-color: pink;
+  margin:0;
+  color: white;
+}
+
+dl.dl-horizontal, dl.dl-vertical{
+  font-size: 20px;
+}
+
+dl.dl-vertical{
+  padding-right: 20px;
+}
+
+dd{
+  padding-left:30px;
+  text-align: justify;
+}
+
+.my-panel-heading{
+  font-size:24px;
+  margin-top:0px;
+}
+
+.panel-default{
+ border-radius:0px;
+ background-color: rgba(255, 255, 255, 0.95);
+}

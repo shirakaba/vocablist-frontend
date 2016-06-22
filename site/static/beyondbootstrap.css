@@ -1,0 +1,45 @@
+.massive{
+    color:black;
+    /*font-family: "MS PGothic", sans-serif;*/
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    font-size:18em;
+    line-height: 1em;
+    width: 18em;
+}
+
+.bg{
+  height: 100%;
+  width: 100%;
+  position:fixed;
+  background-image: url("img/bg.png");
+  background-repeat: no-repeat;
+  z-index: -1;
+  background-position: center bottom;
+  opacity: 0.85;
+}
+
+.massiveimg{
+    max-width: 18em;
+    max-height: 18em;
+}
+
+.maxdocwidth{
+    max-width: 1000px;
+}
+
+.definition-left-column {
+    float: left;
+}
+
+.definition-right-column {
+    min-width: 18em;
+    overflow: auto;
+}
+
+.houdini {
+    overflow:hidden;
+}
+
+.clicked a {
+    cursor: default !important;
+}
