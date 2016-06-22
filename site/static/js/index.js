@@ -14,6 +14,13 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                 templateUrl: "partials/search.html",
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
                 controller: ["$scope", "$http", function(sc, $http) {
+                    angular.extend(sc, {
+                        fundChecked: true,
+                        fundamentalsFilter: function(item) {
+                            // console.log(sc.fundChecked);
+                            return sc.fundChecked || !item.fundamental;
+                        }
+                    });
                     sc.mySearch = "生"; // the input field's value is bound to the value of this variable.
                     sc.currentRow = [];
                     sc.kanjidicReadingResults = [];
