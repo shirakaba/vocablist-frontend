@@ -23,27 +23,27 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                         n5Checked: true,
                         fundamentalsFilter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.fundChecked || !item.fundamental;
+                            return sc.fundChecked || !item.vocabListRowCumulative.fundamental;
                         },
                         n1Filter: function(item) {
                             console.log(item);
-                            return sc.n1Checked || !item.n1;
+                            return sc.n1Checked || !item.vocabListRowCumulative.n1;
                         },
                         n2Filter: function(item) {
                             console.log(item);
-                            return sc.n2Checked || !item.n2;
+                            return sc.n2Checked || !item.vocabListRowCumulative.n2;
                         },
                         n3Filter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.n3Checked || !item.n3;
+                            return sc.n3Checked || !item.vocabListRowCumulative.n3;
                         },
                         n4Filter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.n4Checked || !item.n4;
+                            return sc.n4Checked || !item.vocabListRowCumulative.n4;
                         },
                         n5Filter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.n5Checked || !item.n5;
+                            return sc.n5Checked || !item.vocabListRowCumulative.n5;
                         },
                         mySearch: "生",
                         currentRow: [],
