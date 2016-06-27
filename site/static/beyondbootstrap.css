@@ -1,13 +1,9 @@
-.fundamentalRow {
-  background-color: red;
-}
-
 .n1Row {
-  background-color: orange;
+  background-color: purple;
 }
 
 .n2Row {
-  background-color: yellow;
+  background-color: blue;
 }
 
 .n3Row {
@@ -15,11 +11,15 @@
 }
 
 .n4Row {
-  background-color: blue;
+  background-color: yellow;
 }
 
 .n5Row {
-  background-color: purple;
+  background-color: orange;
+}
+
+.fundamentalRow {
+  background-color: red;
 }
 
 .number {
