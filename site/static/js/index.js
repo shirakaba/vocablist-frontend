@@ -16,29 +16,34 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                 controller: ["$scope", "$http", function(sc, $http) {
                     angular.extend(sc, {
                         fundChecked: true,
-                        jlpt4Checked: true,
-                        jlpt3Checked: true,
-                        jlpt2Checked: true,
-                        jlpt1Checked: true,
+                        n1Checked: true,
+                        n2Checked: true,
+                        n3Checked: true,
+                        n4Checked: true,
+                        n5Checked: true,
                         fundamentalsFilter: function(item) {
                             // console.log(sc.fundChecked);
                             return sc.fundChecked || !item.fundamental;
                         },
-                        jlpt4Filter: function(item) {
+                        n1Filter: function(item) {
                             console.log(item);
-                            return sc.jlpt4Checked || !item.jlpt4;
+                            return sc.n1Checked || !item.n1;
                         },
-                        jlpt3Filter: function(item) {
-                            // console.log(sc.fundChecked);
-                            return sc.jlpt3Checked || !item.jlpt3;
+                        n2Filter: function(item) {
+                            console.log(item);
+                            return sc.n2Checked || !item.n2;
                         },
-                        jlpt2Filter: function(item) {
+                        n3Filter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.jlpt2Checked || !item.jlpt2;
+                            return sc.n3Checked || !item.n3;
                         },
-                        jlpt1Filter: function(item) {
+                        n4Filter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.jlpt1Checked || !item.jlpt1;
+                            return sc.n4Checked || !item.n4;
+                        },
+                        n5Filter: function(item) {
+                            // console.log(sc.fundChecked);
+                            return sc.n5Checked || !item.n5;
                         },
                         mySearch: "生",
                         currentRow: [],

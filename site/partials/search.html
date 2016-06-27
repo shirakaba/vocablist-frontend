@@ -16,10 +16,11 @@
         <section class="row">
             <div class="col-xs-12">
                 <input type="checkbox" id="fundamental" ng-model="fundChecked"/> Fundamental
-                <input type="checkbox" id="jlpt4" ng-model="jlpt4Checked"/> JLPT4
-                <input type="checkbox" id="jlpt3" ng-model="jlpt3Checked"/> JLPT3
-                <input type="checkbox" id="jlpt2" ng-model="jlpt2Checked"/> JLPT2
-                <input type="checkbox" id="jlpt1" ng-model="jlpt1Checked"/> JLPT1
+                <input type="checkbox" id="n1" ng-model="n1Checked"/> N1
+                <input type="checkbox" id="n2" ng-model="n2Checked"/> N2
+                <input type="checkbox" id="n3" ng-model="n3Checked"/> N3
+                <input type="checkbox" id="n4" ng-model="n4Checked"/> N4
+                <input type="checkbox" id="n5" ng-model="n5Checked"/> N5
             </div>
         </section>
         <section class="row">
@@ -39,16 +40,18 @@
                                 <tr
                                 ng-repeat="item in x
                                 | filter:fundamentalsFilter
-                                | filter:jlpt4Filter
-                                | filter:jlpt3Filter
-                                | filter:jlpt2Filter
-                                | filter:jlpt1Filter"
+                                | filter:n1Filter
+                                | filter:n2Filter
+                                | filter:n3Filter
+                                | filter:n4Filter
+                                | filter:n5Filter"
                                 ng-class="{
-                                'fundamentalRow': item.fundamental,
-                                'jlpt4Row': item.vocabListRowCumulative.jlpt4,
-                                'jlpt3Row': item.vocabListRowCumulative.jlpt3,
-                                'jlpt2Row': item.vocabListRowCumulative.jlpt2,
-                                'jlpt1Row': item.vocabListRowCumulative.jlpt1
+                                'fundamentalRow': item.vocabListRowCumulative.fundamental,
+                                'n1Row': item.vocabListRowCumulative.n1,
+                                'n2Row': item.vocabListRowCumulative.n2,
+                                'n3Row': item.vocabListRowCumulative.n3,
+                                'n4Row': item.vocabListRowCumulative.n4,
+                                'n5Row': item.vocabListRowCumulative.n5
                                 }">
                                     <td class="alpha"  ng-bind="item.vocabListRowCumulative.vocabListRow.token.baseForm"/>
                                     <!-- http://stackoverflow.com/questions/16134391/restrict-number-of-decimals-in-html5-type-number-input-field-with-angularjs-m -->

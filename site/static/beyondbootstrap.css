@@ -2,20 +2,24 @@
   background-color: red;
 }
 
-.jlpt4Row {
+.n1Row {
   background-color: orange;
 }
 
-.jlpt3Row {
+.n2Row {
   background-color: yellow;
 }
 
-.jlpt2Row {
+.n3Row {
   background-color: green;
 }
 
-.jlpt1Row {
+.n4Row {
   background-color: blue;
+}
+
+.n5Row {
+  background-color: purple;
 }
 
 .number {
