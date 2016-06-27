@@ -45,15 +45,15 @@
                                 | filter:jlpt1Filter"
                                 ng-class="{
                                 'fundamentalRow': item.fundamental,
-                                'jlpt4Row': item.jlpt4,
-                                'jlpt3Row': item.jlpt3,
-                                'jlpt2Row': item.jlpt2,
-                                'jlpt1Row': item.jlpt1
+                                'jlpt4Row': item.vocabListRowCumulative.jlpt4,
+                                'jlpt3Row': item.vocabListRowCumulative.jlpt3,
+                                'jlpt2Row': item.vocabListRowCumulative.jlpt2,
+                                'jlpt1Row': item.vocabListRowCumulative.jlpt1
                                 }">
-                                    <td class="alpha"  ng-bind="item.vocabListRow.token.baseForm"/>
+                                    <td class="alpha"  ng-bind="item.vocabListRowCumulative.vocabListRow.token.baseForm"/>
                                     <!-- http://stackoverflow.com/questions/16134391/restrict-number-of-decimals-in-html5-type-number-input-field-with-angularjs-m -->
-                                    <td class="number"  ng-bind="{{ 100 * item.isolatePercent | number : 2}} + '%'"/>
-                                    <td class="number" ng-bind="{{ 100 * item.cumulativePercent | number : 2}} + '%'"/>
+                                    <td class="number"  ng-bind="{{ 100 * item.vocabListRowCumulative.isolatePercent | number : 2}} + '%'"/>
+                                    <td class="number" ng-bind="{{ 100 * item.vocabListRowCumulative.cumulativePercent | number : 2}} + '%'"/>
                                 </tr>
                             </tbody>
                         </table>
