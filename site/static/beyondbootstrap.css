@@ -1,25 +1,35 @@
+.uniqueRow {
+  color: rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.4);
+}
 .n1Row {
-  background-color: purple;
+  color: rgb(0, 0, 0);
+  background-color: rgba(213, 213, 213, 0.4);
 }
 
 .n2Row {
-  background-color: blue;
+  color: rgb(0, 0, 0);
+  background-color: rgba(171, 171, 171, 0.4);
 }
 
 .n3Row {
-  background-color: green;
+  color: rgb(0, 0, 0);
+  background-color: rgba(128, 128, 128, 0.4);
 }
 
 .n4Row {
-  background-color: yellow;
+  color: rgb(0, 0, 0);
+  background-color: rgba(86, 86, 86, 0.4);
 }
 
 .n5Row {
-  background-color: orange;
+  color: rgb(0, 0, 0);
+  background-color: rgba(43, 43, 43, 0.4);
 }
 
 .fundamentalRow {
-  background-color: red;
+  color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .number {
@@ -58,19 +68,23 @@
     max-width: 1000px;
 }
 
-.definition-left-column {
-    float: left;
-}
-
-.definition-right-column {
-    min-width: 18em;
-    overflow: auto;
-}
-
 .houdini {
     overflow:hidden;
 }
 
 .clicked a {
     cursor: default !important;
+}
+
+table.definitions {
+  width:100%;
+}
+
+.definitions tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.definitions-column {
+  padding: 0px !important;
+  vertical-align: middle !important;
 }

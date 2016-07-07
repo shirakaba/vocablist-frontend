@@ -26,11 +26,11 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                             return sc.fundChecked || !item.fundamental;
                         },
                         n1Filter: function(item) {
-                            console.log(item);
+                            // console.log(item);
                             return sc.n1Checked || !item.n1;
                         },
                         n2Filter: function(item) {
-                            console.log(item);
+                            // console.log(item);
                             return sc.n2Checked || !item.n2;
                         },
                         n3Filter: function(item) {

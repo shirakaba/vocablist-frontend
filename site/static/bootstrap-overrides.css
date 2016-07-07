@@ -6,7 +6,7 @@ body{
   width: 100%;
   min-width:630px;
   margin:auto;
-  background-color: rgba(216, 175, 222, 0.5);
+  /*background-color: rgba(216, 175, 222, 0.5);*/
 }
 
 p{
@@ -27,7 +27,7 @@ form input.btn {
   background-image: url("svg/MagnifierOptimised.svg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-color: lightpink;
+  /*background-color: lightpink;*/
   border:none;
   border-radius: 0px;
 }
@@ -96,5 +96,5 @@ dd{
 
 .panel-default{
  border-radius:0px;
- background-color: rgba(255, 255, 255, 0.95);
+ /*background-color: rgba(255, 255, 255, 0.95);*/
 }

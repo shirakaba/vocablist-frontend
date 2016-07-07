@@ -31,6 +31,8 @@
                             <thead>
                                 <tr>
                                     <th class="alpha" >Token</th>
+                                    <th class="alpha" >Definition</th>
+                                    <th class="alpha">POS</th>
                                     <th class="number">Lone</th>
                                     <th class="number">Cumulative</th>
                                 </tr>
@@ -51,9 +53,32 @@
                                 'n2Row': item.n2,
                                 'n3Row': item.n3,
                                 'n4Row': item.n4,
-                                'n5Row': item.n5
+                                'n5Row': item.n5,
+                                'uniqueRow': true
                                 }">
                                     <td class="alpha"  ng-bind="item.bf"/>
+                                    <!-- <td class="alpha"  ng-bind="item.defs"/> -->
+                                    <!-- ng-bind binds the model (def) to the view (p.value) -->
+                                    <td class="alpha definitions-column">
+                                      <table class="definitions">
+                                        <tbody>
+                                          <tr ng-repeat="def in item.defs">
+                                            <td ng-bind="def"/>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </td>
+                                    <td class="alpha"> <div
+                                    style="pointer-events: none"
+                                    class="btn btn-xs"
+                                    type="button"
+                                    ng-class="{
+                                    'btn-danger': item.pos === 'particle',
+                                    'btn-success': item.pos === 'verb',
+                                    'btn-primary': item.pos === 'noun',
+                                    'btn-default': true
+                                    }"
+                                    ng-bind="item.pos"/> </td>
                                     <!-- http://stackoverflow.com/questions/16134391/restrict-number-of-decimals-in-html5-type-number-input-field-with-angularjs-m -->
                                     <td class="number"  ng-bind="{{ 100 * item.iso | number : 2}} + '%'"/>
                                     <td class="number" ng-bind="{{ 100 * item.cumu | number : 2}} + '%'"/>
