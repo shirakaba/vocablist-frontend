@@ -96,5 +96,11 @@ table.definitions {
   color: rgb(43, 43, 43);
   background-color: rgb(245, 245, 245);
   padding: 0px !important;
-  vertical-align: middle !important;
+  vertical-align: top !important;
+}
+
+.tokens-column {
+  min-width: 8em;
+  padding: 0px !important;
+  vertical-align: top !important;
 }
