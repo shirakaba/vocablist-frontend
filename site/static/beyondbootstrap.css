@@ -33,11 +33,19 @@
 }
 
 .number {
+  color: black;
   text-align: right;
 }
+
 .alpha {
+  color: black;
   text-align: left;
 }
+
+/*td.alpha{
+  color: rgb(43, 43, 43);
+  background-color: rgb(213, 213, 213);
+}*/
 
 .massive{
     color:black;
@@ -81,10 +89,12 @@ table.definitions {
 }
 
 .definitions tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 1.0);
 }
 
 .definitions-column {
+  color: rgb(43, 43, 43);
+  background-color: rgb(245, 245, 245);
   padding: 0px !important;
   vertical-align: middle !important;
 }

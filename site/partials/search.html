@@ -47,15 +47,7 @@
                                 | filter:n3Filter
                                 | filter:n4Filter
                                 | filter:n5Filter"
-                                ng-class="{
-                                'fundamentalRow': item.fundamental,
-                                'n1Row': item.n1,
-                                'n2Row': item.n2,
-                                'n3Row': item.n3,
-                                'n4Row': item.n4,
-                                'n5Row': item.n5,
-                                'uniqueRow': true
-                                }">
+                                >
                                     <td class="alpha"  ng-bind="item.bf"/>
                                     <!-- <td class="alpha"  ng-bind="item.defs"/> -->
                                     <!-- ng-bind binds the model (def) to the view (p.value) -->
@@ -68,17 +60,39 @@
                                         </tbody>
                                       </table>
                                     </td>
-                                    <td class="alpha"> <div
-                                    style="pointer-events: none"
-                                    class="btn btn-xs"
-                                    type="button"
+                                    <td class="alpha"
                                     ng-class="{
-                                    'btn-danger': item.pos === 'particle',
-                                    'btn-success': item.pos === 'verb',
-                                    'btn-primary': item.pos === 'noun',
-                                    'btn-default': true
-                                    }"
-                                    ng-bind="item.pos"/> </td>
+                                    'fundamentalRow': item.fundamental,
+                                    'n1Row': item.n1,
+                                    'n2Row': item.n2,
+                                    'n3Row': item.n3,
+                                    'n4Row': item.n4,
+                                    'n5Row': item.n5,
+                                    'uniqueRow': true
+                                    }">
+                                      <div
+                                        class="label"
+                                        ng-class="{
+                                        'label-danger': item.pos === 'particle',
+                                        'label-success': item.pos === 'verb',
+                                        'label-primary': item.pos === 'noun',
+                                        'label-default': true
+                                        }"
+                                        ng-bind="item.pos"/>
+                                        <!-- Change n ratings to be labels -->
+<!--                                         <div
+                                        class="label"
+                                        ng-class="{
+                                        'label-primary': item.fundamental,
+                                        'label-danger': item.n5,
+                                        'label-success': item.n4,
+                                        'label-primary': item.n3,
+                                        'label-primary': item.n2,
+                                        'label-primary': item.n1,
+                                        'label-default': true
+                                        }"
+                                        ng-bind="item.n5"/> -->
+                                    </td>
                                     <!-- http://stackoverflow.com/questions/16134391/restrict-number-of-decimals-in-html5-type-number-input-field-with-angularjs-m -->
                                     <td class="number"  ng-bind="{{ 100 * item.iso | number : 2}} + '%'"/>
                                     <td class="number" ng-bind="{{ 100 * item.cumu | number : 2}} + '%'"/>
