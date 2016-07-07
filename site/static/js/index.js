@@ -23,27 +23,27 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                         n5Checked: true,
                         fundamentalsFilter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.fundChecked || !item.vocabListRowCumulative.fundamental;
+                            return sc.fundChecked || !item.fundamental;
                         },
                         n1Filter: function(item) {
                             console.log(item);
-                            return sc.n1Checked || !item.vocabListRowCumulative.n1;
+                            return sc.n1Checked || !item.n1;
                         },
                         n2Filter: function(item) {
                             console.log(item);
-                            return sc.n2Checked || !item.vocabListRowCumulative.n2;
+                            return sc.n2Checked || !item.n2;
                         },
                         n3Filter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.n3Checked || !item.vocabListRowCumulative.n3;
+                            return sc.n3Checked || !item.n3;
                         },
                         n4Filter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.n4Checked || !item.vocabListRowCumulative.n4;
+                            return sc.n4Checked || !item.n4;
                         },
                         n5Filter: function(item) {
                             // console.log(sc.fundChecked);
-                            return sc.n5Checked || !item.vocabListRowCumulative.n5;
+                            return sc.n5Checked || !item.n5;
                         },
                         mySearch: "生",
                         currentRow: [],
@@ -109,7 +109,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                         .then(function(response) {
                             // console.log(response.data.cumulative);
                             // sc.$apply(function() {
-                                sc.x = response.data.cumulative;
+                                sc.x = response.data.list;
                                 // sc.x = response.data.cumulative;
                                 // sc.idsToSearch = response.data.cumulative.id; // this is an array.
                             // });
