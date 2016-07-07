@@ -32,9 +32,9 @@
                                 <tr>
                                     <th class="alpha" >Token</th>
                                     <th class="alpha" >Definition</th>
-                                    <th class="alpha">POS</th>
+                                    <th class="alpha">Info</th>
                                     <th class="number">Lone</th>
-                                    <th class="number">Cumulative</th>
+                                    <th class="number">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,13 +61,17 @@
                                       </table>
                                     </td>
                                     <td class="alpha">
+                                    <!-- For all other cases, label is 'at the very least' styled as label-default. -->
                                       <div
-                                        class="label"
+                                        class="label label-default"
                                         ng-class="{
-                                        'label-danger': item.pos === 'particle',
+                                        'label-primary': item.pos === 'noun'
+                                          || item.pos === 'proper noun',
+                                        'label-warning': item.pos === 'particle',
                                         'label-success': item.pos === 'verb',
-                                        'label-primary': item.pos === 'noun',
-                                        'label-default': true
+                                        'label-info': item.pos === 'adverb'
+                                          || item.pos === 'conjunction'
+                                          || item.pos === 'adjective'
                                         }"
                                         ng-bind="item.pos"></div>
                                       <div class="label label-default" ng-show="item.fundamental">f</div>
