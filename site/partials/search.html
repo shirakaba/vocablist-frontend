@@ -80,6 +80,7 @@
                                       <div class="label label-default" ng-show="item.n3">n3</div>
                                       <div class="label label-default" ng-show="item.n2">n2</div>
                                       <div class="label label-default" ng-show="item.n1">n1</div>
+                                      <div class="label label-default" ng-show="!(item.n1 || item.n2 || item.n3 || item.n4 || item.n5 || item.fundamental)">+</div>
                                     </td>
                                     <!-- http://stackoverflow.com/questions/16134391/restrict-number-of-decimals-in-html5-type-number-input-field-with-angularjs-m -->
                                     <td class="number percent-column"  ng-bind="{{ 100 * item.iso | number : 2}} + '%'"/>
