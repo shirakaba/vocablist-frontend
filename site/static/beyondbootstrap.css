@@ -1,4 +1,4 @@
-.uniqueRow {
+/*.uniqueRow {
   color: rgb(0, 0, 0);
   background-color: rgba(255, 255, 255, 0.4);
 }
@@ -30,7 +30,7 @@
 .fundamentalRow {
   color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-}
+}*/
 
 .number {
   color: black;
@@ -96,11 +96,27 @@ table.definitions {
   color: rgb(43, 43, 43);
   background-color: rgb(245, 245, 245);
   padding: 0px !important;
+  /* Consider restricting this to just vertical padding */
   vertical-align: top !important;
 }
 
 .tokens-column {
   min-width: 8em;
-  padding: 0px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
   vertical-align: top !important;
 }
+
+.info-column {
+  min-width: 7em;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  vertical-align: top !important;
+}
+
+.percent-column {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  vertical-align: top !important;
+}
+

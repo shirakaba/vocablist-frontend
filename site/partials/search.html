@@ -60,7 +60,7 @@
                                         </tbody>
                                       </table>
                                     </td>
-                                    <td class="alpha">
+                                    <td class="alpha info-column">
                                     <!-- For all other cases, label is 'at the very least' styled as label-default. -->
                                       <div
                                         class="label label-default"
@@ -82,8 +82,8 @@
                                       <div class="label label-default" ng-show="item.n1">n1</div>
                                     </td>
                                     <!-- http://stackoverflow.com/questions/16134391/restrict-number-of-decimals-in-html5-type-number-input-field-with-angularjs-m -->
-                                    <td class="number"  ng-bind="{{ 100 * item.iso | number : 2}} + '%'"/>
-                                    <td class="number" ng-bind="{{ 100 * item.cumu | number : 2}} + '%'"/>
+                                    <td class="number percent-column"  ng-bind="{{ 100 * item.iso | number : 2}} + '%'"/>
+                                    <td class="number percent-column" ng-bind="{{ 100 * item.cumu | number : 2}} + '%'"/>
                                 </tr>
                             </tbody>
                         </table>
