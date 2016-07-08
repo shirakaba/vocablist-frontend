@@ -57,7 +57,10 @@
                                           <tr ng-repeat="def in item.defs">
                                             <td>
                                               <span ng-switch="def.indexOf('more results hidden. See all possibilities at:') === -1">
-                                                <span ng-switch-when="true"><span ng-bind="def"/></span></span>
+                                                <span ng-switch-when="true">
+                                                  <span ng-bind="def"></span>
+                                                </span>
+                                              
                                                 <span ng-switch-default>
                                                   <span ng-bind="def.split('more results hidden. See all possibilities at:')[0]"></span>
                                                   more results hidden. See all possibilities at:
