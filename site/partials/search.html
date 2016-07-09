@@ -56,15 +56,24 @@
                                         <tbody>
                                           <tr ng-repeat="def in item.defs">
                                             <td>
-                                              <span ng-switch="def.indexOf('more results hidden. Search off-site at:') === -1">
+                                              <span ng-switch="def.indexOf('Search off-site at:') === -1">
                                                 <span ng-switch-when="true">
                                                   <span ng-bind="def"></span>
                                                 </span>
                                               
                                                 <span ng-switch-default>
-                                                  <span ng-bind="def.split('more results hidden. Search off-site at:')[0]"></span>
-                                                  more results hidden. Search all possibilities off-site at:
-                                                  <a ng-href="{{def.split('more results hidden. Search off-site at:')[1]}}">WWWJDIC</a>.
+                                                  <span ng-switch="def.indexOf('more results hidden.') === -1">
+                                                    <span ng-switch-when="true">
+                                                      No definitions found in dictionary. Search in all dictionaries at:
+                                                      <a ng-href="{{def.split('Search off-site at:')[1]}}">WWWJDIC</a>.
+                                                    </span>
+
+                                                    <span ng-switch-default>
+                                                      <span ng-bind="def.split('more results hidden. Search off-site at:')[0]"></span>
+                                                      more result(s) hidden. Search all possible proper nouns off-site at:
+                                                      <a ng-href="{{def.split('more results hidden. Search off-site at:')[1]}}">WWWJDIC</a>.
+                                                    </span>
+                                                  </span>
                                                 </span>
                                               </span>
                                             </td>
