@@ -49,6 +49,10 @@
   color: darkslateblue;
 }
 
+.eg tr:first-child {
+  border-top: 1px solid black;
+}
+
 table.definitions {
   width:100%;
 }
@@ -85,9 +89,13 @@ table.definitions {
   vertical-align: top !important;
 }
 
-.ruled {
+tr.ruled {
   border-top:1px solid black;
 }
+
+/*table.topruled tr:first-child {
+  border-top:1px solid black;
+}*/
 
 /*.footer-container {
   position: fixed;
