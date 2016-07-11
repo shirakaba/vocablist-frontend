@@ -45,6 +45,10 @@
     cursor: default !important;
 }
 
+.eg {
+  color: darkslateblue;
+}
+
 table.definitions {
   width:100%;
 }
