@@ -27,7 +27,7 @@
             <div class="col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <table class="table">
+                        <table class="table" rules=rows>
                             <thead>
                                 <tr>
                                     <th class="alpha" >Token</th>
@@ -39,7 +39,7 @@
                             </thead>
                             <tbody>
                                 <!-- <pre ng-bind="item.vocabListRowCumulative.isolatePercent"/> -->
-                                <tr
+                                <tr class="ruled"
                                 ng-repeat="item in x
                                 | filter:fundamentalsFilter
                                 | filter:n1Filter

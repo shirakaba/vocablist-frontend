@@ -85,6 +85,10 @@ table.definitions {
   vertical-align: top !important;
 }
 
+.ruled {
+  border-top:1px solid black;
+}
+
 /*.footer-container {
   position: fixed;
   height: 100%;
