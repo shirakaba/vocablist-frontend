@@ -79,11 +79,12 @@
 
                                             </td>
                                           </tr>
-                                        </tbody>
-                                      </table>
-                                      <table class="eg">
-                                        <tbody>
-                                          <tr class="eg" ng-repeat="eg in item.exampleSentences" ng-bind="eg"></tr>
+                                          <tr class="eg" ng-repeat="eg in item.exampleSentences">
+                                            <td>
+                                              <span ng-bind-html="parseSentence(eg)"/>
+                                              <!-- <span ng-bind-html="eg"></span> -->
+                                            </td>
+                                          </tr>
                                         </tbody>
                                       </table>
                                     </td>
@@ -194,7 +195,7 @@
       </section>
     </article> -->
 
-<!--     <footer>
+<!--     <footer class="footer">
       <section class="row">
         <div class="col-xs-12">
           <div class="copyright panel panel-default">
@@ -218,27 +219,3 @@
         </div>
       </section>
     </footer> -->
-    <footer class="footer">
-      <section class="row">
-        <div class="col-xs-12">
-          <div class="copyright panel panel-default">
-            <div class="panel-body">
-              <h3 class="my-panel-heading">Examples</h3>
-              <p>
-                <a href="javascript:void(0);" data-ng-click="submit('和')">和</a>
-                <a href="javascript:void(0);" data-ng-click="submit('神')">神</a>
-                <a href="javascript:void(0);" data-ng-click="submit('電')">電</a>
-                <a href="javascript:void(0);" data-ng-click="submit('桜')">桜</a>
-                <a href="javascript:void(0);" data-ng-click="submit('恩')">恩</a>
-                <a href="javascript:void(0);" data-ng-click="submit('漢')">漢</a>
-                <a href="javascript:void(0);" data-ng-click="submit('数')">数</a>
-                <a href="javascript:void(0);" data-ng-click="submit('算')">算</a>
-                <a href="javascript:void(0);" data-ng-click="submit('機')">機</a>
-                <a href="javascript:void(0);" data-ng-click="submit('愛')">愛</a>
-                <!-- href referring to a dummy JS call allows hand cursor to appear -->
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </footer>

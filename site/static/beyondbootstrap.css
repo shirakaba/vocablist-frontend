@@ -49,9 +49,9 @@
   color: darkslateblue;
 }
 
-.eg tr:first-child {
+/*tr:first-child .eg {
   border-top: 1px solid black;
-}
+}*/
 
 table.definitions {
   width:100%;
@@ -110,4 +110,10 @@ tr.ruled {
   width: 100%;
   bottom:0px;
   /*background-color: red;*/
+}
+
+.sentence-bold {
+  /*text-decoration: underline;*/
+  /*font-weight: 900;*/
+  background-color: yellow;
 }

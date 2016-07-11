@@ -2,10 +2,14 @@
 
 angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependencies.
     // by default, angular animates every class, so we need to configure its selection.
-    .config(['$animateProvider', '$stateProvider', '$urlRouterProvider',
-        function($animateProvider, $stateProvider, $urlRouterProvider){
+    .config(['$animateProvider', '$stateProvider', '$urlRouterProvider', '$sceProvider',
+        function($animateProvider, $stateProvider, $urlRouterProvider, $sceProvider){
             $urlRouterProvider.otherwise("/search");
             $animateProvider.classNameFilter(/houdini/); // filter for any class containing the string 'houdini'
+
+            // Completely disable SCE.  For demonstration purposes only!
+            // Do not use in new projects.
+            $sceProvider.enabled(false);
 
             $stateProvider
             .state({
@@ -48,7 +52,12 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router']) // [''] contains dependen
                         mySearch: "生",
                         currentRow: [],
                         kanjidicReadingResults: [],
-                        hideMe: false
+                        hideMe: false,
+                        parseSentence: function(sentence) {
+                            return sentence
+                            .split('{{{').join('<span class="sentence-bold">')
+                            .split('}}}').join('</span>');
+                        }
                     });
                     // sc.mySearch = "生"; // the input field's value is bound to the value of this variable.
                     // sc.currentRow = [];
