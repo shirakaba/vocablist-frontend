@@ -41,10 +41,7 @@ nav{
   margin-bottom: 10px;
 }
 
-.orange .clicked a,.orange .default a, .orange .clicked a:hover, .orange .default a:hover{
-  margin: 0;
-  border:none;
-  border-radius: 0px;
+.clicked a, .default a{
   font-size:18px;
 }
 
@@ -53,24 +50,22 @@ nav{
     background-color: pink !important;
 }
 
-.orange .clicked a, .orange .clicked a:hover{
+.clicked a, .clicked a:hover{
   background-color: lightpink;
   color: white;
 }
 
 form input.form-control{
   font-size:20px;
-  border-radius: 0px;
 }
 
-.nav-pills>li+li , .orange .default a {
+.nav-pills>li+li , .default a {
   margin:0;
   background-color: white;
   color: lightpink;
-  opacity: 0.90;
 }
 
-.orange .default a:hover{
+.default a:hover{
   background-color: pink;
   margin:0;
   color: white;

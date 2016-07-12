@@ -15,6 +15,10 @@
     <article>
         <section class="row">
             <div class="col-xs-12">
+                <span class="col-xs-3"></span>
+                <span class="col-xs-3"><- (faster, but less data)</span>
+                <span class="col-xs-3"></span>
+                <span class="col-xs-3" style="text-align:right;">(slower, but more data) -></span>
                 <span class="col-xs-3">Cumulative total ≤ <span ng-bind="limit"></span>%</span>
                 <slider class="col-xs-9" ng-model="limit" min="50" step="5" max="100"></slider>
                 <span class="col-xs-3">Max* = <span ng-bind="partition"></span> results</span>
@@ -81,7 +85,7 @@
                                                   <span ng-switch="def.indexOf('more results hidden.') === -1">
                                                     <span ng-switch-when="true">
                                                       No definitions found in dictionary. Search in all dictionaries at:
-                                                      <a ng-href="{{def.split('Search off-site at:')[1]}}">WWWJDIC</a>.
+                                                      <a ng-href="{{def.split('Search off-site at:')[1]}}">jisho.org</a>.
                                                     </span>
 
                                                     <span ng-switch-default>
