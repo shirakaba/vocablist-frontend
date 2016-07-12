@@ -31,6 +31,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
                         n3Checked: true,
                         n4Checked: true,
                         n5Checked: true,
+                        showEg: false,
                         fundamentalsFilter: function(item) {
                             // console.log(sc.fundChecked);
                             return sc.fundChecked || !item.fundamental;
@@ -133,7 +134,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
             //         };
 
                     sc.submit = function(query) {
-                        
+
                         $http.get('http://localhost:8080/test6?'
                             +'partition='+encodeURIComponent(sc.partition)
                             +'&maxArticles='+encodeURIComponent(sc.maxArticles)
