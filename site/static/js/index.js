@@ -24,6 +24,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
                         minyield: 0.02,
                         egs: 1,
                         filtering: 0,
+                        maxArticles: 3,
                         fundChecked: true,
                         n1Checked: true,
                         n2Checked: true,
@@ -74,7 +75,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
                                     return "mandatory";
                             }
                         },
-                        mySearch: "生",
+                        mySearch: "東方Project",
                         currentRow: [],
                         kanjidicReadingResults: [],
                         hideMe: false,
@@ -144,11 +145,12 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
                         // "しかし、近年は夏場に多く発生するゲリラ豪雨による冠水や浸水の被害が報告されることもあり、その対策の一環として雨水貯留施設を埋設する工事を進めている。[9]"
                         $http.get('http://localhost:8080/test6?'
                             +'partition='+encodeURIComponent(sc.partition)
+                            +'&maxArticles='+encodeURIComponent(sc.maxArticles)
                             +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.filtering))
                             +'&egs='+encodeURIComponent(sc.egs)
                             +'&limit='+encodeURIComponent(sc.limit)
                             +'&minyield='+encodeURIComponent(sc.minyield)
-                            +'&input='+encodeURIComponent(input))
+                            +'&input='+encodeURIComponent(sc.mySearch))
                         .then(function(response) {
                             // console.log(response.data.cumulative);
                             // sc.$apply(function() {
