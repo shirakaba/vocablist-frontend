@@ -5,7 +5,7 @@ html {
 body{
   width: 100%;
   min-width:630px;
-  margin:auto;
+  /*margin:auto;*/
   /*background-color: rgba(216, 175, 222, 0.5);*/
 }
 
