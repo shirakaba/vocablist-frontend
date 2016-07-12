@@ -23,6 +23,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
                         partition: 100,
                         minyield: 0.02,
                         egs: 1,
+                        filtering: 0,
                         fundChecked: true,
                         n1Checked: true,
                         n2Checked: true,
@@ -53,9 +54,26 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
                             // console.log(sc.fundChecked);
                             return sc.n5Checked || !item.n5;
                         },
-                        // formatter: function(value) {
-                        //     return 'Current value: ' + value;
-                        // },
+                        filteringEnum: function(value) {
+                            switch(value){
+                                case 0:
+                                    return "mandatory";
+                                case 1:
+                                    return "fundamental";
+                                case 2:
+                                    return "n5";
+                                case 3:
+                                    return "n4";
+                                case 4:
+                                    return "n3";
+                                case 5:
+                                    return "n2";
+                                case 6:
+                                    return "n1";
+                                default:
+                                    return "mandatory";
+                            }
+                        },
                         mySearch: "生",
                         currentRow: [],
                         kanjidicReadingResults: [],
@@ -126,6 +144,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
                         // "しかし、近年は夏場に多く発生するゲリラ豪雨による冠水や浸水の被害が報告されることもあり、その対策の一環として雨水貯留施設を埋設する工事を進めている。[9]"
                         $http.get('http://localhost:8080/test6?'
                             +'partition='+encodeURIComponent(sc.partition)
+                            +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.filtering))
                             +'&egs='+encodeURIComponent(sc.egs)
                             +'&limit='+encodeURIComponent(sc.limit)
                             +'&minyield='+encodeURIComponent(sc.minyield)
