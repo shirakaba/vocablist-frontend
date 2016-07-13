@@ -25,6 +25,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
                         egs: 1,
                         filtering: 0,
                         maxArticles: 3,
+                        makeTest: true,
                         fundChecked: true,
                         n1Checked: true,
                         n2Checked: true,
@@ -134,9 +135,15 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider']) //
             //         };
 
                     sc.submit = function(query) {
-
+                        // $http.post and send JSON object like in dict website to send a .txt file
+                        // Would then need to add fields to JSON object with maxArticles etc.
+                        // Spring web app backend would then expect as its input a single object (with multiple fields within)
+                        // rather than the current flat multi-param setup.
+                        // http://www.leveluplunch.com/java/tutorials/014-post-json-to-spring-rest-webservice/
+                        // https://spring.io/guides/tutorials/bookmarks/
                         $http.get('http://localhost:8080/test6?'
                             +'partition='+encodeURIComponent(sc.partition)
+                            +'&makeTest='+encodeURIComponent(sc.makeTest)
                             +'&maxArticles='+encodeURIComponent(sc.maxArticles)
                             +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.filtering))
                             +'&egs='+encodeURIComponent(sc.egs)
