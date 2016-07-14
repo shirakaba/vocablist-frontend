@@ -160,7 +160,7 @@
           <!-- Kanji test (all tiers) -->
           <div class="col-xs-12">
           <!-- Could iterate lists with <div ng-repeat="list in lists" class="col-md-4"></div> instead of accessing as lists[0] -->
-            <div class="typesDemo">
+ <!--            <div class="typesDemo">
               <ul dnd-list="lists[0].people"
                   dnd-allowed-types="lists[0].allowedTypes"
                   dnd-disable-if="lists[0].people.length >= lists[0].max">
@@ -185,10 +185,67 @@
                       Drop any <strong>{{lists[0].allowedTypes.join(' or ')}}</strong> here
                   </li>
               </ul>
-            </div>
+            </div> -->
 
-            <div class="typesDemo">
+            <!-- The list of infos [under construction] -->
+            <span ng-repeat="question in y.tierOne.kanjiQuiz">
+              <!-- Everything below this <p> is broken.  -->
+              <!-- Refer to: http://jsfiddle.net/kashjs/n2gxobf7/ [Empty 'My basket' array]
+                             http://jsfiddle.net/rniemeyer/qwgrf/ [Trashcan]
+                             http://fiddle.jshell.net/marmotz/83gbS/light/ [?]
+                             http://marceljuenemann.github.io/angular-drag-and-drop-lists/demo/#/nested [docs] -->
+              <p ng-bind="question.info"></p>
+
               <ul dnd-list="y.tierOne.kanjiQuiz"
+                  dnd-disable-if="y.tierOne.kanjiQuiz.length >= 5">
+
+                  <li ng-bind="question"
+                      dnd-draggable="question"
+                      dnd-moved="y.tierOne.kanjiQuiz.splice($index, 1)"
+                      dnd-effect-allowed="move"
+                      class="background-man"
+                      >
+                      <dnd-nodrag>
+                        <div dnd-handle class="handle">:::</div>
+                        <div class="name">
+                            <input type="text" ng-model="question.target" class="background-man form-control input-sm">
+                        </div>
+                      </dnd-nodrag>
+                  </li>
+
+                  <li class="dndPlaceholder">
+                      Drop question/answer here
+                  </li>
+              </ul>
+
+            </span>
+
+            <!-- The draggable list of targets -->
+            <div class="typesDemo">
+
+              <ul dnd-list="y.tierOne.kanjiQuiz"
+                  dnd-disable-if="y.tierOne.kanjiQuiz.length >= 5">
+
+                  <li ng-repeat="question in y.tierOne.kanjiQuiz"
+                      dnd-draggable="question"
+                      dnd-moved="y.tierOne.kanjiQuiz.splice($index, 1)"
+                      dnd-effect-allowed="move"
+                      class="background-man"
+                      >
+                      <dnd-nodrag>
+                        <div dnd-handle class="handle">:::</div>
+                        <div class="name">
+                            <input type="text" ng-model="question.target" class="background-man form-control input-sm">
+                        </div>
+                      </dnd-nodrag>
+                  </li>
+
+                  <li class="dndPlaceholder">
+                      Drop question/answer here
+                  </li>
+              </ul>
+
+<!--               <ul dnd-list="y.tierOne.kanjiQuiz"
                   dnd-disable-if="y.tierOne.kanjiQuiz.length >= 5">
 
                   <li ng-repeat="question in y.tierOne.kanjiQuiz"
@@ -208,7 +265,9 @@
                   <li class="dndPlaceholder">
                       Drop question/answer here
                   </li>
-              </ul>
+              </ul> -->
+
+
             </div>
             
           </div>
