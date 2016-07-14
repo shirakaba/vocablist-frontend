@@ -159,31 +159,34 @@
         <section class="row">
           <!-- Kanji test (all tiers) -->
           <div class="col-xs-12">
+          <!-- Could iterate lists with <div ng-repeat="list in lists" class="col-md-4"></div> instead of accessing as lists[0] -->
+            <div class="typesDemo">
+              <ul dnd-list="lists[0].people"
+                  dnd-allowed-types="lists[0].allowedTypes"
+                  dnd-disable-if="lists[0].people.length >= lists[0].max">
 
-            <ul dnd-list="lists[0]"
-                dnd-allowed-types="lists[0].allowedTypes"
-                dnd-disable-if="lists[0].people.length >= lists[0].max">
+                  <li ng-repeat="person in lists[0].people"
+                      dnd-draggable="person"
+                      dnd-type="person.type"
+                      dnd-disable-if="person.type == 'unknown'"
+                      dnd-moved="lists[0].people.splice($index, 1)"
+                      dnd-effect-allowed="move"
+                      class="background-{{person.type}}"
+                      >
+                      <dnd-nodrag>
+                        <div dnd-handle class="handle">:::</div>
+                        <div class="name">
+                            <input type="text" ng-model="person.name" class="background-{{person.type}} form-control input-sm">
+                        </div>
+                      </dnd-nodrag>
+                  </li>
 
-                <li ng-repeat="person in lists[0].people"
-                    dnd-draggable="person"
-                    dnd-type="person.type"
-                    dnd-disable-if="person.type == 'unknown'"
-                    dnd-moved="lists[0].people.splice($index, 1)"
-                    dnd-effect-allowed="move"
-                    class="background-{{person.type}}"
-                    >
-                    <dnd-nodrag>
-                      <div dnd-handle class="handle">:::</div>
-                      <div class="name">
-                          <input type="text" ng-model="person.name" class="background-{{person.type}} form-control input-sm">
-                      </div>
-                    </dnd-nodrag>
-                </li>
-
-                <li class="dndPlaceholder">
-                    Drop any <strong>{{list.allowedTypes.join(' or ')}}</strong> here
-                </li>
-            </ul>
+                  <li class="dndPlaceholder">
+                      Drop any <strong>{{lists[0].allowedTypes.join(' or ')}}</strong> here
+                  </li>
+              </ul>
+              
+            </div>
             
           </div>
           <!-- Pron test (all tiers) -->
