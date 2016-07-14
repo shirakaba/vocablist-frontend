@@ -185,7 +185,30 @@
                       Drop any <strong>{{lists[0].allowedTypes.join(' or ')}}</strong> here
                   </li>
               </ul>
-              
+            </div>
+
+            <div class="typesDemo">
+              <ul dnd-list="y.tierOne.kanjiQuiz"
+                  dnd-disable-if="y.tierOne.kanjiQuiz.length >= 5">
+
+                  <li ng-repeat="question in y.tierOne.kanjiQuiz"
+                      dnd-draggable="question"
+                      dnd-moved="y.tierOne.kanjiQuiz.splice($index, 1)"
+                      dnd-effect-allowed="move"
+                      class="background-man"
+                      >
+                      <dnd-nodrag>
+                        <div dnd-handle class="handle">:::</div>
+                        <div class="name">
+                            <input type="text" ng-model="question.info" class="background-man form-control input-sm">
+                        </div>
+                      </dnd-nodrag>
+                  </li>
+
+                  <li class="dndPlaceholder">
+                      Drop question/answer here
+                  </li>
+              </ul>
             </div>
             
           </div>
