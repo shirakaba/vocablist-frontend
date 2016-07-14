@@ -19,6 +19,40 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
                 controller: ["$scope", "$http", function(sc, $http) {
                     angular.extend(sc, {
+                        lists : [
+                                    {
+                                        label: "Men",
+                                        allowedTypes: ['man'],
+                                        max: 4,
+                                        people: [
+                                            {name: "Bob", type: "man"},
+                                            {name: "Charlie", type: "man"},
+                                            {name: "Dave", type: "man"}
+                                        ]
+                                    },
+                                    {
+                                        label: "Women",
+                                        allowedTypes: ['woman'],
+                                        max: 4,
+                                        people: [
+                                            {name: "Alice", type: "woman"},
+                                            {name: "Eve", type: "woman"},
+                                            {name: "Peggy", type: "woman"}
+                                        ]
+                                    },
+                                    {
+                                        label: "People",
+                                        allowedTypes: ['man', 'woman'],
+                                        max: 6,
+                                        people: [
+                                            {name: "Frank", type: "man"},
+                                            {name: "Mallory", type: "woman"},
+                                            {name: "Alex", type: "unknown"},
+                                            {name: "Oscar", type: "man"},
+                                            {name: "Wendy", type: "woman"}
+                                        ]
+                                    }
+                                ],
                         limit: 100,
                         partition: 0,
                         minyield: 0.00,
@@ -183,6 +217,40 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
         }])
     .controller('navController', ['$scope', '$state', function($scope, $state) {
         $scope.$state = $state;
+        // $scope.lists = [
+        //                     {
+        //                         label: "Men",
+        //                         allowedTypes: ['man'],
+        //                         max: 4,
+        //                         people: [
+        //                             {name: "Bob", type: "man"},
+        //                             {name: "Charlie", type: "man"},
+        //                             {name: "Dave", type: "man"}
+        //                         ]
+        //                     },
+        //                     {
+        //                         label: "Women",
+        //                         allowedTypes: ['woman'],
+        //                         max: 4,
+        //                         people: [
+        //                             {name: "Alice", type: "woman"},
+        //                             {name: "Eve", type: "woman"},
+        //                             {name: "Peggy", type: "woman"}
+        //                         ]
+        //                     },
+        //                     {
+        //                         label: "People",
+        //                         allowedTypes: ['man', 'woman'],
+        //                         max: 6,
+        //                         people: [
+        //                             {name: "Frank", type: "man"},
+        //                             {name: "Mallory", type: "woman"},
+        //                             {name: "Alex", type: "unknown"},
+        //                             {name: "Oscar", type: "man"},
+        //                             {name: "Wendy", type: "woman"}
+        //                         ]
+        //                     }
+        //                 ];
     }])
 
     // angularJS version of JQuery's slideDown() from http://stackoverflow.com/questions/22659729/modifying-dom-slidedown-slideup-with-angularjs-and-jquery
