@@ -188,39 +188,31 @@
             </div> -->
 
             <!-- The list of infos [under construction] -->
-            <span ng-repeat="question in y.tierOne.kanjiQuiz.quiz">
+            <span ng-repeat="question in r.tierOne.kanjiQuiz.quiz">
               <!-- Everything below this <p> is broken.  -->
               <!-- Refer to: http://jsfiddle.net/kashjs/n2gxobf7/ [Empty 'My basket' array]
                              http://jsfiddle.net/rniemeyer/qwgrf/ [Trashcan]
                              http://fiddle.jshell.net/marmotz/83gbS/light/ [?]
                              http://marceljuenemann.github.io/angular-drag-and-drop-lists/demo/#/nested [docs] -->
               <!-- Fillable containers: https://plnkr.co/edit/9OTy70KZZwavIWClIgvY?p=preview -->
-              <!-- <p ng-bind="question.info"></p> -->
+              <p ng-bind="question.info"></p>
 
-
-              <ul ng-model="groups[0]"
-                  class="groups"
-                  dnd-list="groups[0].items">
-                  <li class="title">{{question.info}}</li>
-                  <li ng-repeat="item in groups[0].items">{{ item.target }}</li>
-              </ul>
             </span>
           </div>
           <div class="col-xs-6">
 
             <!-- The draggable list of targets -->
-            <div class="typesDemo">
+            <div class="panel-body simpleDemo">
 
-              <ul dnd-list="y.tierOne.kanjiQuiz.quiz"
-                  dnd-allowed-types="y.tierOne.kanjiQuiz.allowedTypes"
-                  dnd-disable-if="y.tierOne.kanjiQuiz.quiz.length >= y.tierOne.kanjiQuiz.quiz.max">
+              <ul dnd-list="rw.tierOne.kanjiQuiz.quiz"
+                  dnd-allowed-types="rw.tierOne.kanjiQuiz.allowedTypes"
+                  dnd-disable-if="rw.tierOne.kanjiQuiz.quiz.length >= rw.tierOne.kanjiQuiz.quiz.max">
 
-                  <li ng-repeat="question in y.tierOne.kanjiQuiz.quiz"
+                  <li ng-repeat="question in rw.tierOne.kanjiQuiz.quiz"
                       dnd-draggable="question"
                       dnd-type="question.type"
-                      dnd-moved="y.tierOne.kanjiQuiz.quiz.splice($index, 1)"
+                      dnd-moved="rw.tierOne.kanjiQuiz.quiz.splice($index, 1)"
                       dnd-effect-allowed="move"
-                      class="background-man"
                       >
                       {{question.target}}
 <!--                       <dnd-nodrag>
@@ -232,7 +224,7 @@
                   </li>
 
                   <li class="dndPlaceholder">
-                      Drop any <strong>{{y.tierOne.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
+                      Drop any <strong>{{rw.tierOne.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
                   </li>
               </ul>
 
