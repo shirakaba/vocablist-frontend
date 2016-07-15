@@ -155,37 +155,16 @@
                 </div>
             </div>
         </section>
+
         <!-- The quiz (strictly only one of quizA or quizB) -->
         <section class="row">
+        <div class="col-xs-12">
+
           <!-- Kanji test (all tiers) -->
-          <div class="col-xs-6">
-          <!-- Could iterate lists with <div ng-repeat="list in lists" class="col-md-4"></div> instead of accessing as lists[0] -->
- <!--            <div class="typesDemo">
-              <ul dnd-list="lists[0].people"
-                  dnd-allowed-types="lists[0].allowedTypes"
-                  dnd-disable-if="lists[0].people.length >= lists[0].max">
-
-                  <li ng-repeat="person in lists[0].people"
-                      dnd-draggable="person"
-                      dnd-type="person.type"
-                      dnd-disable-if="person.type == 'unknown'"
-                      dnd-moved="lists[0].people.splice($index, 1)"
-                      dnd-effect-allowed="move"
-                      class="background-{{person.type}}"
-                      >
-                      <dnd-nodrag>
-                        <div dnd-handle class="handle">:::</div>
-                        <div class="name">
-                            <input type="text" ng-model="person.name" class="background-{{person.type}} form-control input-sm">
-                        </div>
-                      </dnd-nodrag>
-                  </li>
-
-                  <li class="dndPlaceholder">
-                      Drop any <strong>{{lists[0].allowedTypes.join(' or ')}}</strong> here
-                  </li>
-              </ul>
-            </div> -->
+        <div class="panel panel-default">
+        <div class="panel-heading">Panel heading</div>
+        <div class="panel-body">
+          <div class="col-xs-3">
 
             <!-- The list of infos [under construction] -->
             <span ng-repeat="question in r.tierOne.kanjiQuiz.quiz">
@@ -199,11 +178,11 @@
 
             </span>
           </div>
-          <div class="col-xs-6">
+
+          <div class="col-xs-9">
 
             <!-- The draggable list of targets -->
-            <div class="panel-body simpleDemo">
-
+              <div class="simpleDemo">
               <ul dnd-list="rw.tierOne.kanjiQuiz.quiz"
                   dnd-allowed-types="rw.tierOne.kanjiQuiz.allowedTypes"
                   dnd-disable-if="rw.tierOne.kanjiQuiz.quiz.length >= rw.tierOne.kanjiQuiz.quiz.max">
@@ -227,86 +206,18 @@
                       Drop any <strong>{{rw.tierOne.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
                   </li>
               </ul>
+              </div>
+              </div>
 
 
-            </div>
           </div>
+        </div>
+        </div>
 
           
         </section>
     </article>
 
-    <!-- <article class="ng-hide houdini" data-ng-show="kanjidicReadingResults.length &amp;&amp; !hideMe">
-      <h2>Results</h2>
-      <section class="row">
-          <div class="col-xs-12">
-              <div class="panel panel-default">
-                  <div class="panel-body">
-                      <div class="definition-left-column">
-                          <span class="massive" data-ng-bind="searchQuery"></span>
-                      </div>
-                      <div class="definition-right-column">
-                      <h3 class="my-panel-heading">Kanji</h3>
-                          <dl class="dl-vertical">
-                              <dt>Meaning</dt>
-                              <dd>
-                                <span data-ng-repeat="readingIterator in kanjidicDefinitionResults track by $index">
-                                    <span data-ng-bind="readingIterator"></span><span data-ng-hide="$last">, </span>
-                                </span>
-                              </dd>
-                              <dt>Reading</dt>
-                              <dd>
-                                  <span data-ng-repeat="readingIterator in kanjidicReadingResults track by $index">
-                                    <span data-ng-bind="readingIterator"></span><span data-ng-hide="$last">, </span>
-                                  </span>
-                              </dd>
-                          </dl>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <section class="row">
-          <div class="col-xs-12">
-              <div class="panel panel-default">
-                  <div class="panel-body">
-                      <h3 class="my-panel-heading">Study data</h3>
-                      <dl class="dl-horizontal">
-                        <dt>Frequency</dt>
-                        <dd data-ng-bind="kanjidicFrequencyResults"></dd>
-                        <dt>Stroke</dt>
-                        <dd data-ng-bind="kanjidicStrokeResults"></dd>
-                        <dt>JLPT Level</dt>
-                        <dd data-ng-bind="kanjidicJlptResults"></dd>
-                        <dt>Grade</dt>
-                        <dd data-ng-bind="kanjidicGradeResults"></dd>
-                      </dl>
-                  </div>
-              </div>
-            </div>
-      </section>
-
-      <section class="row">
-          <div class="col-xs-12">
-              <div class="panel panel-default">
-                  <div class="panel-body">
-                      <h3 class="my-panel-heading">Extra information</h3>
-                      <dl class="dl-horizontal">
-                          <dt>Henshall page</dt>
-                          <dd data-ng-bind="hkanjiPageOnlyResult"></dd>
-                          <dt>Henshall index</dt>
-                          <dd data-ng-bind="hkanjiIndexOnlyResult"></dd>
-                          <dt>Unicode</dt>
-                          <dd data-ng-bind="hkanjiCodePointOnlyResult.unicode"></dd>
-                          <dt>JIS</dt>
-                          <dd data-ng-bind="hkanjiCodePointOnlyResult.jis"></dd>
-                      </dl>
-                  </div>
-              </div>
-          </div>
-      </section>
-    </article> -->
 
 <!--     <footer class="footer">
       <section class="row">
