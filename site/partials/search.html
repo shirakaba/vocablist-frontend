@@ -158,7 +158,7 @@
         <!-- The quiz (strictly only one of quizA or quizB) -->
         <section class="row">
           <!-- Kanji test (all tiers) -->
-          <div class="col-xs-12">
+          <div class="col-xs-6">
           <!-- Could iterate lists with <div ng-repeat="list in lists" class="col-md-4"></div> instead of accessing as lists[0] -->
  <!--            <div class="typesDemo">
               <ul dnd-list="lists[0].people"
@@ -188,37 +188,25 @@
             </div> -->
 
             <!-- The list of infos [under construction] -->
-            <span ng-repeat="question in y.tierOne.kanjiQuiz">
+            <span ng-repeat="question in y.tierOne.kanjiQuiz.quiz">
               <!-- Everything below this <p> is broken.  -->
               <!-- Refer to: http://jsfiddle.net/kashjs/n2gxobf7/ [Empty 'My basket' array]
                              http://jsfiddle.net/rniemeyer/qwgrf/ [Trashcan]
                              http://fiddle.jshell.net/marmotz/83gbS/light/ [?]
                              http://marceljuenemann.github.io/angular-drag-and-drop-lists/demo/#/nested [docs] -->
+              <!-- Fillable containers: https://plnkr.co/edit/9OTy70KZZwavIWClIgvY?p=preview -->
               <p ng-bind="question.info"></p>
 
-              <ul dnd-list="y.tierOne.kanjiQuiz"
-                  dnd-disable-if="y.tierOne.kanjiQuiz.length >= 5">
-
-                  <li ng-bind="question"
-                      dnd-draggable="question"
-                      dnd-moved="y.tierOne.kanjiQuiz.splice($index, 1)"
-                      dnd-effect-allowed="move"
-                      class="background-man"
-                      >
-                      <dnd-nodrag>
-                        <div dnd-handle class="handle">:::</div>
-                        <div class="name">
-                            <input type="text" ng-model="question.target" class="background-man form-control input-sm">
-                        </div>
-                      </dnd-nodrag>
-                  </li>
-
-                  <li class="dndPlaceholder">
-                      Drop question/answer here
-                  </li>
-              </ul>
-
             </span>
+
+            <ul ng-repeat="group in groups"
+                class="groups"
+                dnd-list="group.items">
+                <li class="title">{{group.name}}</li>
+                <li ng-repeat="item in group.items">{{ item.target }}</li>
+            </ul>
+          </div>
+          <div class="col-xs-6">
 
             <!-- The draggable list of targets -->
             <div class="typesDemo">
@@ -234,12 +222,13 @@
                       dnd-effect-allowed="move"
                       class="background-man"
                       >
-                      <dnd-nodrag>
+                      {{question.target}}
+<!--                       <dnd-nodrag>
                         <div dnd-handle class="handle">:::</div>
                         <div class="name">
                             <input type="text" ng-model="question.target" class="background-man form-control input-sm">
                         </div>
-                      </dnd-nodrag>
+                      </dnd-nodrag> -->
                   </li>
 
                   <li class="dndPlaceholder">
@@ -247,39 +236,8 @@
                   </li>
               </ul>
 
-<!--               <ul dnd-list="y.tierOne.kanjiQuiz"
-                  dnd-disable-if="y.tierOne.kanjiQuiz.length >= 5">
-
-                  <li ng-repeat="question in y.tierOne.kanjiQuiz"
-                      dnd-draggable="question"
-                      dnd-moved="y.tierOne.kanjiQuiz.splice($index, 1)"
-                      dnd-effect-allowed="move"
-                      class="background-man"
-                      >
-                      <dnd-nodrag>
-                        <div dnd-handle class="handle">:::</div>
-                        <div class="name">
-                            <input type="text" ng-model="question.info" class="background-man form-control input-sm">
-                        </div>
-                      </dnd-nodrag>
-                  </li>
-
-                  <li class="dndPlaceholder">
-                      Drop question/answer here
-                  </li>
-              </ul> -->
-
 
             </div>
-            
-          </div>
-          <!-- Pron test (all tiers) -->
-          <div class="col-xs-12">
-            
-          </div>
-          <!-- Def test (all tiers) -->
-          <div class="col-xs-12">
-            
           </div>
 
           
