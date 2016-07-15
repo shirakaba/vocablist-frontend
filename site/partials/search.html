@@ -223,12 +223,14 @@
             <!-- The draggable list of targets -->
             <div class="typesDemo">
 
-              <ul dnd-list="y.tierOne.kanjiQuiz"
-                  dnd-disable-if="y.tierOne.kanjiQuiz.length >= 5">
+              <ul dnd-list="y.tierOne.kanjiQuiz.quiz"
+                  dnd-allowed-types="y.tierOne.kanjiQuiz.allowedTypes"
+                  dnd-disable-if="y.tierOne.kanjiQuiz.quiz.length >= y.tierOne.kanjiQuiz.quiz.max">
 
-                  <li ng-repeat="question in y.tierOne.kanjiQuiz"
+                  <li ng-repeat="question in y.tierOne.kanjiQuiz.quiz"
                       dnd-draggable="question"
-                      dnd-moved="y.tierOne.kanjiQuiz.splice($index, 1)"
+                      dnd-type="question.type"
+                      dnd-moved="y.tierOne.kanjiQuiz.quiz.splice($index, 1)"
                       dnd-effect-allowed="move"
                       class="background-man"
                       >
@@ -241,7 +243,7 @@
                   </li>
 
                   <li class="dndPlaceholder">
-                      Drop question/answer here
+                      Drop any <strong>{{y.tierOne.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
                   </li>
               </ul>
 
