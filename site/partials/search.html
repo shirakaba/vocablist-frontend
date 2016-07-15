@@ -159,48 +159,125 @@
         <!-- The quiz (strictly only one of quizA or quizB) -->
         <section class="row">
           <div class="col-xs-12">
-
-            <!-- Kanji test (all tiers) -->
-            <div class="panel panel-default">
-              <div class="panel-heading">kanji test</div>
+            <div class="panel panel-primary">
+              <div class="panel-heading"><h3 class="panel-title">Tier one</h3></div>
               <div class="panel-body">
-                <!-- The list of infos -->
-                <div class="col-xs-3 v-container">
-                  <div class="v-box">
-                    <span ng-repeat="question in r.tierOne.kanjiQuiz.quiz">
-                      <p ng-bind="question.info"></p>
-                    </span>
+
+                <!-- Kanji test (all tiers) -->
+                <div class="panel panel-default">
+                  <div class="panel-heading">kanji test</div>
+                  <div class="panel-body">
+                    <!-- The list of infos -->
+                    <div class="col-xs-3 v-container">
+                      <div class="v-box">
+                        <span ng-repeat="question in r.tierOne.kanjiQuiz.quiz">
+                          <p ng-bind="question.info"></p>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="col-xs-9">
+                      <!-- The draggable list of targets -->
+                      <div class="simpleDemo">
+                        <ul dnd-list="rw.tierOne.kanjiQuiz.quiz"
+                            dnd-allowed-types="rw.tierOne.kanjiQuiz.allowedTypes"
+                            dnd-disable-if="rw.tierOne.kanjiQuiz.quiz.length >= rw.tierOne.kanjiQuiz.quiz.max">
+
+                            <li ng-repeat="question in rw.tierOne.kanjiQuiz.quiz"
+                                dnd-draggable="question"
+                                dnd-type="question.type"
+                                dnd-moved="rw.tierOne.kanjiQuiz.quiz.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                >
+                                {{question.target}}
+                            </li>
+
+                            <li class="dndPlaceholder">
+                                Drop any <strong>{{rw.tierOne.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
+                            </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="col-xs-9">
-                  <!-- The draggable list of targets -->
-                  <div class="simpleDemo">
-                    <ul dnd-list="rw.tierOne.kanjiQuiz.quiz"
-                        dnd-allowed-types="rw.tierOne.kanjiQuiz.allowedTypes"
-                        dnd-disable-if="rw.tierOne.kanjiQuiz.quiz.length >= rw.tierOne.kanjiQuiz.quiz.max">
 
-                        <li ng-repeat="question in rw.tierOne.kanjiQuiz.quiz"
-                            dnd-draggable="question"
-                            dnd-type="question.type"
-                            dnd-moved="rw.tierOne.kanjiQuiz.quiz.splice($index, 1)"
-                            dnd-effect-allowed="move"
-                            >
-                            {{question.target}}
-      <!--                       <dnd-nodrag>
-                              <div dnd-handle class="handle">:::</div>
-                              <div class="name">
-                                  <input type="text" ng-model="question.target" class="background-man form-control input-sm">
-                              </div>
-                            </dnd-nodrag> -->
-                        </li>
+                <!-- Pron test -->
+                <div class="panel panel-default">
+                  <div class="panel-heading">pron test</div>
+                  <div class="panel-body">
+                    <!-- The list of infos -->
+                    <div class="col-xs-3 v-container">
+                      <div class="v-box">
+                        <span ng-repeat="question in r.tierOne.pronQuiz.quiz">
+                          <p ng-bind="question.info"></p>
+                        </span>
+                      </div>
+                    </div>
 
-                        <li class="dndPlaceholder">
-                            Drop any <strong>{{rw.tierOne.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
-                        </li>
-                    </ul>
+                    <div class="col-xs-9">
+                      <!-- The draggable list of targets -->
+                      <div class="simpleDemo">
+                        <ul dnd-list="rw.tierOne.pronQuiz.quiz"
+                            dnd-allowed-types="rw.tierOne.pronQuiz.allowedTypes"
+                            dnd-disable-if="rw.tierOne.pronQuiz.quiz.length >= rw.tierOne.pronQuiz.quiz.max">
+
+                            <li ng-repeat="question in rw.tierOne.pronQuiz.quiz"
+                                dnd-draggable="question"
+                                dnd-type="question.type"
+                                dnd-moved="rw.tierOne.pronQuiz.quiz.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                >
+                                {{question.target}}
+                            </li>
+
+                            <li class="dndPlaceholder">
+                                Drop any <strong>{{rw.tierOne.pronQuiz.allowedTypes.join(' or ')}}</strong> here
+                            </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                <!-- Def test -->
+                <div class="panel panel-default">
+                  <div class="panel-heading">def test</div>
+                  <div class="panel-body">
+                    <!-- The list of infos -->
+                    <div class="col-xs-9 v-container">
+                      <div class="v-box">
+                        <span ng-repeat="question in r.tierOne.defQuiz.quiz">
+                          <p ng-bind="question.info"></p>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="col-xs-3">
+                      <!-- The draggable list of targets -->
+                      <div class="simpleDemo">
+                        <ul dnd-list="rw.tierOne.defQuiz.quiz"
+                            dnd-allowed-types="rw.tierOne.defQuiz.allowedTypes"
+                            dnd-disable-if="rw.tierOne.defQuiz.quiz.length >= rw.tierOne.defQuiz.quiz.max">
+
+                            <li ng-repeat="question in rw.tierOne.defQuiz.quiz"
+                                dnd-draggable="question"
+                                dnd-type="question.type"
+                                dnd-moved="rw.tierOne.defQuiz.quiz.splice($index, 1)"
+                                dnd-effect-allowed="move"
+                                >
+                                {{question.target}}
+                            </li>
+
+                            <li class="dndPlaceholder">
+                                Drop any <strong>{{rw.tierOne.defQuiz.allowedTypes.join(' or ')}}</strong> here
+                            </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
