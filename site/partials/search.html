@@ -195,16 +195,16 @@
                              http://fiddle.jshell.net/marmotz/83gbS/light/ [?]
                              http://marceljuenemann.github.io/angular-drag-and-drop-lists/demo/#/nested [docs] -->
               <!-- Fillable containers: https://plnkr.co/edit/9OTy70KZZwavIWClIgvY?p=preview -->
-              <p ng-bind="question.info"></p>
+              <!-- <p ng-bind="question.info"></p> -->
 
+
+              <ul ng-model="groups[0]"
+                  class="groups"
+                  dnd-list="groups[0].items">
+                  <li class="title">{{question.info}}</li>
+                  <li ng-repeat="item in groups[0].items">{{ item.target }}</li>
+              </ul>
             </span>
-
-            <ul ng-repeat="group in groups"
-                class="groups"
-                dnd-list="group.items">
-                <li class="title">{{group.name}}</li>
-                <li ng-repeat="item in group.items">{{ item.target }}</li>
-            </ul>
           </div>
           <div class="col-xs-6">
 
