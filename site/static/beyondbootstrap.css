@@ -118,6 +118,26 @@ tr.ruled {
   background-color: yellow;
 }
 
+.v-container{
+    height: 100%;
+    white-space: nowrap;
+    text-align: center;
+}
+.v-container:before{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    /* adjust for white space between pseudo element and next sibling */
+    margin-right: -.25em;
+    /* stretch line height */
+    height: 100%; 
+}
+.v-box{
+    vertical-align: middle;
+    white-space: normal;
+}
+
 
 
 /* Below here: for angular-drag-and-drop-lists. */

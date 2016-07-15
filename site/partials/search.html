@@ -158,63 +158,52 @@
 
         <!-- The quiz (strictly only one of quizA or quizB) -->
         <section class="row">
-        <div class="col-xs-12">
+          <div class="col-xs-12">
 
-          <!-- Kanji test (all tiers) -->
-        <div class="panel panel-default">
-        <div class="panel-heading">Panel heading</div>
-        <div class="panel-body">
-          <div class="col-xs-3">
+            <!-- Kanji test (all tiers) -->
+            <div class="panel panel-default">
+              <div class="panel-heading">kanji test</div>
+              <div class="panel-body">
+                <!-- The list of infos -->
+                <div class="col-xs-3 v-container">
+                  <div class="v-box">
+                    <span ng-repeat="question in r.tierOne.kanjiQuiz.quiz">
+                      <p ng-bind="question.info"></p>
+                    </span>
+                  </div>
+                </div>
 
-            <!-- The list of infos [under construction] -->
-            <span ng-repeat="question in r.tierOne.kanjiQuiz.quiz">
-              <!-- Everything below this <p> is broken.  -->
-              <!-- Refer to: http://jsfiddle.net/kashjs/n2gxobf7/ [Empty 'My basket' array]
-                             http://jsfiddle.net/rniemeyer/qwgrf/ [Trashcan]
-                             http://fiddle.jshell.net/marmotz/83gbS/light/ [?]
-                             http://marceljuenemann.github.io/angular-drag-and-drop-lists/demo/#/nested [docs] -->
-              <!-- Fillable containers: https://plnkr.co/edit/9OTy70KZZwavIWClIgvY?p=preview -->
-              <p ng-bind="question.info"></p>
+                <div class="col-xs-9">
+                  <!-- The draggable list of targets -->
+                  <div class="simpleDemo">
+                    <ul dnd-list="rw.tierOne.kanjiQuiz.quiz"
+                        dnd-allowed-types="rw.tierOne.kanjiQuiz.allowedTypes"
+                        dnd-disable-if="rw.tierOne.kanjiQuiz.quiz.length >= rw.tierOne.kanjiQuiz.quiz.max">
 
-            </span>
-          </div>
+                        <li ng-repeat="question in rw.tierOne.kanjiQuiz.quiz"
+                            dnd-draggable="question"
+                            dnd-type="question.type"
+                            dnd-moved="rw.tierOne.kanjiQuiz.quiz.splice($index, 1)"
+                            dnd-effect-allowed="move"
+                            >
+                            {{question.target}}
+      <!--                       <dnd-nodrag>
+                              <div dnd-handle class="handle">:::</div>
+                              <div class="name">
+                                  <input type="text" ng-model="question.target" class="background-man form-control input-sm">
+                              </div>
+                            </dnd-nodrag> -->
+                        </li>
 
-          <div class="col-xs-9">
-
-            <!-- The draggable list of targets -->
-              <div class="simpleDemo">
-              <ul dnd-list="rw.tierOne.kanjiQuiz.quiz"
-                  dnd-allowed-types="rw.tierOne.kanjiQuiz.allowedTypes"
-                  dnd-disable-if="rw.tierOne.kanjiQuiz.quiz.length >= rw.tierOne.kanjiQuiz.quiz.max">
-
-                  <li ng-repeat="question in rw.tierOne.kanjiQuiz.quiz"
-                      dnd-draggable="question"
-                      dnd-type="question.type"
-                      dnd-moved="rw.tierOne.kanjiQuiz.quiz.splice($index, 1)"
-                      dnd-effect-allowed="move"
-                      >
-                      {{question.target}}
-<!--                       <dnd-nodrag>
-                        <div dnd-handle class="handle">:::</div>
-                        <div class="name">
-                            <input type="text" ng-model="question.target" class="background-man form-control input-sm">
-                        </div>
-                      </dnd-nodrag> -->
-                  </li>
-
-                  <li class="dndPlaceholder">
-                      Drop any <strong>{{rw.tierOne.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
-                  </li>
-              </ul>
+                        <li class="dndPlaceholder">
+                            Drop any <strong>{{rw.tierOne.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
+                        </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-              </div>
-
-
+            </div>
           </div>
-        </div>
-        </div>
-
-          
         </section>
     </article>
 
@@ -229,15 +218,7 @@
                 <a href="javascript:void(0);" data-ng-click="submit('和')">和</a>
                 <a href="javascript:void(0);" data-ng-click="submit('神')">神</a>
                 <a href="javascript:void(0);" data-ng-click="submit('電')">電</a>
-                <a href="javascript:void(0);" data-ng-click="submit('桜')">桜</a>
-                <a href="javascript:void(0);" data-ng-click="submit('恩')">恩</a>
-                <a href="javascript:void(0);" data-ng-click="submit('漢')">漢</a>
-                <a href="javascript:void(0);" data-ng-click="submit('数')">数</a>
-                <a href="javascript:void(0);" data-ng-click="submit('算')">算</a>
-                <a href="javascript:void(0);" data-ng-click="submit('機')">機</a>
-                <a href="javascript:void(0);" data-ng-click="submit('愛')">愛</a> -->
-                <!-- href referring to a dummy JS call allows hand cursor to appear -->
-<!--               </p>
+               </p>
             </div>
           </div>
         </div>
