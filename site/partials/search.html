@@ -170,9 +170,11 @@
                     <!-- The list of infos -->
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
-                        <span ng-repeat="question in r.tierOne.kanjiQuiz.quiz">
-                          <p ng-bind="question.info"></p>
-                        </span>
+                        <ol>
+                          <li ng-repeat="question in r.tierOne.kanjiQuiz.quiz">
+                            <span ng-bind="question.info"></span>
+                          </li>
+                        </ol>
                       </div>
                     </div>
 
@@ -209,11 +211,14 @@
                     <!-- The list of infos -->
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
-                        <span ng-repeat="question in r.tierOne.pronQuiz.quiz">
-                          <p ng-bind="question.info"></p>
-                        </span>
+                        <ol>
+                          <li ng-repeat="question in r.tierOne.pronQuiz.quiz">
+                            <span ng-bind="question.info"></span>
+                          </li>
+                        </ol>
                       </div>
                     </div>
+                    <!-- <span ng-bind=""></span> -->
 
                     <div class="col-xs-9">
                       <!-- The draggable list of targets -->
@@ -237,6 +242,7 @@
                         </ul>
                       </div>
                     </div>
+
                   </div>
                 </div>
 
@@ -247,9 +253,11 @@
                     <!-- The list of infos -->
                     <div class="col-xs-9 v-container">
                       <div class="v-box">
-                        <span ng-repeat="question in r.tierOne.defQuiz.quiz">
-                          <p ng-bind="question.info"></p>
-                        </span>
+                        <ol>
+                          <li ng-repeat="question in r.tierOne.defQuiz.quiz">
+                            <span ng-bind="question.info"></span>
+                          </li>
+                        </ol>
                       </div>
                     </div>
 
