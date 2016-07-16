@@ -138,6 +138,10 @@ tr.ruled {
     white-space: normal;
 }
 
+.panel-body .v-stable{
+  min-height: 250px;
+}
+
 
 
 /* Below here: for angular-drag-and-drop-lists. */

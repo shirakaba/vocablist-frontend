@@ -166,7 +166,7 @@
                 <!-- Kanji test (all tiers) -->
                 <div class="panel panel-default">
                   <div class="panel-heading">kanji test</div>
-                  <div class="panel-body">
+                  <div class="panel-body v-stable">
                     <!-- The list of infos -->
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
@@ -187,7 +187,7 @@
 
                             <li ng-repeat="question in rw[0].kanjiQuiz.quiz"
                                 dnd-draggable="question"
-                                dnd-type="question.type"
+                                dnd-type="rw[0].kanjiQuiz.type"
                                 dnd-moved="rw[0].kanjiQuiz.quiz.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 >
@@ -207,7 +207,7 @@
                 <!-- Pron test -->
                 <div class="panel panel-default">
                   <div class="panel-heading">pron test</div>
-                  <div class="panel-body">
+                  <div class="panel-body v-stable">
                     <!-- The list of infos -->
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
@@ -229,7 +229,7 @@
 
                             <li ng-repeat="question in rw[0].pronQuiz.quiz"
                                 dnd-draggable="question"
-                                dnd-type="question.type"
+                                dnd-type="rw[0].pronQuiz.type"
                                 dnd-moved="rw[0].pronQuiz.quiz.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 >
@@ -249,7 +249,7 @@
                 <!-- Def test -->
                 <div class="panel panel-default">
                   <div class="panel-heading">def test</div>
-                  <div class="panel-body">
+                  <div class="panel-body v-stable">
                     <!-- The list of infos -->
                     <div class="col-xs-9 v-container">
                       <div class="v-box">
@@ -270,7 +270,7 @@
 
                             <li ng-repeat="question in rw[0].defQuiz.quiz"
                                 dnd-draggable="question"
-                                dnd-type="question.type"
+                                dnd-type="rw[0].defQuiz.type"
                                 dnd-moved="rw[0].defQuiz.quiz.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 >
