@@ -173,12 +173,9 @@
                         <ol>
                           <li ng-repeat="question in r[0].kanjiQuiz.quiz">
                             <span ng-bind="question.info"></span>
-                            <!-- <span ng-bind="rw[0].kanjiQuiz.quiz[$index].target"></span> -->
-
                             <div ng-if="question.target === rw[0].kanjiQuiz.quiz[$index].target">
                                 <span>MATCH!</span>
                             </div>
-
                           </li>
                         </ol>
                       </div>
@@ -220,6 +217,9 @@
                         <ol>
                           <li ng-repeat="question in r[0].pronQuiz.quiz">
                             <span ng-bind="question.info"></span>
+                            <div ng-if="question.target === rw[0].pronQuiz.quiz[$index].target">
+                                <span>MATCH!</span>
+                            </div>
                           </li>
                         </ol>
                       </div>
@@ -262,6 +262,9 @@
                         <ol>
                           <li ng-repeat="question in r[0].defQuiz.quiz">
                             <span ng-bind="question.info"></span>
+                            <div ng-if="question.target === rw[0].defQuiz.quiz[$index].target">
+                                <span>MATCH!</span>
+                            </div>
                           </li>
                         </ol>
                       </div>
