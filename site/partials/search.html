@@ -159,10 +159,11 @@
         <!-- The quiz (strictly only one of quizA or quizB) -->
         <section class="row">
           <div class="col-xs-12">
-            <div class="panel panel-primary">
-              <div class="panel-heading"><h3 class="panel-title">Tier one</h3></div>
+            <div class="panel panel-primary" ng-repeat="tier in r">
+            <!-- <div class="panel panel-primary"> -->
+              <div class="panel-heading"><h3 class="panel-title">Tier <span ng-bind="$index + 1"></span></h3></div>
               <div class="panel-body">
-                Tier score: <span ng-bind="calculateTierScore(r[0], rw[0])"></span>
+                Tier score: <span ng-bind="calculateTierScore(tier, rw[$index])"></span>
 
                 <!-- Kanji test (all tiers) -->
                 <div class="panel panel-default">
@@ -172,9 +173,9 @@
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
-                        [<span ng-bind="calculateTestScore(r[0].kanjiQuiz.quiz, rw[0].kanjiQuiz.quiz)"></span>]
+                        [<span ng-bind="calculateTestScore(tier.kanjiQuiz.quiz, rw[$index].kanjiQuiz.quiz)"></span>]
                         <ol>
-                          <li ng-repeat="question in r[0].kanjiQuiz.quiz">
+                          <li ng-repeat="question in tier.kanjiQuiz.quiz">
                             <span ng-bind="question.info"></span>
 <!--                             <div ng-if="question.target === rw[0].kanjiQuiz.quiz[$index].target">
                                 <span>MATCH!</span>
@@ -187,21 +188,21 @@
                     <div class="col-xs-9">
                       <!-- The draggable list of targets -->
                       <div class="simpleDemo">
-                        <ul dnd-list="rw[0].kanjiQuiz.quiz"
-                            dnd-allowed-types="rw[0].kanjiQuiz.allowedTypes"
-                            dnd-disable-if="rw[0].kanjiQuiz.quiz.length >= rw[0].kanjiQuiz.quiz.max">
+                        <ul dnd-list="rw[$index].kanjiQuiz.quiz"
+                            dnd-allowed-types="rw[$index].kanjiQuiz.allowedTypes"
+                            dnd-disable-if="rw[$index].kanjiQuiz.quiz.length >= rw[$index].kanjiQuiz.quiz.max">
 
-                            <li ng-repeat="question in rw[0].kanjiQuiz.quiz"
+                            <li ng-repeat="question in rw[$index].kanjiQuiz.quiz"
                                 dnd-draggable="question"
-                                dnd-type="rw[0].kanjiQuiz.type"
-                                dnd-moved="rw[0].kanjiQuiz.quiz.splice($index, 1)"
+                                dnd-type="rw[$parent.$index].kanjiQuiz.type"
+                                dnd-moved="rw[$parent.$index].kanjiQuiz.quiz.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 >
                                 {{question.target}}
                             </li>
 
                             <li class="dndPlaceholder">
-                                Drop any <strong>{{rw[0].kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
+                                Drop any <strong>{{rw[$index].kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
                             </li>
                         </ul>
                       </div>
@@ -218,9 +219,9 @@
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
-                        [<span ng-bind="calculateTestScore(r[0].pronQuiz.quiz, rw[0].pronQuiz.quiz)"></span>]
+                        [<span ng-bind="calculateTestScore(tier.pronQuiz.quiz, rw[$index].pronQuiz.quiz)"></span>]
                         <ol>
-                          <li ng-repeat="question in r[0].pronQuiz.quiz">
+                          <li ng-repeat="question in tier.pronQuiz.quiz">
                             <span ng-bind="question.info"></span>
                           </li>
                         </ol>
@@ -230,21 +231,21 @@
                     <div class="col-xs-9">
                       <!-- The draggable list of targets -->
                       <div class="simpleDemo">
-                        <ul dnd-list="rw[0].pronQuiz.quiz"
-                            dnd-allowed-types="rw[0].pronQuiz.allowedTypes"
-                            dnd-disable-if="rw[0].pronQuiz.quiz.length >= rw[0].pronQuiz.quiz.max">
+                        <ul dnd-list="rw[$index].pronQuiz.quiz"
+                            dnd-allowed-types="rw[$index].pronQuiz.allowedTypes"
+                            dnd-disable-if="rw[$index].pronQuiz.quiz.length >= rw[$index].pronQuiz.quiz.max">
 
-                            <li ng-repeat="question in rw[0].pronQuiz.quiz"
+                            <li ng-repeat="question in rw[$index].pronQuiz.quiz"
                                 dnd-draggable="question"
-                                dnd-type="rw[0].pronQuiz.type"
-                                dnd-moved="rw[0].pronQuiz.quiz.splice($index, 1)"
+                                dnd-type="rw[$parent.$index].pronQuiz.type"
+                                dnd-moved="rw[$parent.$index].pronQuiz.quiz.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 >
                                 {{question.target}}
                             </li>
 
                             <li class="dndPlaceholder">
-                                Drop any <strong>{{rw[0].pronQuiz.allowedTypes.join(' or ')}}</strong> here
+                                Drop any <strong>{{rw[$index].pronQuiz.allowedTypes.join(' or ')}}</strong> here
                             </li>
                         </ul>
                       </div>
@@ -261,11 +262,11 @@
                     <div class="col-xs-9 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
-                        [<span ng-bind="calculateTestScore(r[0].defQuiz.quiz, rw[0].defQuiz.quiz)"></span>]
+                        [<span ng-bind="calculateTestScore(tier.defQuiz.quiz, rw[$index].defQuiz.quiz)"></span>]
                         <ol>
-                          <li ng-repeat="question in r[0].defQuiz.quiz">
+                          <li ng-repeat="question in tier.defQuiz.quiz">
                             <span ng-bind="question.info"></span>
-<!--                             <div ng-if="question.target === rw[0].defQuiz.quiz[$index].target">
+<!--                             <div ng-if="question.target === rw[$index].defQuiz.quiz[$index].target">
                                 <span>MATCH!</span>
                             </div> -->
                           </li>
@@ -276,21 +277,21 @@
                     <div class="col-xs-3">
                       <!-- The draggable list of targets -->
                       <div class="simpleDemo">
-                        <ul dnd-list="rw[0].defQuiz.quiz"
-                            dnd-allowed-types="rw[0].defQuiz.allowedTypes"
-                            dnd-disable-if="rw[0].defQuiz.quiz.length >= rw[0].defQuiz.quiz.max">
+                        <ul dnd-list="rw[$index].defQuiz.quiz"
+                            dnd-allowed-types="rw[$index].defQuiz.allowedTypes"
+                            dnd-disable-if="rw[$index].defQuiz.quiz.length >= rw[$index].defQuiz.quiz.max">
 
-                            <li ng-repeat="question in rw[0].defQuiz.quiz"
+                            <li ng-repeat="question in rw[$index].defQuiz.quiz"
                                 dnd-draggable="question"
-                                dnd-type="rw[0].defQuiz.type"
-                                dnd-moved="rw[0].defQuiz.quiz.splice($index, 1)"
+                                dnd-type="rw[$parent.$index].defQuiz.type"
+                                dnd-moved="rw[$parent.$index].defQuiz.quiz.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 >
                                 {{question.target}}
                             </li>
 
                             <li class="dndPlaceholder">
-                                Drop any <strong>{{rw[0].defQuiz.allowedTypes.join(' or ')}}</strong> here
+                                Drop any <strong>{{rw[$index].defQuiz.allowedTypes.join(' or ')}}</strong> here
                             </li>
                         </ul>
                       </div>
@@ -300,6 +301,7 @@
 
               </div>
             </div>
+
           </div>
         </section>
     </article>
