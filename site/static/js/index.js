@@ -34,13 +34,27 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         n5Checked: true,
                         showEg: false,
                         qScore: 0,
-                        // testScore: 0,
-                        calculateTestScore: function(rQuiz, rwQuiz){
+                        // TODO: change JSON's quiz to test.
+                        calculateTestScore: function(rTest, rwTest){
                             var testScore = 0;
-                            for(var i=0; i < rQuiz.length; i++){
-                                if(rQuiz[i].target === rwQuiz[i].target) testScore++;
+                            for(var i=0; i < rTest.length; i++){
+                                if(rTest[i].target === rwTest[i].target) testScore++;
                             }
                             return testScore;
+                        },
+                        // TODO: change JSON's quizATiers to 'quizA', or even 'quiz[]'.
+                        calculateTierScore: function(rTier, rwTier){
+                            return sc.calculateTestScore(rTier.kanjiQuiz.quiz, rwTier.kanjiQuiz.quiz)
+                            + sc.calculateTestScore(rTier.pronQuiz.quiz, rwTier.pronQuiz.quiz)
+                            + sc.calculateTestScore(rTier.defQuiz.quiz, rwTier.defQuiz.quiz);
+                        },
+                        // TODO: change JSON's kanjiQuiz to 'kanjiTest'
+                        calculateQuizScore: function(rQuiz, rwQuiz){
+                            var quizScore = 0;
+                            for(var i=0; i < rQuiz.length; i++){
+                                quizScore += sc.calculateTierScore(rQuiz[i], rwQuiz[i]);
+                            }
+                            return quizScore;
                         },
                         fundamentalsFilter: function(item) {
                             // console.log(sc.fundChecked);
