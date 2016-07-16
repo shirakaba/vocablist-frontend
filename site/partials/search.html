@@ -159,6 +159,7 @@
         <!-- The quiz (strictly only one of quizA or quizB) -->
         <section class="row">
           <div class="col-xs-12">
+            <h1>Quiz score: <span ng-bind="calculateQuizScore(r, rw)"></span></h1>
             <div class="panel panel-primary" ng-repeat="tier in r">
             <!-- <div class="panel panel-primary"> -->
               <div class="panel-heading"><h3 class="panel-title">Tier <span ng-bind="$index + 1"></span></h3></div>
