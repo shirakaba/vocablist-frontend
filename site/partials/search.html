@@ -170,12 +170,14 @@
                     <!-- The list of infos -->
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
+                        <span>Test score:</span>
+                        [<span ng-bind="calculateScore(r[0].kanjiQuiz.quiz, rw[0].kanjiQuiz.quiz)"></span>]
                         <ol>
                           <li ng-repeat="question in r[0].kanjiQuiz.quiz">
                             <span ng-bind="question.info"></span>
-                            <div ng-if="question.target === rw[0].kanjiQuiz.quiz[$index].target">
+<!--                             <div ng-if="question.target === rw[0].kanjiQuiz.quiz[$index].target">
                                 <span>MATCH!</span>
-                            </div>
+                            </div> -->
                           </li>
                         </ol>
                       </div>
@@ -214,17 +216,15 @@
                     <!-- The list of infos -->
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
+                        <span>Test score:</span>
+                        [<span ng-bind="calculateScore(r[0].pronQuiz.quiz, rw[0].pronQuiz.quiz)"></span>]
                         <ol>
                           <li ng-repeat="question in r[0].pronQuiz.quiz">
                             <span ng-bind="question.info"></span>
-                            <div ng-if="question.target === rw[0].pronQuiz.quiz[$index].target">
-                                <span>MATCH!</span>
-                            </div>
                           </li>
                         </ol>
                       </div>
                     </div>
-                    <!-- <span ng-bind="">(invisible) Score assessment to go here</span> -->
 
                     <div class="col-xs-9">
                       <!-- The draggable list of targets -->
@@ -259,12 +259,14 @@
                     <!-- The list of infos -->
                     <div class="col-xs-9 v-container">
                       <div class="v-box">
+                        <span>Test score:</span>
+                        [<span ng-bind="calculateScore(r[0].defQuiz.quiz, rw[0].defQuiz.quiz)"></span>]
                         <ol>
                           <li ng-repeat="question in r[0].defQuiz.quiz">
                             <span ng-bind="question.info"></span>
-                            <div ng-if="question.target === rw[0].defQuiz.quiz[$index].target">
+<!--                             <div ng-if="question.target === rw[0].defQuiz.quiz[$index].target">
                                 <span>MATCH!</span>
-                            </div>
+                            </div> -->
                           </li>
                         </ol>
                       </div>

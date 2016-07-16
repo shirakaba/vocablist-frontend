@@ -33,6 +33,18 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         n4Checked: true,
                         n5Checked: true,
                         showEg: false,
+                        qScore: 0,
+                        testScore: 0,
+                        // testScore: function (a,b) {
+                        //     return a+b;
+                        // },
+                        calculateScore: function(rQuiz, rwQuiz){
+                            var testScore = 0;
+                            for(var i=0; i < rQuiz.length; i++){
+                                if(rQuiz[i].target === rwQuiz[i].target) testScore++;
+                            }
+                            return testScore;
+                        },
                         fundamentalsFilter: function(item) {
                             // console.log(sc.fundChecked);
                             return sc.fundChecked || !item.fundamental;
@@ -86,7 +98,11 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             .split('{{{').join('<span class="sentence-bold">')
                             .split('}}}').join('</span>');
                         }
-                    });
+                    })
+                    // .forEach($scope.qScore, function(value){
+                    //     $scope.testScore += qScore;
+                    // })
+                    ;
                     // sc.mySearch = "生"; // the input field's value is bound to the value of this variable.
                     // sc.currentRow = [];
                     // sc.kanjidicReadingResults = [];
@@ -196,6 +212,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     sc.rw[0].kanjiQuiz.quiz = sc.shuffleArray(sc.rw[0].kanjiQuiz.quiz);
                     sc.rw[0].pronQuiz.quiz = sc.shuffleArray(sc.rw[0].pronQuiz.quiz);
                     sc.rw[0].defQuiz.quiz = sc.shuffleArray(sc.rw[0].defQuiz.quiz);
+
+                    // sc.$watch("question.target === rw[0].pronQuiz.quiz[$index].target")
 
 
                     // sc.groups = 
