@@ -171,7 +171,7 @@
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
                         <ol>
-                          <li ng-repeat="question in r.tierOne.kanjiQuiz.quiz">
+                          <li ng-repeat="question in r[0].kanjiQuiz.quiz">
                             <span ng-bind="question.info"></span>
                           </li>
                         </ol>
@@ -181,21 +181,21 @@
                     <div class="col-xs-9">
                       <!-- The draggable list of targets -->
                       <div class="simpleDemo">
-                        <ul dnd-list="rw.tierOne.kanjiQuiz.quiz"
-                            dnd-allowed-types="rw.tierOne.kanjiQuiz.allowedTypes"
-                            dnd-disable-if="rw.tierOne.kanjiQuiz.quiz.length >= rw.tierOne.kanjiQuiz.quiz.max">
+                        <ul dnd-list="rw[0].kanjiQuiz.quiz"
+                            dnd-allowed-types="rw[0].kanjiQuiz.allowedTypes"
+                            dnd-disable-if="rw[0].kanjiQuiz.quiz.length >= rw[0].kanjiQuiz.quiz.max">
 
-                            <li ng-repeat="question in rw.tierOne.kanjiQuiz.quiz"
+                            <li ng-repeat="question in rw[0].kanjiQuiz.quiz"
                                 dnd-draggable="question"
                                 dnd-type="question.type"
-                                dnd-moved="rw.tierOne.kanjiQuiz.quiz.splice($index, 1)"
+                                dnd-moved="rw[0].kanjiQuiz.quiz.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 >
                                 {{question.target}}
                             </li>
 
                             <li class="dndPlaceholder">
-                                Drop any <strong>{{rw.tierOne.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
+                                Drop any <strong>{{rw[0].kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
                             </li>
                         </ul>
                       </div>
@@ -212,7 +212,7 @@
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
                         <ol>
-                          <li ng-repeat="question in r.tierOne.pronQuiz.quiz">
+                          <li ng-repeat="question in r[0].pronQuiz.quiz">
                             <span ng-bind="question.info"></span>
                           </li>
                         </ol>
@@ -223,21 +223,21 @@
                     <div class="col-xs-9">
                       <!-- The draggable list of targets -->
                       <div class="simpleDemo">
-                        <ul dnd-list="rw.tierOne.pronQuiz.quiz"
-                            dnd-allowed-types="rw.tierOne.pronQuiz.allowedTypes"
-                            dnd-disable-if="rw.tierOne.pronQuiz.quiz.length >= rw.tierOne.pronQuiz.quiz.max">
+                        <ul dnd-list="rw[0].pronQuiz.quiz"
+                            dnd-allowed-types="rw[0].pronQuiz.allowedTypes"
+                            dnd-disable-if="rw[0].pronQuiz.quiz.length >= rw[0].pronQuiz.quiz.max">
 
-                            <li ng-repeat="question in rw.tierOne.pronQuiz.quiz"
+                            <li ng-repeat="question in rw[0].pronQuiz.quiz"
                                 dnd-draggable="question"
                                 dnd-type="question.type"
-                                dnd-moved="rw.tierOne.pronQuiz.quiz.splice($index, 1)"
+                                dnd-moved="rw[0].pronQuiz.quiz.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 >
                                 {{question.target}}
                             </li>
 
                             <li class="dndPlaceholder">
-                                Drop any <strong>{{rw.tierOne.pronQuiz.allowedTypes.join(' or ')}}</strong> here
+                                Drop any <strong>{{rw[0].pronQuiz.allowedTypes.join(' or ')}}</strong> here
                             </li>
                         </ul>
                       </div>
@@ -254,7 +254,7 @@
                     <div class="col-xs-9 v-container">
                       <div class="v-box">
                         <ol>
-                          <li ng-repeat="question in r.tierOne.defQuiz.quiz">
+                          <li ng-repeat="question in r[0].defQuiz.quiz">
                             <span ng-bind="question.info"></span>
                           </li>
                         </ol>
@@ -264,21 +264,21 @@
                     <div class="col-xs-3">
                       <!-- The draggable list of targets -->
                       <div class="simpleDemo">
-                        <ul dnd-list="rw.tierOne.defQuiz.quiz"
-                            dnd-allowed-types="rw.tierOne.defQuiz.allowedTypes"
-                            dnd-disable-if="rw.tierOne.defQuiz.quiz.length >= rw.tierOne.defQuiz.quiz.max">
+                        <ul dnd-list="rw[0].defQuiz.quiz"
+                            dnd-allowed-types="rw[0].defQuiz.allowedTypes"
+                            dnd-disable-if="rw[0].defQuiz.quiz.length >= rw[0].defQuiz.quiz.max">
 
-                            <li ng-repeat="question in rw.tierOne.defQuiz.quiz"
+                            <li ng-repeat="question in rw[0].defQuiz.quiz"
                                 dnd-draggable="question"
                                 dnd-type="question.type"
-                                dnd-moved="rw.tierOne.defQuiz.quiz.splice($index, 1)"
+                                dnd-moved="rw[0].defQuiz.quiz.splice($index, 1)"
                                 dnd-effect-allowed="move"
                                 >
                                 {{question.target}}
                             </li>
 
                             <li class="dndPlaceholder">
-                                Drop any <strong>{{rw.tierOne.defQuiz.allowedTypes.join(' or ')}}</strong> here
+                                Drop any <strong>{{rw[0].defQuiz.allowedTypes.join(' or ')}}</strong> here
                             </li>
                         </ul>
                       </div>
