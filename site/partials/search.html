@@ -173,6 +173,12 @@
                         <ol>
                           <li ng-repeat="question in r[0].kanjiQuiz.quiz">
                             <span ng-bind="question.info"></span>
+                            <!-- <span ng-bind="rw[0].kanjiQuiz.quiz[$index].target"></span> -->
+
+                            <div ng-if="question.target === rw[0].kanjiQuiz.quiz[$index].target">
+                                <span>MATCH!</span>
+                            </div>
+
                           </li>
                         </ol>
                       </div>
