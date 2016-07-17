@@ -171,7 +171,7 @@
                   <div class="panel-heading">kanji test</div>
                   <div class="panel-body v-stable">
                     <!-- The list of infos -->
-                    <div class="col-xs-3 v-container">
+                    <div class="col-xs-6 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
                         [<span ng-bind="calculateTestScore(tier.kanjiQuiz.quiz, tier.kanjiQuiz.answers)"></span>]
@@ -183,7 +183,7 @@
                             <div class="simpleDemo"> <!-- $index = that of 'question', or 'i' in tier.kanjiQuiz.quiz[i] -->
                               <ul dnd-list="tier.kanjiQuiz.answers[$index].bucket"
                                   dnd-allowed-types="tier.kanjiQuiz.allowedTypes"
-                                  dnd-disable-if="tier.kanjiQuiz.quiz.length >= tier.kanjiQuiz.quiz.max">
+                                  dnd-disable-if="tier.kanjiQuiz.answers[$index].bucket.length >= 1">
                                   <!-- the bucket is an array of tentative answers. -->
 
                                   <li ng-repeat="bucketContent in tier.kanjiQuiz.answers[$index].bucket"
@@ -207,7 +207,7 @@
                       </div>
                     </div>
 
-                    <div class="col-xs-9">
+                    <div class="col-xs-6">
                       <!-- The draggable list of targets -->
                       <div class="simpleDemo">
                         <ul dnd-list="rw[$index].kanjiQuiz.quiz"
@@ -238,7 +238,7 @@
                   <div class="panel-heading">pron test</div>
                   <div class="panel-body v-stable">
                     <!-- The list of infos -->
-                    <div class="col-xs-3 v-container">
+                    <div class="col-xs-6 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
                         [<span ng-bind="calculateTestScore(tier.pronQuiz.quiz, tier.pronQuiz.answers)"></span>]
@@ -250,7 +250,7 @@
                             <div class="simpleDemo"> <!-- $index = that of 'question', or 'i' in tier.pronQuiz.quiz[i] -->
                               <ul dnd-list="tier.pronQuiz.answers[$index].bucket"
                                   dnd-allowed-types="tier.pronQuiz.allowedTypes"
-                                  dnd-disable-if="tier.pronQuiz.quiz.length >= tier.pronQuiz.quiz.max">
+                                  dnd-disable-if="tier.pronQuiz.answers[$index].bucket.length >= 1">
                                   <!-- the bucket is an array of tentative answers. -->
 
                                   <li ng-repeat="bucketContent in tier.pronQuiz.answers[$index].bucket"
@@ -273,7 +273,7 @@
                       </div>
                     </div>
 
-                    <div class="col-xs-9">
+                    <div class="col-xs-6">
                       <!-- The draggable list of targets -->
                       <div class="simpleDemo">
                         <ul dnd-list="rw[$index].pronQuiz.quiz"
@@ -304,7 +304,7 @@
                   <div class="panel-heading">def test</div>
                   <div class="panel-body v-stable">
                     <!-- The list of infos -->
-                    <div class="col-xs-9 v-container">
+                    <div class="col-xs-6 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
                         [<span ng-bind="calculateTestScore(tier.defQuiz.quiz, tier.defQuiz.answers)"></span>]
@@ -316,7 +316,7 @@
                             <div class="simpleDemo"> <!-- $index = that of 'question', or 'i' in tier.defQuiz.quiz[i] -->
                               <ul dnd-list="tier.defQuiz.answers[$index].bucket"
                                   dnd-allowed-types="tier.defQuiz.allowedTypes"
-                                  dnd-disable-if="tier.defQuiz.quiz.length >= tier.defQuiz.quiz.max">
+                                  dnd-disable-if="tier.defQuiz.answers[$index].bucket.length >= 1">
                                   <!-- the bucket is an array of tentative answers. -->
 
                                   <li ng-repeat="bucketContent in tier.defQuiz.answers[$index].bucket"
@@ -339,7 +339,7 @@
                       </div>
                     </div>
 
-                    <div class="col-xs-3">
+                    <div class="col-xs-6">
                       <!-- The draggable list of targets -->
                       <div class="simpleDemo">
                         <ul dnd-list="rw[$index].defQuiz.quiz"
