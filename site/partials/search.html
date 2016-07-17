@@ -174,7 +174,7 @@
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
-                        <!-- [<span ng-bind="calculateTestScore(tier.kanjiQuiz.quiz, rw[$index].kanjiQuiz.quiz)"></span>] -->
+                        [<span ng-bind="calculateTestScore(tier.kanjiQuiz.quiz, tier.kanjiQuiz.answers)"></span>]
                         <ol>
                           <li ng-repeat="question in tier.kanjiQuiz.quiz">
                             <span ng-bind="question.info"></span>
@@ -241,7 +241,7 @@
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
-                        <!-- [<span ng-bind="calculateTestScore(tier.pronQuiz.quiz, rw[$index].pronQuiz.quiz)"></span>] -->
+                        [<span ng-bind="calculateTestScore(tier.pronQuiz.quiz, tier.pronQuiz.answers)"></span>]
                         <ol>
                           <li ng-repeat="question in tier.pronQuiz.quiz">
                             <span ng-bind="question.info"></span>
@@ -307,7 +307,7 @@
                     <div class="col-xs-9 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
-                        <!-- [<span ng-bind="calculateTestScore(tier.defQuiz.quiz, rw[$index].defQuiz.quiz)"></span>] -->
+                        [<span ng-bind="calculateTestScore(tier.defQuiz.quiz, tier.defQuiz.answers)"></span>]
                         <ol>
                           <li ng-repeat="question in tier.defQuiz.quiz">
                             <span ng-bind="question.info"></span>

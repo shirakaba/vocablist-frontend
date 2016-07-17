@@ -35,10 +35,11 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         showEg: false,
                         qScore: 0,
                         // TODO: change JSON's quiz to test.
-                        calculateTestScore: function(rTest, rwTest){
+                        calculateTestScore: function(rTest, answers){
                             var testScore = 0;
                             for(var i=0; i < rTest.length; i++){
-                                if(rTest[i].target === rwTest[i].target) testScore++;
+                                if(answers[i].bucket.length > 0)
+                                    if(rTest[i].target === answers[i].bucket[0].target) testScore++;
                             }
                             return testScore;
                         },
