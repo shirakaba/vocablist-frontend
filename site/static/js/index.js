@@ -250,7 +250,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     sc.rw = allResponse[0].quizATiers;
                     sc.r = JSON.parse(JSON.stringify(sc.rw));
 
-                    for(var i = 0; i < sc.rw.length; i++) sc.insertAnswers(sc.rw[i]);
+                    for(var i = 0; i < sc.rw.length; i++) sc.insertAnswers(sc.r[i]);
                     // optionally add extra dummy qus into sc.rw's tests now before shuffling them.
                     for(var i = 0; i < sc.rw.length; i++) sc.shuffleAllTestsInTier(sc.rw[i]);
                     console.log(sc.rw);

@@ -159,12 +159,12 @@
         <!-- The quiz (strictly only one of quizA or quizB) -->
         <section class="row">
           <div class="col-xs-12">
-            <h1>Quiz score: <span ng-bind="calculateQuizScore(r, rw)"></span></h1>
+            <!-- <h1>Quiz score: <span ng-bind="calculateQuizScore(r, rw)"></span></h1> -->
             <div class="panel panel-primary" ng-repeat="tier in r">
             <!-- <div class="panel panel-primary"> -->
               <div class="panel-heading"><h3 class="panel-title">Tier <span ng-bind="$index + 1"></span></h3></div>
               <div class="panel-body">
-                Tier score: <span ng-bind="calculateTierScore(tier, rw[$index])"></span>
+                <!-- Tier score: <span ng-bind="calculateTierScore(tier, rw[$index])"></span> -->
 
                 <!-- Kanji test (all tiers) -->
                 <div class="panel panel-default">
@@ -174,16 +174,35 @@
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
-                        [<span ng-bind="calculateTestScore(tier.kanjiQuiz.quiz, rw[$index].kanjiQuiz.quiz)"></span>]
+                        <!-- [<span ng-bind="calculateTestScore(tier.kanjiQuiz.quiz, rw[$index].kanjiQuiz.quiz)"></span>] -->
                         <ol>
                           <li ng-repeat="question in tier.kanjiQuiz.quiz">
                             <span ng-bind="question.info"></span>
-                            
-<!--                             <div ng-if="question.target === rw[0].kanjiQuiz.quiz[$index].target">
-                                <span>MATCH!</span>
-                            </div> -->
+
+                            <div class="simpleDemo"> <!-- $index = that of 'question', or 'i' in tier.kanjiQuiz.quiz[i] -->
+                              <ul dnd-list="tier.kanjiQuiz.answers[$index].bucket"
+                                  dnd-allowed-types="tier.kanjiQuiz.allowedTypes"
+                                  dnd-disable-if="tier.kanjiQuiz.quiz.length >= tier.kanjiQuiz.quiz.max">
+                                  <!-- the bucket is an array of tentative answers. -->
+
+                                  <li ng-repeat="bucketContent in tier.kanjiQuiz.answers[$index].bucket"
+                                      dnd-draggable="bucketContent"
+                                      dnd-type="tier.kanjiQuiz.type"
+                                      dnd-moved="tier.kanjiQuiz.answers[$parent.$index].bucket.splice($index, 1)"
+                                      dnd-effect-allowed="move"
+                                      >
+                                      {{bucketContent.target}}
+                                  </li>
+
+                                  <li class="dndPlaceholder">
+                                      Drop any <strong>{{tier.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
+                                  </li>
+                              </ul>
+                            </div>
+
                           </li>
                         </ol>
+
                       </div>
                     </div>
 
@@ -221,7 +240,7 @@
                     <div class="col-xs-3 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
-                        [<span ng-bind="calculateTestScore(tier.pronQuiz.quiz, rw[$index].pronQuiz.quiz)"></span>]
+                        <!-- [<span ng-bind="calculateTestScore(tier.pronQuiz.quiz, rw[$index].pronQuiz.quiz)"></span>] -->
                         <ol>
                           <li ng-repeat="question in tier.pronQuiz.quiz">
                             <span ng-bind="question.info"></span>
@@ -264,7 +283,7 @@
                     <div class="col-xs-9 v-container">
                       <div class="v-box">
                         <span>Test score:</span>
-                        [<span ng-bind="calculateTestScore(tier.defQuiz.quiz, rw[$index].defQuiz.quiz)"></span>]
+                        <!-- [<span ng-bind="calculateTestScore(tier.defQuiz.quiz, rw[$index].defQuiz.quiz)"></span>] -->
                         <ol>
                           <li ng-repeat="question in tier.defQuiz.quiz">
                             <span ng-bind="question.info"></span>
