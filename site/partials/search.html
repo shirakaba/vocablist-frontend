@@ -168,198 +168,68 @@
                 Tier score: <span ng-bind="calculateTierScore(tier)"></span>
 
                 <!-- Kanji test (all tiers) -->
-                <div class="panel panel-default">
-                  <div class="panel-heading">kanji test</div>
-                  <div class="panel-body v-stable">
-                    <!-- The list of infos -->
-                    <div class="col-xs-6 v-container">
-                      <div class="v-box">
-                        <span>Test score:</span>
-                        [<span ng-bind="calculateTestScore(tier.kanjiQuiz.quiz, tier.kanjiQuiz.answers)"></span>]
-                        <ol>
-                          <li ng-repeat="question in tier.kanjiQuiz.quiz">
-                            <span ng-bind="question.info"></span>
+                <div ng-repeat="test in tier.tests">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">test</div>
+                    <div class="panel-body v-stable">
+                      <!-- The list of infos -->
+                      <div class="col-xs-6 v-container">
+                        <div class="v-box">
+                          <span>Test score:</span>
+                          [<span ng-bind="calculateTestScore(test.qus, test.answers)"></span>]
+                          <ol>
+                            <li ng-repeat="question in test.qus">
+                              <span ng-bind="question.info"></span>
 
-                            <!-- Buckets -->
-                            <div class="simpleDemo well well-sm"> <!-- $index = that of 'question', or 'i' in tier.kanjiQuiz.quiz[i] -->
-                              <ul dnd-list="tier.kanjiQuiz.answers[$index].bucket"
-                                  dnd-allowed-types="tier.kanjiQuiz.allowedTypes"
-                                  dnd-disable-if="tier.kanjiQuiz.answers[$index].bucket.length >= 1">
-                                  <!-- the bucket is an array of tentative answers. -->
+                              <!-- Buckets -->
+                              <div class="simpleDemo well well-sm"> <!-- $index = that of 'question', or 'i' in tier.kanjiQuiz.qus[i] -->
+                                <ul dnd-list="test.answers[$index].bucket"
+                                    dnd-allowed-types="test.allowedTypes"
+                                    dnd-disable-if="test.answers[$index].bucket.length >= 1">
+                                    <!-- the bucket is an array of tentative answers. -->
 
-                                  <li ng-repeat="bucketContent in tier.kanjiQuiz.answers[$index].bucket"
-                                      dnd-draggable="bucketContent"
-                                      dnd-type="tier.kanjiQuiz.type"
-                                      dnd-moved="tier.kanjiQuiz.answers[$parent.$index].bucket. splice($index, 1)"
-                                      dnd-effect-allowed="move"
-                                      >
-                                      {{bucketContent.target}}
-                                  </li>
+                                    <li ng-repeat="bucketContent in test.answers[$index].bucket"
+                                        dnd-draggable="bucketContent"
+                                        dnd-type="test.eleType"
+                                        dnd-moved="test.answers[$parent.$index].bucket.splice($index, 1)"
+                                        dnd-effect-allowed="move"
+                                        >
+                                        {{bucketContent.target}}
+                                    </li>
 
-                                  <li class="dndPlaceholder">
-                                      Drop any <strong>{{tier.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
-                                  </li>
-                              </ul>
-                            </div>
+                                    <li class="dndPlaceholder">
+                                        Drop any <strong>{{test.allowedTypes.join(' or ')}}</strong> here
+                                    </li>
+                                </ul>
+                              </div>
 
-                          </li>
-                        </ol>
+                            </li>
+                          </ol>
 
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="col-xs-6 well well-sm">
-                      <!-- The draggable list of targets -->
-                      <div class="simpleDemo">
-                        <ul dnd-list="rw[$index].kanjiQuiz.quiz"
-                            dnd-allowed-types="rw[$index].kanjiQuiz.allowedTypes"
-                            dnd-disable-if="rw[$index].kanjiQuiz.quiz.length >= rw[$index].kanjiQuiz.quiz.max">
+                      <div class="col-xs-6 well well-sm">
+                        <!-- The draggable list of targets -->
+                        <div class="simpleDemo">
+                          <ul dnd-list="rw[$parent.$index].tests[$index].qus"
+                              dnd-allowed-types="rw[$parent.$index].tests[$index].allowedTypes"
+                              dnd-disable-if="rw[$parent.$index].tests[$index].qus.length >= rw[$parent.$index].tests[$index].qus.max">
 
-                            <li ng-repeat="question in rw[$index].kanjiQuiz.quiz"
-                                dnd-draggable="question"
-                                dnd-type="rw[$parent.$index].kanjiQuiz.type"
-                                dnd-moved="rw[$parent.$index].kanjiQuiz.quiz.splice($index, 1)"
-                                dnd-effect-allowed="move"
-                                >
-                                {{question.target}}
-                            </li>
+                              <li ng-repeat="question in rw[$parent.$index].tests[$index].qus"
+                                  dnd-draggable="question"
+                                  dnd-type="rw[$parent.$parent.$index].tests[$parent.$index].eleType"
+                                  dnd-moved="rw[$parent.$parent.$index].tests[$parent.$index].qus.splice($index, 1)"
+                                  dnd-effect-allowed="move"
+                                  >
+                                  {{question.target}}
+                              </li>
 
-                            <li class="dndPlaceholder">
-                                Drop any <strong>{{rw[$index].kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
-                            </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-                <!-- Pron test -->
-                <div class="panel panel-default">
-                  <div class="panel-heading">pron test</div>
-                  <div class="panel-body v-stable">
-                    <!-- The list of infos -->
-                    <div class="col-xs-6 v-container">
-                      <div class="v-box">
-                        <span>Test score:</span>
-                        [<span ng-bind="calculateTestScore(tier.pronQuiz.quiz, tier.pronQuiz.answers)"></span>]
-                        <ol>
-                          <li ng-repeat="question in tier.pronQuiz.quiz">
-                            <span ng-bind="question.info"></span>
-
-                            <!-- Buckets -->
-                            <div class="simpleDemo well well-sm"> <!-- $index = that of 'question', or 'i' in tier.pronQuiz.quiz[i] -->
-                              <ul dnd-list="tier.pronQuiz.answers[$index].bucket"
-                                  dnd-allowed-types="tier.pronQuiz.allowedTypes"
-                                  dnd-disable-if="tier.pronQuiz.answers[$index].bucket.length >= 1">
-                                  <!-- the bucket is an array of tentative answers. -->
-
-                                  <li ng-repeat="bucketContent in tier.pronQuiz.answers[$index].bucket"
-                                      dnd-draggable="bucketContent"
-                                      dnd-type="tier.pronQuiz.type"
-                                      dnd-moved="tier.pronQuiz.answers[$parent.$index].bucket. splice($index, 1)"
-                                      dnd-effect-allowed="move"
-                                      >
-                                      {{bucketContent.target}}
-                                  </li>
-
-                                  <li class="dndPlaceholder">
-                                      Drop any <strong>{{tier.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
-                                  </li>
-                              </ul>
-                            </div>
-
-                          </li>
-                        </ol>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-6 well well-sm">
-                      <!-- The draggable list of targets -->
-                      <div class="simpleDemo">
-                        <ul dnd-list="rw[$index].pronQuiz.quiz"
-                            dnd-allowed-types="rw[$index].pronQuiz.allowedTypes"
-                            dnd-disable-if="rw[$index].pronQuiz.quiz.length >= rw[$index].pronQuiz.quiz.max">
-
-                            <li ng-repeat="question in rw[$index].pronQuiz.quiz"
-                                dnd-draggable="question"
-                                dnd-type="rw[$parent.$index].pronQuiz.type"
-                                dnd-moved="rw[$parent.$index].pronQuiz.quiz.splice($index, 1)"
-                                dnd-effect-allowed="move"
-                                >
-                                {{question.target}}
-                            </li>
-
-                            <li class="dndPlaceholder">
-                                Drop any <strong>{{rw[$index].pronQuiz.allowedTypes.join(' or ')}}</strong> here
-                            </li>
-                        </ul>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-                <!-- Def test -->
-                <div class="panel panel-default">
-                  <div class="panel-heading">def test</div>
-                  <div class="panel-body v-stable">
-                    <!-- The list of infos -->
-                    <div class="col-xs-6 v-container">
-                      <div class="v-box">
-                        <span>Test score:</span>
-                        [<span ng-bind="calculateTestScore(tier.defQuiz.quiz, tier.defQuiz.answers)"></span>]
-                        <ol>
-                          <li ng-repeat="question in tier.defQuiz.quiz">
-                            <span ng-bind="question.info"></span>
-
-                            <!-- Buckets -->
-                            <div class="simpleDemo well well-sm"> <!-- $index = that of 'question', or 'i' in tier.defQuiz.quiz[i] -->
-                              <ul dnd-list="tier.defQuiz.answers[$index].bucket"
-                                  dnd-allowed-types="tier.defQuiz.allowedTypes"
-                                  dnd-disable-if="tier.defQuiz.answers[$index].bucket.length >= 1">
-                                  <!-- the bucket is an array of tentative answers. -->
-
-                                  <li ng-repeat="bucketContent in tier.defQuiz.answers[$index].bucket"
-                                      dnd-draggable="bucketContent"
-                                      dnd-type="tier.defQuiz.type"
-                                      dnd-moved="tier.defQuiz.answers[$parent.$index].bucket. splice($index, 1)"
-                                      dnd-effect-allowed="move"
-                                      >
-                                      {{bucketContent.target}}
-                                  </li>
-
-                                  <li class="dndPlaceholder">
-                                      Drop any <strong>{{tier.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
-                                  </li>
-                              </ul>
-                            </div>
-
-                          </li>
-                        </ol>
-                      </div>
-                    </div>
-
-                    <div class="col-xs-6 well well-sm">
-                      <!-- The draggable list of targets -->
-                      <div class="simpleDemo">
-                        <ul dnd-list="rw[$index].defQuiz.quiz"
-                            dnd-allowed-types="rw[$index].defQuiz.allowedTypes"
-                            dnd-disable-if="rw[$index].defQuiz.quiz.length >= rw[$index].defQuiz.quiz.max">
-
-                            <li ng-repeat="question in rw[$index].defQuiz.quiz"
-                                dnd-draggable="question"
-                                dnd-type="rw[$parent.$index].defQuiz.type"
-                                dnd-moved="rw[$parent.$index].defQuiz.quiz.splice($index, 1)"
-                                dnd-effect-allowed="move"
-                                >
-                                {{question.target}}
-                            </li>
-
-                            <li class="dndPlaceholder">
-                                Drop any <strong>{{rw[$index].defQuiz.allowedTypes.join(' or ')}}</strong> here
-                            </li>
-                        </ul>
+                              <li class="dndPlaceholder">
+                                  Drop any <strong>{{rw[$parent.$index].tests[$index].allowedTypes.join(' or ')}}</strong> here
+                              </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>

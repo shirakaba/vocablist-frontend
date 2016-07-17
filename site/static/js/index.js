@@ -45,9 +45,15 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         },
                         // TODO: change JSON's quizATiers to 'quizA', or even 'quiz[]'.
                         calculateTierScore: function(rTier){
-                            return sc.calculateTestScore(rTier.kanjiQuiz.quiz, rTier.kanjiQuiz.answers)
-                            + sc.calculateTestScore(rTier.pronQuiz.quiz, rTier.pronQuiz.answers)
-                            + sc.calculateTestScore(rTier.defQuiz.quiz, rTier.defQuiz.answers);
+                            var tierScore = 0;
+                            for(var i=0; i < rTier.tests.length; i++){
+                               tierScore += sc.calculateTestScore(rTier.tests[i].qus, rTier.tests[i].answers);
+                            }
+                            return tierScore;
+
+                            // return sc.calculateTestScore(rTier.kanjiQuiz.quiz, rTier.kanjiQuiz.answers)
+                            // + sc.calculateTestScore(rTier.pronQuiz.quiz, rTier.pronQuiz.answers)
+                            // + sc.calculateTestScore(rTier.defQuiz.quiz, rTier.defQuiz.answers);
                         },
                         // TODO: change JSON's kanjiQuiz to 'kanjiTest'
                         calculateQuizScore: function(rQuiz){
