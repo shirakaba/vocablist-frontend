@@ -163,20 +163,31 @@
             <h1>Quiz score: <span ng-bind="calculateQuizScore(r)"></span></h1>
             <div class="panel panel-primary" ng-repeat="tier in r">
             <!-- <div class="panel panel-primary"> -->
-              <div class="panel-heading"><h3 class="panel-title">Tier <span ng-bind="$index + 1"></span></h3></div>
+              <div class="panel-heading">
+                <!-- <h3 class="panel-title">Tier <span ng-bind="$index + 1"></span></h3> -->
+                <h3 class="panel-title">
+
+                  <span ng-switch="$index">
+                    <span ng-switch-when="0"><span>Tier one: 50th percentile of word usage</span></span>
+                    <span ng-switch-when="1"><span>Tier two: 50th-75th percentile of word usage</span></span>
+                    <span ng-switch-when="2"><span>Tier three: 75th-88th percentile of word usage</span></span>
+                    <span ng-switch-when="3"><span>Tier four: 88th-94th percentile of word usage</span></span>
+                    <span ng-switch-default>Tier <span ng-bind="$index +1"/>: [undefined percentile of word usage]</span>
+                  </span>
+
+                </h3>
+              </div>
               <div class="panel-body">
                 Tier score: <span ng-bind="calculateTierScore(tier)"></span>
 
                 <!-- Kanji test (all tiers) -->
                 <div ng-repeat="test in tier.tests">
                   <div class="panel panel-default">
-                    <div class="panel-heading">test</div>
-                    <div class="panel-body v-stable">
+                    <div class="panel-heading"><span ng-bind="test.testType"></span> test</div>
+                    <div class="panel-body">
                       <!-- The list of infos -->
-                      <div class="col-xs-6 v-container">
-                        <div class="v-box">
-                          <span>Test score:</span>
-                          [<span ng-bind="calculateTestScore(test.qus, test.answers)"></span>]
+                      <div class="col-xs-6">
+                        <h4>Questions</h4>
                           <ol>
                             <li ng-repeat="question in test.qus">
                               <span ng-bind="question.info"></span>
@@ -205,13 +216,13 @@
 
                             </li>
                           </ol>
-
-                        </div>
+                          <span>Test score: </span>[<span ng-bind="calculateTestScore(test.qus, test.answers)"></span>]
                       </div>
 
-                      <div class="col-xs-6 well well-sm">
+                      <div class="col-xs-6">
                         <!-- The draggable list of targets -->
-                        <div class="simpleDemo">
+                        <h4>Choices</h4>
+                        <div class="simpleDemo well well-sm">
                           <ul dnd-list="rw[$parent.$index].tests[$index].qus"
                               dnd-allowed-types="rw[$parent.$index].tests[$index].allowedTypes"
                               dnd-disable-if="rw[$parent.$index].tests[$index].qus.length >= rw[$parent.$index].tests[$index].qus.max">
