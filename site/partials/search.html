@@ -179,6 +179,7 @@
                           <li ng-repeat="question in tier.kanjiQuiz.quiz">
                             <span ng-bind="question.info"></span>
 
+                            <!-- Buckets -->
                             <div class="simpleDemo"> <!-- $index = that of 'question', or 'i' in tier.kanjiQuiz.quiz[i] -->
                               <ul dnd-list="tier.kanjiQuiz.answers[$index].bucket"
                                   dnd-allowed-types="tier.kanjiQuiz.allowedTypes"
@@ -188,7 +189,7 @@
                                   <li ng-repeat="bucketContent in tier.kanjiQuiz.answers[$index].bucket"
                                       dnd-draggable="bucketContent"
                                       dnd-type="tier.kanjiQuiz.type"
-                                      dnd-moved="tier.kanjiQuiz.answers[$parent.$index].bucket.splice($index, 1)"
+                                      dnd-moved="tier.kanjiQuiz.answers[$parent.$index].bucket. splice($index, 1)"
                                       dnd-effect-allowed="move"
                                       >
                                       {{bucketContent.target}}
@@ -244,6 +245,29 @@
                         <ol>
                           <li ng-repeat="question in tier.pronQuiz.quiz">
                             <span ng-bind="question.info"></span>
+
+                            <!-- Buckets -->
+                            <div class="simpleDemo"> <!-- $index = that of 'question', or 'i' in tier.pronQuiz.quiz[i] -->
+                              <ul dnd-list="tier.pronQuiz.answers[$index].bucket"
+                                  dnd-allowed-types="tier.pronQuiz.allowedTypes"
+                                  dnd-disable-if="tier.pronQuiz.quiz.length >= tier.pronQuiz.quiz.max">
+                                  <!-- the bucket is an array of tentative answers. -->
+
+                                  <li ng-repeat="bucketContent in tier.pronQuiz.answers[$index].bucket"
+                                      dnd-draggable="bucketContent"
+                                      dnd-type="tier.pronQuiz.type"
+                                      dnd-moved="tier.pronQuiz.answers[$parent.$index].bucket. splice($index, 1)"
+                                      dnd-effect-allowed="move"
+                                      >
+                                      {{bucketContent.target}}
+                                  </li>
+
+                                  <li class="dndPlaceholder">
+                                      Drop any <strong>{{tier.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
+                                  </li>
+                              </ul>
+                            </div>
+
                           </li>
                         </ol>
                       </div>
@@ -287,9 +311,29 @@
                         <ol>
                           <li ng-repeat="question in tier.defQuiz.quiz">
                             <span ng-bind="question.info"></span>
-<!--                             <div ng-if="question.target === rw[$index].defQuiz.quiz[$index].target">
-                                <span>MATCH!</span>
-                            </div> -->
+
+                            <!-- Buckets -->
+                            <div class="simpleDemo"> <!-- $index = that of 'question', or 'i' in tier.defQuiz.quiz[i] -->
+                              <ul dnd-list="tier.defQuiz.answers[$index].bucket"
+                                  dnd-allowed-types="tier.defQuiz.allowedTypes"
+                                  dnd-disable-if="tier.defQuiz.quiz.length >= tier.defQuiz.quiz.max">
+                                  <!-- the bucket is an array of tentative answers. -->
+
+                                  <li ng-repeat="bucketContent in tier.defQuiz.answers[$index].bucket"
+                                      dnd-draggable="bucketContent"
+                                      dnd-type="tier.defQuiz.type"
+                                      dnd-moved="tier.defQuiz.answers[$parent.$index].bucket. splice($index, 1)"
+                                      dnd-effect-allowed="move"
+                                      >
+                                      {{bucketContent.target}}
+                                  </li>
+
+                                  <li class="dndPlaceholder">
+                                      Drop any <strong>{{tier.kanjiQuiz.allowedTypes.join(' or ')}}</strong> here
+                                  </li>
+                              </ul>
+                            </div>
+
                           </li>
                         </ol>
                       </div>
