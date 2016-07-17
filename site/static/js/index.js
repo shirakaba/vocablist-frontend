@@ -44,16 +44,16 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             return testScore;
                         },
                         // TODO: change JSON's quizATiers to 'quizA', or even 'quiz[]'.
-                        calculateTierScore: function(rTier, rwTier){
-                            return sc.calculateTestScore(rTier.kanjiQuiz.quiz, rwTier.kanjiQuiz.quiz)
-                            + sc.calculateTestScore(rTier.pronQuiz.quiz, rwTier.pronQuiz.quiz)
-                            + sc.calculateTestScore(rTier.defQuiz.quiz, rwTier.defQuiz.quiz);
+                        calculateTierScore: function(rTier){
+                            return sc.calculateTestScore(rTier.kanjiQuiz.quiz, rTier.kanjiQuiz.answers)
+                            + sc.calculateTestScore(rTier.pronQuiz.quiz, rTier.pronQuiz.answers)
+                            + sc.calculateTestScore(rTier.defQuiz.quiz, rTier.defQuiz.answers);
                         },
                         // TODO: change JSON's kanjiQuiz to 'kanjiTest'
-                        calculateQuizScore: function(rQuiz, rwQuiz){
+                        calculateQuizScore: function(rQuiz){
                             var quizScore = 0;
                             for(var i=0; i < rQuiz.length; i++){
-                                quizScore += sc.calculateTierScore(rQuiz[i], rwQuiz[i]);
+                                quizScore += sc.calculateTierScore(rQuiz[i]);
                             }
                             return quizScore;
                         },
