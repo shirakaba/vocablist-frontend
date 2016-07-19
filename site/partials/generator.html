@@ -39,7 +39,7 @@
                   <dt>Consent to participate</dt>
                   <dd>
                     <label class="radio-inline"><input type="radio" ng-model="consent" data-ng-value="true">Yes (I consent)</label>
-                    <label class="radio-inline"><input type="radio" ng-model="consent" data-ng-value="false">No (I don't consent)</label>
+                    <label class="radio-inline" ng-hide="consent"><input type="radio" ng-model="consent" data-ng-value="false">No (I don't consent)</label>
                   </dd>
               </div>
           </div>
@@ -117,21 +117,14 @@
   <section class="row">
       <div class="col-xs-12">
           <div class="panel panel-default">
+              <div class="panel-heading"><span>Vocabulary of interest</span></div>
               <div class="panel-body">
-                  <h3 class="my-panel-heading">Kanji data</h3>
-                  <p>Two information fields are provided:</p>
-                  <dl class="dl-horizontal">
-                    <dt>Meaning</dt>
-                    <dd>Possible translations of the character into English terms.</dd>
-                    <dt>Reading</dt>
-                    <dd>All the various ways in which the character may be pronounced based on different contexts (excluding proper nouns, inclusion of which would make the database too large to submit!).</dd>
-                  </dl>
               </div>
           </div>
       </div>
   </section>
   
-  <section class="row">
+<!--   <section class="row">
       <div class="col-xs-12">
           <div class="panel panel-default">
               <div class="panel-body">
@@ -172,6 +165,6 @@
               </div>
           </div>
       </div>
-  </section>
+  </section> -->
 
 </article>
