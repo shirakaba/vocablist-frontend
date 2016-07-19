@@ -163,7 +163,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         // rather than the current flat multi-param setup.
                         // http://www.leveluplunch.com/java/tutorials/014-post-json-to-spring-rest-webservice/
                         // https://spring.io/guides/tutorials/bookmarks/
-                        $http.get('http://localhost:8080/test6?'
+                        $http.get('http://localhost:8080/generate?'
                             +'partition='+encodeURIComponent(sc.partition)
                             +'&makequiz='+encodeURIComponent(sc.makeQuiz)
                             +'&maxarticles='+encodeURIComponent(sc.maxArticles)
