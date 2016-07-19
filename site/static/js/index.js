@@ -272,12 +272,14 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
             beforeAddClass: function(element, className, done) {
                 if(className === NG_HIDE_CLASS) {
                     console.log(element);
+                    element.click();
                     element.slideUp(done);
                 }
             },
             removeClass: function(element, className, done) {
                 if(className === NG_HIDE_CLASS) {
                     console.log(element);
+                    element.click();
                     element.hide().slideDown(done);
                 }
             }
