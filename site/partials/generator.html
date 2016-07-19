@@ -1,0 +1,129 @@
+<article>
+
+  <section class="row">
+      <div class="col-xs-12">
+          <div class="panel panel-default">
+              <div class="panel-heading"><span>Demographic info</span></div>
+              <div class="panel-body">
+
+                  <dl class="dl-horizontal">
+
+                    <dt>Gender</dt>
+                    <dd>
+                      <label class="radio-inline"><input type="radio" ng-model="gender" value="male">Male</label>
+                      <label class="radio-inline"><input type="radio" ng-model="gender" value="female">Female</label>
+                      <label class="radio-inline"><input type="radio" ng-model="gender" value="other">Other category</label>
+                    </dd>
+
+                    <div class="controlRow-s">
+                      <dt>Age = <span ng-bind="ageReport(age)"/></dt>
+                      <dd><slider class="col-xs-11" ng-model="age" min="10" step="1" max="100" ticks="[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]" ticks-labels='[10, 20, 30, 40, 50, 60, 70, 80, 90, "Unspecified"]'></slider><span class="col-xs-1"></span></dd>
+                    </div>
+
+                    <dt>Japanese language exposure</dt>
+                    <dd>
+                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="proficiency = 2" value="low">Low environmental exposure <p><em>(eg. have spent no more than one year living in a primarily Japanese language environment*)</em></p></label>
+                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="proficiency = 4" value="some">Some environmental exposure <p><em>(eg. have spent some years in a primarily Japanese language environment*, but have completed no more than a junior high school education there)</em></p></label>
+                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="proficiency = 6" value="high">High environmental exposure <p><em>(eg. have completed at least a high school education in a primarily Japanese language environment*)</em></p></label>
+                      <small><em>* This may include international schools outside of Japan.</em></small>
+                    </dd>
+
+                    <div class="controlRow-s">
+                      <dt>Proficiency > <span ng-bind="filteringEnum(proficiency)"></span></dt>
+                      <dd>
+                        <div class="col-xs-12">
+                          <slider class="col-xs-11" tooltip="hide" ng-model="proficiency" ticks="[2, 3, 4, 5, 6]"
+                      ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
+                          <span class="col-xs-1"></span>
+                        </div>
+                        <span><em>(ie. you are confident that you generally have already learned most of the vocabulary of at least JLPT level: <span ng-bind="filteringEnum(proficiency)"></span>)</em></span><br>
+                        <small><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
+                      </dd>
+                    </div>
+
+                    <div class="controlRow-s">
+                      <dt>Source</dt>
+                      <dd>
+                        <label class="radio-inline"><input type="radio" ng-model="source" value="uni">Bristol University</label>
+                        <label class="radio-inline"><input type="radio" ng-model="source" value="reddit">Reddit</label>
+                        <label class="radio-inline"><input type="radio" ng-model="source" value="koohii">Koohii</label>
+                        <label class="radio-inline"><input type="radio" ng-model="source" value="other">Other</label>
+                      </dd>
+                    </div>
+                    
+                    <div class="controlRow-s">
+                      <dt>Other</dt>
+                      <dd>
+                        <span>If you had any problems with the options on this form (eg. you are genuinely of age 100), please report them here so that I can make manual adjustments.</span><br>
+                        <textarea class="form-control" rows="3" ng-model="issues" maxlength="400" placeholder="Input any issues here - maximum of 400 characters."></textarea>
+                      </dd>
+                    </div>
+
+                  </dl>
+
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section class="row">
+      <div class="col-xs-12">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <h3 class="my-panel-heading">Kanji data</h3>
+                  <p>Two information fields are provided:</p>
+                  <dl class="dl-horizontal">
+                    <dt>Meaning</dt>
+                    <dd>Possible translations of the character into English terms.</dd>
+                    <dt>Reading</dt>
+                    <dd>All the various ways in which the character may be pronounced based on different contexts (excluding proper nouns, inclusion of which would make the database too large to submit!).</dd>
+                  </dl>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+  <section class="row">
+      <div class="col-xs-12">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <h3 class="my-panel-heading">Study data</h3>
+                  <p>Four information fields are provided, generally available only for the Ministry of Education-recommended characters:</p>
+                  <dl class="dl-horizontal">
+                    <dt>Frequency</dt>
+                    <dd>A ranking of the frequency with which each of the characters are used (higher ranks are more frequent).</dd>
+                    <dt>Stroke</dt>
+                    <dd>The number of strokes used to draw the character.</dd>
+                    <dt>JLPT Level</dt>
+                    <dd>The level of the Japanese Language Proficiency Test under which the character falls.</dd>
+                    <dt>Grade</dt>
+                    <dd>The school grade in which native Japanese would learn the character.</dd>
+                  </dl>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+  <section class="row">
+      <div class="col-xs-12">
+          <div class="panel panel-default">
+              <div class="panel-body">
+
+                      <h3 class="my-panel-heading">Extra info</h3>
+                      <p>Four information fields are provided, generally available only for the Ministry of Education-recommended characters:</p>
+                      <dl class="dl-horizontal">
+                        <dt>Henshall page</dt>
+                        <dd>The page of Kenneth G. Henshall's 1988 character etymology dictionary (A Guide To Remembering Japanese Characters) under which the character may be found.</dd>
+                        <dt>Henshall index</dt>
+                        <dd>The index of the character under the same book.</dd>
+                        <dt>Unicode</dt>
+                        <dd>The Unicode point of the character.</dd>
+                        <dt>JIS</dt>
+                        <dd>The JIS point of the character.</dd>
+                      </dl>
+              </div>
+          </div>
+      </div>
+  </section>
+
+</article>

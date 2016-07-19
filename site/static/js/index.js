@@ -12,6 +12,45 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
             $sceProvider.enabled(false);
 
             $stateProvider
+            // state for generator partial.
+            .state({
+                name: 'generator',
+                url: "/generator",
+                templateUrl: "partials/generator.html",
+                controller: ["$scope", "$http", function(sc, $http) {
+                    angular.extend(sc, {
+                        gender: "other",
+                        age: 20,
+                        exposure: "low",
+                        proficiency: 2,
+                        source: "other",
+                        ageReport: function(age) {
+                            if(age === 100) return "?";
+                            else return age.toString();
+                        },
+                        filteringEnum: function(value) {
+                            switch(value){
+                                case 2:
+                                    return "n5";
+                                case 3:
+                                    return "n4";
+                                case 4:
+                                    return "n3";
+                                case 5:
+                                    return "n2";
+                                case 6:
+                                    return "n1";
+                                default:
+                                    return "n5";
+                            }
+                        },
+                    });
+                    sc.startupFunction = function(thing){
+                        return 0;
+                    };
+                }]
+            })
+            
             // state for search partial.
             .state({
                 name: 'search',
@@ -20,7 +59,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
                 controller: ["$scope", "$http", function(sc, $http) {
                     angular.extend(sc, {
-                        // articles: [""],
+                        // articles: ["", ""],
                         limit: 100,
                         partition: 0,
                         minyield: 0.00,

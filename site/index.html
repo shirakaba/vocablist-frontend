@@ -40,9 +40,13 @@
           <div class="col-xs-12">
               <ul class="nav nav-pills orange">
               <li data-ng-class="{
+              'clicked': $state.is('generator'),
+              'default': !$state.is('generator')
+              }" role="presentation" ><a data-ui-sref="generator">Generator</a></li>
+              <li data-ng-class="{
               'clicked': $state.is('search'),
               'default': !$state.is('search')
-              }" role="presentation" ><a data-ui-sref="search">Home</a></li>
+              }" role="presentation" ><a data-ui-sref="search">Search</a></li>
               <li data-ng-class ="{
               'clicked': $state.is('quiz'),
               'default': !$state.is('quiz')

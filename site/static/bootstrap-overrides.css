@@ -1,3 +1,7 @@
+small {
+  color: grey;
+}
+
 html {
   min-height: 100%;
 }
@@ -73,6 +77,10 @@ form input.form-control{
 
 dl.dl-horizontal, dl.dl-vertical{
   font-size: 20px;
+}
+
+dl.dl-horizontal dt{
+  white-space: normal;
 }
 
 dl.dl-vertical{
