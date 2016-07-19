@@ -13,7 +13,7 @@
                   <li>Taking another quiz to measure any changes in comprehension of the topic <em>[est. 7 minutes]</em></li>
                 </ol>
                 <p>I shall be asking participants to fill in a small demographic survey (below) so that demographic effects may be measured. Note that nonetheless, most fields are optional.</p>
-                <p class="helpy"><em>Data stored is limited to: the user-provided demographic information; the website-provided access ID; the website-generated vocabulary list; timestamps of events; and the user's performance during the website-generated quizzes as well as the quizzes themselves. Information on unstated data such as IP address will not be taken.</em></p>
+                <p class="helpy"><em>Data stored is limited to: the user-provided demographic information; the website-provided access ID; the website-generated vocabulary list; timestamps of events; user feedback; and the user's performance during the website-generated quizzes as well as the quizzes themselves. Information on unstated data such as IP address will not be taken.</em></p>
               </div>
           </div>
       </div>
@@ -70,24 +70,11 @@
 
                     <dt>Japanese language exposure</dt>
                     <dd>
-                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="proficiency = 2" value="low">Low environmental exposure <p><em>(eg. have spent no more than one year living in a primarily Japanese language environment*)</em></p></label>
-                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="proficiency = 4" value="some">Some environmental exposure <p><em>(eg. have spent some years in a primarily Japanese language environment*, but have completed no more than a junior high school education there; or comprehend at least high school-level Chinese, as it helps with Japanese recognition)</em></p></label>
-                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="proficiency = 6" value="high">High environmental exposure <p><em>(eg. have completed at least a high school education in a primarily Japanese language environment*)</em></p></label>
+                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="$parent.proficiency = 2" value="low">Low environmental exposure <p><em>(eg. have spent no more than one year living in a primarily Japanese language environment*)</em></p></label>
+                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="$parent.proficiency = 4" value="some">Some environmental exposure <p><em>(eg. have spent some years in a primarily Japanese language environment*, but have completed no more than a junior high school education there; or comprehend at least high school-level Chinese, as it helps with Japanese recognition)</em></p></label>
+                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="$parent.proficiency = 6" value="high">High environmental exposure <p><em>(eg. have completed at least a high school education in a primarily Japanese language environment*)</em></p></label>
                       <small class="helpy"><em>* This may include international schools outside of Japan.</em></small>
                     </dd>
-
-                    <div class="controlRow-s">
-                      <dt>Proficiency > <span ng-bind="filteringEnum(proficiency)"></span></dt>
-                      <dd>
-                        <div class="col-xs-12">
-                          <slider class="col-xs-11" tooltip="hide" ng-model="proficiency" ticks="[2, 3, 4, 5, 6]"
-                      ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
-                          <span class="col-xs-1"></span>
-                        </div>
-                        <small><span><em>(ie. you are confident that you generally have already learned most of the vocabulary of at least JLPT level: <span ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
-                        <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
-                      </dd>
-                    </div>
 
                     <div class="controlRow-s">
                       <dt>Source</dt>
@@ -119,6 +106,47 @@
           <div class="panel panel-default">
               <div class="panel-heading"><span>Vocabulary of interest</span></div>
               <div class="panel-body">
+                <p>Please select a vocabulary area of interest either from within the pre-generated options (which are instant), or by providing one yourself (which may take up to two minutes).</p>
+
+                <dl class="dl-horizontal">
+                  <dt>Selection</dt>
+                  <dd>
+                    <label class="radio-inline"><input type="radio" ng-model="ownchoice" data-ng-value="true">From own choice <span ng-show="ownchoice">(visible below)</span></label>
+                    <label class="radio-inline"><input type="radio" ng-model="ownchoice" data-ng-value="false">From pre-generated <span ng-hide="ownchoice">(visible below)</span></label>
+                  </dd>
+                </dl>
+
+                <div class="form-group" ng-hide="ownchoice">
+                  <label for="select" class="col-lg-2 control-label">Pre-generated options</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" id="select">
+                      <option>Biology</option>
+                      <option>Physics</option>
+                      <option>Chemistry</option>
+                      <option>Economics</option>
+                      <option>Politics</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group" ng-show="ownchoice">
+                  <label class="control-label" for="inputDefault">Category of choice</label>
+                  <input type="text" class="form-control" id="inputDefault" placeholder="Placeholder text">
+                </div>
+
+                <div class="controlRow-s">
+                  <dt>Proficiency > <span ng-bind="filteringEnum(proficiency)"></span></dt>
+                  <dd>
+                    <div class="col-xs-12">
+                      <slider class="col-xs-11" tooltip="hide" ng-model="proficiency" ticks="[2, 3, 4, 5, 6]"
+                  ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
+                      <span class="col-xs-1"></span>
+                    </div>
+                    <small><span><em>(ie. you are confident that you generally have already learned most of the vocabulary of at least JLPT level: <span ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
+                    <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
+                  </dd>
+                </div>
+
               </div>
           </div>
       </div>

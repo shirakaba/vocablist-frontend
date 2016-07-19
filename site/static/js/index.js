@@ -26,6 +26,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         proficiency: 2,
                         source: "other",
                         issues: "",
+                        ownchoice: false,
                         ageReport: function(age) {
                             if(age === 100) return "?";
                             else return age.toString();
