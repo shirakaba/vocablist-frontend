@@ -20,10 +20,12 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                 controller: ["$scope", "$http", function(sc, $http) {
                     angular.extend(sc, {
                         gender: "other",
-                        age: 20,
+                        age: 100,
                         exposure: "low",
+                        consent: false,
                         proficiency: 2,
                         source: "other",
+                        issues: "",
                         ageReport: function(age) {
                             if(age === 100) return "?";
                             else return age.toString();
