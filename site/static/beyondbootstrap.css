@@ -1,3 +1,7 @@
+.controlRow {
+  padding-top: 3.5em;
+}
+
 .number {
   color: black;
   text-align: right;
