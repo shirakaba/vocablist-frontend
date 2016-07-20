@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dndLists']) // [''] contains dependencies.
+angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dndLists', 'timer']) // [''] contains dependencies.
     // by default, angular animates every class, so we need to configure its selection.
     .config(['$animateProvider', '$stateProvider', '$urlRouterProvider', '$sceProvider',
         function($animateProvider, $stateProvider, $urlRouterProvider, $sceProvider){
@@ -29,6 +29,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         // category: "none",
                         ownchoice: false,
                         startedSearch: false,
+                        finishedSearch: false,
                         generatedSelection: "none",
                         generatedOptions: [
                             "Biology",
@@ -37,6 +38,11 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             "Economics", 
                             "Politics"
                         ],
+                        finishTheSearch: function(){
+                            sc.$apply(function() {
+                                sc.finishedSearch = true;
+                            });
+                        },
                         ageReport: function(age) {
                             if(age === 100) return "?";
                             else return age.toString();
@@ -78,19 +84,27 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
                             .then(
                                 function(response) {
-                                    // TODO: insertAnswers, insertDummy, etc. should be handled on quiz side
-                                    console.log(sc.makeQuiz);
-                                    // console.log(response);
-                                    sc.x = response.data.list;
-                                    // console.log(sc.x);
-                                    sc.articles = response.data.successfulArticles;
-                                    sc.rw = response.data.quizA;
-                                    sc.dummy = response.data.quizC;
-                                    sc.r = JSON.parse(JSON.stringify(sc.rw));
-                                    // r[0] is tierOne.
-                                    for(var i = 0; i < sc.rw.length; i++) sc.insertAnswers(sc.r[i]);
-                                    for(var i = 0; i < sc.rw.length; i++) sc.insertDummy(sc.rw[i], sc.dummy[i]);
-                                    for(var i = 0; i < sc.rw.length; i++) sc.shuffleAllTestsInTier(sc.rw[i]);
+                                    // console.log("got this far.");
+                                    console.log(response.data);
+                                    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(response.data));
+                                    var dlAnchorElem = document.getElementById('downloadAnchorElem');
+                                    dlAnchorElem.setAttribute("href",     dataStr     );
+                                    dlAnchorElem.setAttribute("download", "vocablist.json");
+                                    dlAnchorElem.click();
+
+                                    // // TODO: insertAnswers, insertDummy, etc. should be handled on quiz side
+                                    // console.log(sc.makeQuiz);
+                                    // // console.log(response);
+                                    // sc.x = response.data.list;
+                                    // // console.log(sc.x);
+                                    // sc.articles = response.data.successfulArticles;
+                                    // sc.rw = response.data.quizA;
+                                    // sc.dummy = response.data.quizC;
+                                    // sc.r = JSON.parse(JSON.stringify(sc.rw));
+                                    // // r[0] is tierOne.
+                                    // for(var i = 0; i < sc.rw.length; i++) sc.insertAnswers(sc.r[i]);
+                                    // for(var i = 0; i < sc.rw.length; i++) sc.insertDummy(sc.rw[i], sc.dummy[i]);
+                                    // for(var i = 0; i < sc.rw.length; i++) sc.shuffleAllTestsInTier(sc.rw[i]);
                                 },
 
                                 function(response) {

@@ -29,8 +29,8 @@
   font-size: xx-large;
 }
 .glyphicon.spinning {
-    animation: spin 1s infinite linear;
-    -webkit-animation: spin2 1s infinite linear;
+    /*animation: spin 1s infinite linear;*/
+    /*-webkit-animation: spin2 1s infinite linear;*/
 }
 @keyframes spin {
     from {
