@@ -105,64 +105,9 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             .split('}}}').join('</span>');
                         }
                     })
-                    // .forEach($scope.qScore, function(value){
-                    //     $scope.testScore += qScore;
-                    // })
                     ;
-                    // sc.mySearch = "生"; // the input field's value is bound to the value of this variable.
-                    // sc.currentRow = [];
-                    // sc.kanjidicReadingResults = [];
-                    // sc.hideMe = false; // We declare this one only because our ng-show interacts with it. It's more about being explicit for documentation.
-
-            //         sc.submit = function(query) {
-            //             sc.mySearch = query;
-
-            //             $.ajax({
-            //                     url        : "http://127.0.0.1:3000",
-            //                     dataType   : 'json',
-            //                     contentType: 'application/json; charset=UTF-8',
-            //                     data       : JSON.stringify({
-            //                         "kanjiglyph": query
-            //                     }),
-            //                     type       : 'POST'
-            //                 })
-            //                 .done(function(data, textStatus, jqXHR) {
-            //                     console.log(data); // logs the incoming data as javascript objects
-            // //                  console.log(JSON.stringify(data, undefined, "  ")); // serialises the JSON to a string to emerge in Chrome console
-            //                         sc.$apply(function() {
-            //                             if(data.kanjidicReadingSearch.length){
-            //                                 sc.hideMe = false;
-            //                                     sc.searchQuery = data.receivedsearch;
-            //                                     sc.hkanjiPageOnlyResult = data.hkanjiPageSearch || "";
-            //                                     sc.hkanjiIndexOnlyResult = data.hkanjiIndexSearch || "";
-            //                                     sc.hkanjiCodePointOnlyResult = data.hkanjiCodePointSearch || "";
-
-            //                                     sc.kanjidicReadingResults = data.kanjidicReadingSearch;
-            //                                     sc.kanjidicDefinitionResults = data.kanjidicDefinitionSearch;
-            //                                     sc.kanjidicFrequencyResults = data.kanjidicFrequencySearch|| "";
-            //                                     sc.kanjidicStrokeResults = data.kanjidicStrokeSearch|| "";
-            //                                     sc.kanjidicJlptResults = data.kanjidicJlptSearch|| "";
-            //                                     sc.kanjidicGradeResults = data.kanjidicGradeSearch|| "";
-            //                             }
-            //                             else{
-            //                                 sc.hideMe = true;
-
-            //                             }
-
-            //                         });
-            //                 })
-            //                 .fail(function(jqXHR, textStatus, errorThrown) {
-            //                     console.error(arguments);
-            //                 });
-            //         };
 
                     sc.submit = function(query) {
-                        // $http.post and send JSON object like in dict website to send a .txt file
-                        // Would then need to add fields to JSON object with maxArticles etc.
-                        // Spring web app backend would then expect as its input a single object (with multiple fields within)
-                        // rather than the current flat multi-param setup.
-                        // http://www.leveluplunch.com/java/tutorials/014-post-json-to-spring-rest-webservice/
-                        // https://spring.io/guides/tutorials/bookmarks/
                         $http.get('http://localhost:8080/generate?'
                             +'partition='+encodeURIComponent(sc.partition)
                             +'&makequiz='+encodeURIComponent(sc.makeQuiz)
@@ -262,9 +207,9 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                 }]
             })
             .state({
-                name: 'about',
-                url: "/about",
-                templateUrl: "partials/about.html"
+                name: 'quiz',
+                url: "/quiz",
+                templateUrl: "partials/quiz.html"
             });
         }])
     .controller('navController', ['$scope', '$state', function($scope, $state) {
