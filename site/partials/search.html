@@ -1,7 +1,7 @@
 <nav>
       <div class="row">
           <div class="col-xs-12">
-              <form data-ng-submit="submit(mySearch)">
+              <form data-ng-submit="generate(mySearch)">
                   <div class="input-group">
                       <input type ="text" data-ng-model="mySearch" class="form-control" title="submitbutton"/> <!-- This input field's value is bound to $scope.mySearch -->
                           <span class="input-group-btn">
@@ -31,10 +31,10 @@
                   <span class="col-xs-3">Make quiz = <span ng-bind="makeQuiz"></span></span>
                   <div class="col-xs-9">
                     <label class="radio-inline">
-                      <input type="radio" type="radio" ng-model="makeQuiz" data-ng-value="false"> false
+                      <input type="radio" ng-model="makeQuiz" data-ng-value="false"> false
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" type="radio" ng-model="makeQuiz" data-ng-value="true"> true
+                      <input type="radio" ng-model="makeQuiz" data-ng-value="true"> true
                     </label>
                   </div>
                 </div>
@@ -184,103 +184,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-
-        <!-- The quiz (strictly only one of quizA or quizB) -->
-        <section class="row">
-          <div class="col-xs-12">
-            <h1>Quiz score: <span ng-bind="calculateQuizScore(r)"></span></h1>
-            <div class="panel panel-primary" ng-repeat="tier in r">
-            <!-- <div class="panel panel-primary"> -->
-              <div class="panel-heading">
-                <!-- <h3 class="panel-title">Tier <span ng-bind="$index + 1"></span></h3> -->
-                <h3 class="panel-title">
-
-                  <span ng-switch="$index">
-                    <span ng-switch-when="0"><span>Tier one: 50th percentile of word usage</span></span>
-                    <span ng-switch-when="1"><span>Tier two: 50th-75th percentile of word usage</span></span>
-                    <span ng-switch-when="2"><span>Tier three: 75th-88th percentile of word usage</span></span>
-                    <span ng-switch-when="3"><span>Tier four: 88th-94th percentile of word usage</span></span>
-                    <span ng-switch-default>Tier <span ng-bind="$index +1"/>: [undefined percentile of word usage]</span>
-                  </span>
-
-                </h3>
-              </div>
-              <div class="panel-body">
-                Tier score: <span ng-bind="calculateTierScore(tier)"></span>
-
-                <!-- Kanji test (all tiers) -->
-                <div ng-repeat="test in tier.tests">
-                  <div class="panel panel-default">
-                    <div class="panel-heading"><span ng-bind="test.testType"></span> test</div>
-                    <div class="panel-body">
-                    <!-- <span><i>Answer the questions by dragging the appropriate choice into each question's answer slot.</i></span> -->
-                      <!-- The list of infos -->
-                      <div class="col-xs-6">
-                        <h4>Questions</h4>
-                          <ol>
-                            <li ng-repeat="question in test.qus">
-                              <span ng-bind="question.info"></span>
-
-                              <!-- Buckets -->
-                              <div class="simpleDemo well well-sm"> <!-- $index = that of 'question', or 'i' in tier.kanjiQuiz.qus[i] -->
-                                <ul dnd-list="test.answers[$index].bucket"
-                                    dnd-allowed-types="test.allowedTypes"
-                                    dnd-disable-if="test.answers[$index].bucket.length >= 1">
-                                    <!-- the bucket is an array of tentative answers. -->
-
-                                    <li ng-repeat="bucketContent in test.answers[$index].bucket"
-                                        dnd-draggable="bucketContent"
-                                        dnd-type="test.eleType"
-                                        dnd-moved="test.answers[$parent.$index].bucket.splice($index, 1)"
-                                        dnd-effect-allowed="move"
-                                        >
-                                        {{bucketContent.target}}
-                                    </li>
-
-                                    <li class="dndPlaceholder">
-                                        Drop any <strong>{{test.allowedTypes.join(' or ')}}</strong> here
-                                    </li>
-                                </ul>
-                              </div>
-
-                            </li>
-                          </ol>
-                          <span>Test score: </span>[<span ng-bind="calculateTestScore(test.qus, test.answers)"></span>]
-                      </div>
-
-                      <div class="col-xs-6">
-                        <!-- The draggable list of targets -->
-                        <h4>Choices</h4>
-                        <div class="simpleDemo well well-sm">
-                          <ul dnd-list="rw[$parent.$index].tests[$index].qus"
-                              dnd-allowed-types="rw[$parent.$index].tests[$index].allowedTypes"
-                              dnd-disable-if="rw[$parent.$index].tests[$index].qus.length >= rw[$parent.$index].tests[$index].qus.max">
-
-                              <li ng-repeat="question in rw[$parent.$index].tests[$index].qus"
-                                  dnd-draggable="question"
-                                  dnd-type="rw[$parent.$parent.$index].tests[$parent.$index].eleType"
-                                  dnd-moved="rw[$parent.$parent.$index].tests[$parent.$index].qus.splice($index, 1)"
-                                  dnd-effect-allowed="move"
-                                  >
-                                  {{question.target}}
-                              </li>
-
-                              <li class="dndPlaceholder">
-                                  Drop any <strong>{{rw[$parent.$index].tests[$index].allowedTypes.join(' or ')}}</strong> here
-                              </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
         </section>
     </article>
 
