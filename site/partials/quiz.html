@@ -1,13 +1,19 @@
     <article>
-    <!-- The list of articles. -->
         <section class="row">
             <div class="col-xs-12">
-              <textarea class="form-control" rows="3" ng-model="articles.join('\n')" placeholder="articles to come."></textarea>
+              <div class="panel panel-default">
+                <div class="panel-heading"><span>Set-up</span></div>
+                <div class="panel-body">
+                  <span>Upload your JSON file here.</span>
+                  <input type="file" id="file" name="file"/>
+                  <button ng-click="add()">Add</button>
+                </div>
+              </div>
             </div>
         </section>
 
         <!-- The quiz (strictly only one of quizA or quizB) -->
-        <section class="row">
+        <section ng-if="ready" class="row">
           <div class="col-xs-12">
             <h1>Quiz score: <span ng-bind="calculateQuizScore(r)"></span></h1>
             <div class="panel panel-primary" ng-repeat="tier in r">
