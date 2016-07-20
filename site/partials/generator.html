@@ -130,8 +130,9 @@
                 </div>
 
                 <div class="form-group" ng-show="ownchoice">
-                  <label class="control-label" for="inputDefault">Category of choice</label>
-                  <input type="text" class="form-control" id="inputDefault" placeholder="Placeholder text">
+                  <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
+                  <input type="text" class="form-control" ng-model="category" placeholder="Category name, eg. 科学">
+                  <small class="helpy"><em>Please provide a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category from which to extract information (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try any broad word in Japanese and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em></small>
                 </div>
 
                 <div class="controlRow-s">
@@ -142,7 +143,7 @@
                   ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
                       <span class="col-xs-1"></span>
                     </div>
-                    <small><span><em>(ie. you are confident that you generally have already learned most of the vocabulary of at least JLPT level: <span ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
+                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
                     <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
                   </dd>
                 </div>
