@@ -143,10 +143,16 @@
                       <form data-ng-submit="submit(category)">
 
                         <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
-                        <input type="text" class="form-control" title="submitbutton" data-ng-model="category" placeholder="Category name, eg. 科学">
-                        <span class="input-group-btn" style="vertical-align: bottom;">
-                          <input type="submit" name = "button1" value = "" class ="btn"/>
-                        </span>
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <input type="text" class="form-control" title="submitbutton" data-ng-model="category" placeholder="Category name, eg. 科学">
+                          </div>
+                          <!-- <div class="col-xs-2"> -->
+                            <span class="input-group-btn" style="vertical-align: bottom;">
+                              <input type="submit" name = "button1" value = "" class ="btn"/>
+                            </span>
+                          <!-- </div> -->
+                        </div>
                       </form>
                       <small class="helpy col-xs-12"><em>Please provide a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category from which to extract information (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try any broad word in Japanese and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em></small>
                     </div>
