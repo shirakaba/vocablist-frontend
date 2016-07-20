@@ -111,16 +111,16 @@
                 <dl class="dl-horizontal">
                   <dt>Selection</dt>
                   <dd>
-                    <label class="radio-inline"><input type="radio" ng-model="ownchoice" data-ng-value="true">From own choice <span ng-show="ownchoice">(visible below)</span></label>
-                    <label class="radio-inline"><input type="radio" ng-model="ownchoice" data-ng-value="false">From pre-generated <span ng-hide="ownchoice">(visible below)</span></label>
+                    <label class="radio-inline col-xs-5"><input type="radio" ng-model="ownchoice" data-ng-value="true">From own choice <span ng-show="ownchoice">(visible below)</span></label>
+                    <label class="radio-inline col-xs-5"><input type="radio" ng-model="ownchoice" data-ng-value="false">From pre-generated <span ng-hide="ownchoice">(visible below)</span></label>
                   </dd>
                 </dl>
 
-                <div class="form-group" ng-hide="ownchoice">
-                  <div class="row">
-                    <form data-ng-submit="submit(category)">
-                      <label for="select" class="col-xs-2 control-label">Pre-generated options</label>
-                      <div class="col-xs-8">
+                <div class="form-group well well-sm" ng-hide="ownchoice">
+                  <form data-ng-submit="submit(category)">
+                    <label for="select" class="control-label">Pre-generated options</label>
+                    <div class="row">
+                      <div class="col-xs-9" style="padding-right: 0px;">
                         <select class="form-control" id="select">
                           <option>Biology</option>
                           <option>Physics</option>
@@ -129,9 +129,9 @@
                           <option>Politics</option>
                         </select>
                       </div>
-                    </form>
-                    <a href="#" class="btn btn-default col-xs-2">Download JSON as .txt</a>
-                  </div>
+                      <a href="#" class="btn btn-default col-xs-2">Download JSON as .txt</a>
+                    </div>
+                  </form>
 
                   <!-- <div class="row"> -->
                   <!-- </div> -->
@@ -139,12 +139,11 @@
 
                 <div class="row">
                   <div class="col-xs-12">
-                    <div class="input-group" ng-show="ownchoice">
+                    <div class="input-group well well-sm" ng-show="ownchoice">
                       <form data-ng-submit="submit(category)">
-
                         <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
                         <div class="row">
-                          <div class="col-xs-11">
+                          <div class="col-xs-10" style="padding-right: 0px;">
                             <input type="text" class="form-control" title="submitbutton" data-ng-model="category" placeholder="Category name, eg. 科学">
                           </div>
                           <!-- <div class="col-xs-2"> -->
