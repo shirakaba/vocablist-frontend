@@ -117,19 +117,17 @@
                 </dl>
 
                 <div class="form-group well well-sm" ng-hide="ownchoice">
-                  <form data-ng-submit="submit(category)">
+                  <form data-ng-submit="submit(generatedSelection)">
                     <label for="select" class="control-label">Pre-generated options</label>
                     <div class="row">
                       <div class="col-xs-9" style="padding-right: 0px;">
-                        <select class="form-control" id="select">
-                          <option>Biology</option>
-                          <option>Physics</option>
-                          <option>Chemistry</option>
-                          <option>Economics</option>
-                          <option>Politics</option>
+                        <select class="form-control" ng-model="generatedSelection">
+                          <option ng-bind="gen" data-ng-value="gen" ng-repeat="gen in generatedOptions"></option>
                         </select>
+                        <!-- <span>{{category}}</span> -->
                       </div>
                       <a href="#" class="btn btn-default col-xs-2">Download JSON as .txt</a>
+                      <small class="helpy col-xs-12"><em>Several samples have been pre-generated in case there are any problems with the automatic generation of vocabulary lists and quizzes. These samples are, however, only available for proficiency levels above JLPT level N3.</em></small>
                     </div>
                   </form>
 
@@ -146,14 +144,12 @@
                           <div class="col-xs-10" style="padding-right: 0px;">
                             <input type="text" class="form-control" title="submitbutton" data-ng-model="category" placeholder="Category name, eg. 科学">
                           </div>
-                          <!-- <div class="col-xs-2"> -->
-                            <span class="input-group-btn" style="vertical-align: bottom;">
-                              <input type="submit" name = "button1" value = "" class ="btn"/>
-                            </span>
-                          <!-- </div> -->
+                          <span class="input-group-btn" style="vertical-align: bottom;">
+                            <input type="submit" name = "button1" value = "" class ="btn"/>
+                          </span>
+                          <small class="helpy col-xs-12"><em>Please provide a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category from which to extract information (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em></small>
                         </div>
                       </form>
-                      <small class="helpy col-xs-12"><em>Please provide a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category from which to extract information (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try any broad word in Japanese and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em></small>
                     </div>
                   </div>
                 </div>
@@ -161,14 +157,14 @@
 
 
                 <div class="controlRow-s">
-                  <dt>Proficiency > <span ng-bind="filteringEnum(proficiency)"></span></dt>
+                  <dt >Proficiency > <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span></dt>
                   <dd>
                     <div class="col-xs-12">
                       <slider class="col-xs-11" tooltip="hide" ng-model="proficiency" ticks="[2, 3, 4, 5, 6]"
                   ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
                       <span class="col-xs-1"></span>
                     </div>
-                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
+                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
                     <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
                   </dd>
                 </div>

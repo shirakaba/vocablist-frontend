@@ -24,10 +24,17 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         exposure: "low",
                         consent: false,
                         proficiency: 2,
-                        category: "",
                         source: "other",
                         issues: "",
                         ownchoice: false,
+                        generatedSelection: "Biology",
+                        generatedOptions: [
+                            "Biology",
+                            "Physics",
+                            "Chemistry", 
+                            "Economics", 
+                            "Politics"
+                        ],
                         ageReport: function(age) {
                             if(age === 100) return "?";
                             else return age.toString();
