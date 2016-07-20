@@ -138,16 +138,24 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="input-group well well-sm" ng-show="ownchoice">
-                      <form data-ng-submit="submit(category)">
+                      <form data-ng-submit="generate(category)">
                         <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
                         <div class="row">
                           <div class="col-xs-10" style="padding-right: 0px;">
-                            <input type="text" class="form-control" title="submitbutton" data-ng-model="category" placeholder="Category name, eg. 科学">
+                            <input type="text" class="form-control" title="submitbutton" data-ng-model="category" placeholder="Category name in Japanese, eg. 科学">
                           </div>
                           <span class="input-group-btn" style="vertical-align: bottom;">
                             <input type="submit" name = "button1" value = "" class ="btn"/>
                           </span>
-                          <small class="helpy col-xs-12"><em>Please provide a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category from which to extract information (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em></small>
+                          <small class="helpy col-xs-12"><em>Click to input examples: 
+                          <a href="javascript:void(0);" data-ng-click="category = '科学'">Science</a>, 
+                          <a href="javascript:void(0);" data-ng-click="category = '経済'">Economics</a>, 
+                          <a href="javascript:void(0);" data-ng-click="category = '政治'">Politics</a>, 
+                          <a href="javascript:void(0);" data-ng-click="category = '歴史'">History</a>, 
+                          <a href="javascript:void(0);" data-ng-click="category = '数学'">Maths</a>, 
+                          <a href="javascript:void(0);" data-ng-click="category = 'アニメ'">Anime</a>. Please click the search button to start the search.
+                          </em></small>
+                          <small class="helpy col-xs-12"><em>The category provided must be a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em></small>
                         </div>
                       </form>
                     </div>

@@ -26,8 +26,9 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         proficiency: 2,
                         source: "other",
                         issues: "",
+                        // category: "none",
                         ownchoice: false,
-                        generatedSelection: "Biology",
+                        generatedSelection: "none",
                         generatedOptions: [
                             "Biology",
                             "Physics",
@@ -56,9 +57,47 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             }
                         },
                     });
-                    sc.startupFunction = function(thing){
-                        return 0;
+                    // TODO: inform if error (ie. Spring app not running)
+                    sc.generate = function(cat) {
+                        if(cat == null) {
+                            console.log("category was null.");
+                            return;
+                        }
+                        $http.get(
+                            'http://localhost:8080/generate?'
+                            +'partition='+encodeURIComponent(250)
+                            +'&makequiz='+encodeURIComponent(true)
+                            +'&maxarticles='+encodeURIComponent(1)
+                            +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.filtering))
+                            +'&egs='+encodeURIComponent(2)
+                            +'&limit='+encodeURIComponent(100.0)
+                            +'&minyield='+encodeURIComponent(0.0)
+                            +'&input='+encodeURIComponent(sc.category)
+                            )
+
+                            .then(
+                                function(response) {
+                                    // TODO: insertAnswers, insertDummy, etc. should be handled on quiz side
+                                    console.log(sc.makeQuiz);
+                                    // console.log(response);
+                                    sc.x = response.data.list;
+                                    // console.log(sc.x);
+                                    sc.articles = response.data.successfulArticles;
+                                    sc.rw = response.data.quizA;
+                                    sc.dummy = response.data.quizC;
+                                    sc.r = JSON.parse(JSON.stringify(sc.rw));
+                                    // r[0] is tierOne.
+                                    for(var i = 0; i < sc.rw.length; i++) sc.insertAnswers(sc.r[i]);
+                                    for(var i = 0; i < sc.rw.length; i++) sc.insertDummy(sc.rw[i], sc.dummy[i]);
+                                    for(var i = 0; i < sc.rw.length; i++) sc.shuffleAllTestsInTier(sc.rw[i]);
+                                },
+
+                                function(response) {
+                                    console.error(response);
+                                }
+                            );
                     };
+
                 }]
             })
             
