@@ -28,6 +28,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         issues: "",
                         // category: "none",
                         ownchoice: false,
+                        startedSearch: false,
                         generatedSelection: "none",
                         generatedOptions: [
                             "Biology",
