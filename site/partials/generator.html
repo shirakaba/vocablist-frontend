@@ -174,18 +174,20 @@
                               <a href="javascript:void(0);" data-ng-click="category = 'アニメ'">Anime</a>. Please click the search button to start the search.
                             </em>
                           </small>
-                          <small class="helpy col-xs-12"><em>The category provided must be a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em></small>
+                          <small class="helpy col-xs-12"><em>The category provided must be a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em><br></small>
                         </div>
                       </form>
                       <div ng-if="startedSearch && !finishedSearch" class="alert alert-info" ng-show="startedSearch">
                         <span>Now generating the vocabulary list and corresponding quizzes.</span>
-                        <timer finish-callback="finishTheSearch()" countdown="30" interval="1000"> Estimated remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}% done).
+                        <timer finish-callback="overTime()" countdown="30" interval="1000"> Estimated remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}% done).
                         </timer>
+                        <span ng-if="overtime"><br>Generation is taking longer than usual. Please wait :(</span>
                       </div>
                       <!-- <a id="downloadAnchorElem" style="display:none"></a> -->
                       <div ng-if="finishedSearch" class="alert alert-success">
                         <p>File successfully generated on our server. Can now be accessed by your user id.</p>
                         <p>Your user id is: <span ng-bind="uid"></span></p>
+                        <p><a href="#/quiz?uid={{uid}}" class="alert-link">Access the first of two quizzes here.</a></p>
                       </div>
 
                     </div>

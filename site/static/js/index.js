@@ -95,9 +95,10 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     sc.postman = function(uid, extension, feedback, separator){
                         // console.log("feedback: " + feedback);
                         // feedback = JSON.parse(feedback);
+                        // HTTP.POST is the angular version, 
                         $.ajax({
                                 url        : "http://127.0.0.1:3000/generator",
-                                dataType   : 'json',
+                                // dataType   : 'json', // this is the expected payload type. Doesn't like response.status(200).end()
                                 contentType: 'application/json; charset=UTF-8',
                                 data       : JSON.stringify({
                                     "uid": uid,
@@ -107,12 +108,14 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 }),
                                 type       : 'POST'
                             })
+                            // HTTP 200 may send you in here
                             .done(function(data, textStatus, jqXHR) {
                                 // console.log(data); // logs the incoming data as javascript objects
                                 sc.$apply(function() {
                                     sc.reportSent = true;
                                 });
                             })
+                            // HTTP 500 may send you in here
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 console.error(arguments);
                             })
@@ -260,12 +263,12 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
             // state for quiz partial.
             .state({
                 name: 'quiz',
-                url: "/quiz",
+                url: "/quiz?uid",
                 uid: "abcdef123",
                 templateUrl: "partials/quiz.html",
                 uidSelected: false,
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
-                controller: ["$scope", "$http", function(sc, $http) {
+                controller: ["$scope", "$http", "$stateParams", function(sc, $http, $stateParams) {
                     angular.extend(sc, {
                         // allResponse: {},
                         ready: false,
@@ -284,7 +287,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             .done(function(contents, textStatus, jqXHR) {
                                 // console.log(contents);
                                 sc.$apply(function() {
-                                    sc.init(JSON.parse(contents));
+                                    // var fullResponse = JSON.parse(contents);
+                                    sc.init(contents);
                                     sc.ready = true;
                                 });
                                 console.log("done!");
@@ -405,6 +409,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         }
                     }
 
+                    sc.uid = $stateParams['uid'];
+                    console.log(sc.uid);
                     // sc.x = response.data.list;
                     // console.log(sc.x);
                 }]

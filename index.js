@@ -39,10 +39,11 @@ app.post('/generator', function(request, response){
 		  	function (err) {
 		  		if (err) {
 		  			console.log("Error: " + err);
+		  			response.status(500).end(); // server-internal error
 		  			throw err;
 		  		}
-		  		console.log("Error: " + err);
 		  		console.log('The "data to write" was written to file!');
+		  		response.status(200).end();
 			}
 		);
 	}
@@ -55,9 +56,11 @@ app.post('/generator', function(request, response){
 		  	function (err) {
 		  		if (err) {
 		  			console.log("Error: " + err);
+		  			response.status(500).end(); // server-internal error
 		  			throw err;
 		  		}
 		  		console.log('The "data to append" was appended to file!');
+		  		response.status(200).end();
 			}
 		);
 	}
