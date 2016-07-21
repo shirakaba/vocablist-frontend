@@ -19,25 +19,47 @@ app.listen(3000, function (){
    console.log('Server started. Please navigate to localhost:3000 to view website.');
 });
 
+/** 
+  * Generates either 'abcdef123.json' (main JSON), 'abcdef123.txt' (report) based on the file extension passed in.
+  * If request.body.extension is '.json', will write the main JSON file.
+  * Else (eg. '.txt'), it will append to the report file.
+  */
 app.post('/generator', function(request, response){
 	var filepath =  'feedback/' + request.body.uid + request.body.extension;
 	var toappend;
 	if(request.body.extension === '.json') toappend = JSON.stringify(request.body.feedback); // minified
-	else toappend = request.body.separator + '\n' + JSON.stringify(request.body.feedback, null, "  ") + '\n'
+	else toappend = request.body.separator + '\n' + JSON.stringify(request.body.feedback, null, "  ") + '\n';
 
-	// http://stackoverflow.com/questions/3459476/how-to-append-to-a-file-in-node
-	fs.appendFile(
-		filepath,
-	 	toappend,
+	if(request.body.extension === '.json') {
+		// http://stackoverflow.com/questions/2496710/writing-files-in-node-js
+		fs.writeFile(
+			filepath,
+		 	toappend,
 
-	  	function (err) {
-	  		if (err) throw err;
-	  		console.log('The "data to append" was appended to file!');
-		}
-	);
+		  	function (err) {
+		  		if (err) throw err;
+		  		console.log('The "data to write" was written to file!');
+			}
+		);
+	}
+	else {
+		// http://stackoverflow.com/questions/3459476/how-to-append-to-a-file-in-node
+		fs.appendFile(
+			filepath,
+		 	toappend,
+
+		  	function (err) {
+		  		if (err) throw err;
+		  		console.log('The "data to append" was appended to file!');
+			}
+		);
+	}
 
 });
 
+/** 
+  * Reads the main JSON file based on the uid passed in.
+  */
 app.post('/quiz', function(request, response){
 	var filepath =  'feedback/' + request.body.uid + '.json';
 
