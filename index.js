@@ -1,3 +1,4 @@
+var fs = require('fs');
 var express = require('express');
 var app = express();
 
@@ -11,4 +12,17 @@ app.use('', express.static('site'));
 // Listens continuously on port 3000
 app.listen(3000, function (){
    console.log('Server started. Please navigate to localhost:3000 to view website.');
+});
+
+// http://stackoverflow.com/questions/2496710/writing-files-in-node-js
+fs.writeFile("feedback/test.txt", "Hey there!", function(err) {
+    if(err) return console.log(err);
+
+    console.log("The file was saved!");
+});
+
+// http://stackoverflow.com/questions/3459476/how-to-append-to-a-file-in-node
+fs.appendFile('feedback/test.txt', 'data to append', function (err) {
+  if (err) throw err;
+  console.log('The "data to append" was appended to file!');
 });
