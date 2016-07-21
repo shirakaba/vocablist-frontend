@@ -28,6 +28,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         proficiency: 2,
                         source: "other",
                         issues: "",
+                        postmanError: false,
                         reportSent: false,
                         ownchoice: false,
                         startedSearch: false,
@@ -69,29 +70,30 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             }
                         },
                     });
-                    sc.makeList = function (uid, extension, feedback, separator) {
-                        // console.log("feedback: " + feedback);
-                        // feedback = JSON.parse(feedback);
-                        $.ajax({
-                                url        : "http://127.0.0.1:3000/generator",
-                                dataType   : 'json',
-                                contentType: 'application/json; charset=UTF-8',
-                                data       : JSON.stringify(feedback),
-                                type       : 'POST'
-                            })
-                            .done(function(data, textStatus, jqXHR) {
-                                // console.log(data); // logs the incoming data as javascript objects
-                                sc.$apply(function() {
-                                    sc.reportSent = true;
-                                });
-                            })
-                            .fail(function(jqXHR, textStatus, errorThrown) {
-                                console.error(arguments);
-                            })
-                        ;
-                    },
+                    // sc.makeList = function (uid, extension, feedback, separator) {
+                    //     // console.log("feedback: " + feedback);
+                    //     // feedback = JSON.parse(feedback);
+                    //     $.ajax({
+                    //             url        : "http://127.0.0.1:3000/generator",
+                    //             dataType   : 'json',
+                    //             contentType: 'application/json; charset=UTF-8',
+                    //             data       : JSON.stringify(feedback),
+                    //             type       : 'POST'
+                    //         })
+                    //         .done(function(data, textStatus, jqXHR) {
+                    //             // console.log(data); // logs the incoming data as javascript objects
+                    //             sc.$apply(function() {
+                    //                 sc.reportSent = true;
+                    //             });
+                    //         })
+                    //         .fail(function(jqXHR, textStatus, errorThrown) {
 
-                    /** Append to the user's report. */
+                    //             console.error(arguments);
+                    //         })
+                    //     ;
+                    // },
+
+                    /** Two modes: Append to the user's report, or make main JSON. */
                     sc.postman = function(uid, extension, feedback, separator){
                         // console.log("feedback: " + feedback);
                         // feedback = JSON.parse(feedback);
@@ -113,11 +115,17 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 // console.log(data); // logs the incoming data as javascript objects
                                 sc.$apply(function() {
                                     sc.reportSent = true;
+                                    sc.postmanError = false;
                                 });
                             })
                             // HTTP 500 may send you in here
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 console.error(arguments);
+                                sc.$apply(function() {
+                                    sc.postmanError = true;
+                                    sc.finishedSearch = false;
+                                    sc.startedSearch = false;
+                                });
                             })
                         ;
                     },
