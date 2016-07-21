@@ -4,7 +4,8 @@ var bodyParser = require('body-parser'); // allows you to parse JSON.
 var app = express();
 var cors = require('cors') // makes this backend allow frontend traffic (eg. for AJAX requests) from any domain.
 app.use(cors());
-app.use(bodyParser.json()); // gives our application support for JSON-formatted PUT or POST requests.
+app.use(bodyParser.json({limit: '50mb'})); // gives our application support for JSON-formatted PUT or POST requests.
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 /* Creates a mapping between your filesystem, and the filesystem you pretend exists.
  * If you ask for the first parameter to be just '', then no extra folder is inserted in front of the 'images' in the URL presented to the user.
@@ -19,11 +20,15 @@ app.listen(3000, function (){
 });
 
 app.post('/generator', function(request, response){
-	// If no file exists, creates one :D
+	var filepath =  'feedback/' + request.body.uid + request.body.extension;
+	var toappend;
+	if(request.body.extension === '.json') toappend = JSON.stringify(request.body.feedback); // minified
+	else toappend = request.body.separator + '\n' + JSON.stringify(request.body.feedback, null, "  ") + '\n'
+
 	// http://stackoverflow.com/questions/3459476/how-to-append-to-a-file-in-node
 	fs.appendFile(
-		'feedback/' + request.body.uid + '.txt',
-	 	request.body.separator + '\n' + JSON.stringify(request.body.feedback, null, "  ") + '\n',
+		filepath,
+	 	toappend,
 
 	  	function (err) {
 	  		if (err) throw err;

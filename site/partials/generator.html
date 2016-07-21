@@ -168,9 +168,9 @@
                         <timer finish-callback="finishTheSearch()" countdown="30" interval="1000"> Estimated remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}% done).
                         </timer>
                       </div>
-                      <a id="downloadAnchorElem" style="display:none"></a>
+                      <!-- <a id="downloadAnchorElem" style="display:none"></a> -->
                       <div ng-if="finishedSearch" class="alert alert-success">
-                        <span>File successfully generated. Should have been automatically downloaded as "vocablist.json".</span>
+                        <span>File successfully generated on our server. Can now be accessed by your user id.</span>
                       </div>
 
                     </div>
