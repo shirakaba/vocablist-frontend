@@ -121,7 +121,7 @@
                     <label for="select" class="control-label">Pre-generated options</label>
                     <div class="row">
                       <div class="col-xs-9" style="padding-right: 0px;">
-                        <select class="form-control" ng-model="generatedSelection">
+                        <select class="form-control" ng-model="generatedSelection" ng-disabled="startedSearch">
                           <option ng-bind="gen" data-ng-value="gen" ng-repeat="gen in generatedOptions"></option>
                         </select>
                         <!-- <span>{{category}}</span> -->
