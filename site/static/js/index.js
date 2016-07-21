@@ -21,8 +21,10 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     angular.extend(sc, {
                         gender: "other",
                         age: 100,
+                        uid: "",
                         exposure: "low",
                         consent: false,
+                        overtime: false,
                         proficiency: 2,
                         source: "other",
                         issues: "",
@@ -41,9 +43,9 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         generateUid: function(){
                             return (Math.random()*1e32).toString(36);
                         },
-                        finishTheSearch: function(){
+                        overTime: function(){
                             sc.$apply(function() {
-                                sc.finishedSearch = true;
+                                sc.overtime = true;
                             });
                         },
                         ageReport: function(age) {
@@ -68,7 +70,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         },
                     });
                     sc.makeList = function (uid, extension, feedback, separator) {
-                        console.log("feedback: " + feedback);
+                        // console.log("feedback: " + feedback);
                         // feedback = JSON.parse(feedback);
                         $.ajax({
                                 url        : "http://127.0.0.1:3000/generator",
@@ -78,7 +80,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 type       : 'POST'
                             })
                             .done(function(data, textStatus, jqXHR) {
-                                console.log(data); // logs the incoming data as javascript objects
+                                // console.log(data); // logs the incoming data as javascript objects
                                 sc.$apply(function() {
                                     sc.reportSent = true;
                                 });
@@ -89,8 +91,9 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         ;
                     },
 
-                    sc.report = function(uid, extension, feedback, separator){
-                        console.log("feedback: " + feedback);
+                    /** Append to the user's report. */
+                    sc.postman = function(uid, extension, feedback, separator){
+                        // console.log("feedback: " + feedback);
                         // feedback = JSON.parse(feedback);
                         $.ajax({
                                 url        : "http://127.0.0.1:3000/generator",
@@ -105,7 +108,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 type       : 'POST'
                             })
                             .done(function(data, textStatus, jqXHR) {
-                                console.log(data); // logs the incoming data as javascript objects
+                                // console.log(data); // logs the incoming data as javascript objects
                                 sc.$apply(function() {
                                     sc.reportSent = true;
                                 });
@@ -115,7 +118,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             })
                         ;
                     },
-                    // TODO: inform if error (ie. Spring app not running)
+
+                    /** Generates the main JSON and report via postman(). */
                     sc.generate = function(cat) {
                         if(cat == null) {
                             console.log("category was null.");
@@ -135,8 +139,17 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
                             .then(
                                 function (response) {
-                                    sc.report('abcdef123', '.json', response.data, '');
+                                    // For some reason, this is enclosed by sc.$apply() from elsewhere, so another is unneeded.
                                     sc.finishedSearch = true;
+                                    sc.uid = sc.generateUid();
+
+                                    console.log(sc.uid);
+                                    var fb = {
+                                        "info":"結社",
+                                        "target":"association ･ society"
+                                    };
+                                    sc.postman(sc.uid, '.json', response.data, ''); // The JSON
+                                    sc.postman(sc.uid, '.txt', fb, '/*=== First contents ===*/\n'); // The report
                                 }
 
                                 /** For automatically serving the user a .txt file of the GET response (the main JSON) */
@@ -160,12 +173,12 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             );
                     };
 
-                    console.log("starting functions.");
-                    var fb = {
-                     "info":"結社",
-                     "target":"association ･ society"
-                    };
-                    sc.report('abcdef123', '.txt', fb, '/*=== First contents ===*/\n');
+                    // console.log("starting functions.");
+                    // var fb = {
+                    //  "info":"結社",
+                    //  "target":"association ･ society"
+                    // };
+                    // sc.report('abcdef123', '.txt', fb, '/*=== First contents ===*/\n');
                 }]
             })
             

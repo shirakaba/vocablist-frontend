@@ -106,6 +106,20 @@
           <div class="panel panel-default">
               <div class="panel-heading"><span>Vocabulary of interest</span></div>
               <div class="panel-body">
+                <div style="padding-bottom: 2em">
+                  <p>Please specify what level of Japanese language you already generally understand, so that it needn't be added to your quizzes and vocabulary list.</p>
+                  <dt >Proficiency > <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span></dt>
+                  <dd>
+                    <div class="col-xs-12">
+                      <slider class="col-xs-11" tooltip="hide" ng-model="proficiency" ticks="[2, 3, 4, 5, 6]"
+                  ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
+                      <span class="col-xs-1"></span>
+                    </div>
+                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
+                    <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
+                  </dd>
+                </div>
+
                 <p>Please select a vocabulary area of interest either from within the pre-generated options (which are instant), or by providing one yourself (which may take up to two minutes).</p>
 
                 <dl class="dl-horizontal">
@@ -170,26 +184,12 @@
                       </div>
                       <!-- <a id="downloadAnchorElem" style="display:none"></a> -->
                       <div ng-if="finishedSearch" class="alert alert-success">
-                        <span>File successfully generated on our server. Can now be accessed by your user id.</span>
+                        <p>File successfully generated on our server. Can now be accessed by your user id.</p>
+                        <p>Your user id is: <span ng-bind="uid"></span></p>
                       </div>
 
                     </div>
                   </div>
-                </div>
-
-
-
-                <div class="controlRow-s">
-                  <dt >Proficiency > <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span></dt>
-                  <dd>
-                    <div class="col-xs-12">
-                      <slider class="col-xs-11" tooltip="hide" ng-model="proficiency" ticks="[2, 3, 4, 5, 6]"
-                  ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
-                      <span class="col-xs-1"></span>
-                    </div>
-                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
-                    <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
-                  </dd>
                 </div>
 
               </div>
