@@ -19,18 +19,16 @@ app.listen(3000, function (){
 });
 
 app.post('/generator', function(request, response){
-
-	// // http://stackoverflow.com/questions/2496710/writing-files-in-node-js
-	// fs.writeFile("feedback/test.txt", request.body.feedback, function(err) {
-	//     if(err) return console.log(err);
-
-	//     console.log("The file was saved!");
-	// });
-
 	// If no file exists, creates one :D
 	// http://stackoverflow.com/questions/3459476/how-to-append-to-a-file-in-node
-	fs.appendFile('feedback/' + request.body.uid + '.txt', '\n' + JSON.stringify(request.body.feedback, null, "  "), function (err) {
-	  if (err) throw err;
-	  console.log('The "data to append" was appended to file!');
-	});
+	fs.appendFile(
+		'feedback/' + request.body.uid + '.txt',
+	 	request.body.separator + '\n' + JSON.stringify(request.body.feedback, null, "  ") + '\n',
+
+	  	function (err) {
+	  		if (err) throw err;
+	  		console.log('The "data to append" was appended to file!');
+		}
+	);
+
 });
