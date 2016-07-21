@@ -37,7 +37,11 @@ app.post('/generator', function(request, response){
 		 	toappend,
 
 		  	function (err) {
-		  		if (err) throw err;
+		  		if (err) {
+		  			console.log("Error: " + err);
+		  			throw err;
+		  		}
+		  		console.log("Error: " + err);
 		  		console.log('The "data to write" was written to file!');
 			}
 		);
@@ -49,7 +53,10 @@ app.post('/generator', function(request, response){
 		 	toappend,
 
 		  	function (err) {
-		  		if (err) throw err;
+		  		if (err) {
+		  			console.log("Error: " + err);
+		  			throw err;
+		  		}
 		  		console.log('The "data to append" was appended to file!');
 			}
 		);
