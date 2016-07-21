@@ -75,6 +75,7 @@ app.post('/quiz', function(request, response){
 
 	fs.readFile(filepath, 'utf8', function (err, contents) {
 	  if (err) {
+	  	response.status(500).end(); // server-internal error
 	    return console.log(err);
 	  }
 	  var o=JSON.parse(contents);

@@ -4,10 +4,13 @@
               <div class="panel panel-default">
                 <div class="panel-heading"><span>Set-up</span></div>
                 <div class="panel-body">
-                  <span>Input your user id here.</span>
+                  <span>Input your user id here and press 'enter'.</span>
                   <form data-ng-submit="read(uid)">
                     <input type="text" class="form-control" title="submitbutton" data-ng-model="uid" ng-disabled="ready" placeholder="User id, eg. abcdef123">
                   </form>
+                  <div ng-if="readError" class="alert alert-danger">
+                    <p>Unable to read a file under that user id. Please check whether the user id is correct.</p>
+                  </div>
                   <!-- <button ng-click="add()">Add</button> -->
                 </div>
               </div>

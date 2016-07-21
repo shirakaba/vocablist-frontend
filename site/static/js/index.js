@@ -272,7 +272,6 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
             .state({
                 name: 'quiz',
                 url: "/quiz?uid",
-                uid: "abcdef123",
                 templateUrl: "partials/quiz.html",
                 uidSelected: false,
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
@@ -280,6 +279,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     angular.extend(sc, {
                         // allResponse: {},
                         ready: false,
+                        readError: false,
                         qScore: 0,
                         /** Reads the main JSON file (eg. 'abcd.json') stored on the host machine, given a uid. */
                         read : function(uid){
@@ -296,12 +296,16 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 // console.log(contents);
                                 sc.$apply(function() {
                                     // var fullResponse = JSON.parse(contents);
+                                    sc.readError = false;
                                     sc.init(contents);
                                     sc.ready = true;
                                 });
                                 console.log("done!");
                             })
                             .fail(function(jqXHR, textStatus, errorThrown) {
+                                sc.$apply(function() {
+                                    sc.readError = true;
+                                });
                                 console.error(arguments);
                             })
                         ;
@@ -418,6 +422,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     }
 
                     sc.uid = $stateParams['uid'];
+                    if(sc.uid != null) sc.read(sc.uid);
                     console.log(sc.uid);
                     // sc.x = response.data.list;
                     // console.log(sc.x);
