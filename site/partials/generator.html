@@ -142,7 +142,7 @@
                         <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
                         <div class="row">
                           <div class="col-xs-10" style="padding-right: 0px;">
-                            <input type="text" class="form-control" title="submitbutton" data-ng-model="category" placeholder="Category name in Japanese, eg. 科学">
+                            <input type="text" class="form-control" title="submitbutton" data-ng-model="category" ng-disabled="startedSearch" placeholder="Category name in Japanese, eg. 科学">
                           </div>
                           <span class="input-group-btn col-xs-1" style="vertical-align: bottom; padding-left: 0px;" ng-hide="startedSearch">
                             <input type="submit" name = "button1" value = "" class ="btn" ng-click="startedSearch = true"/>
@@ -150,22 +150,27 @@
                           <span class="input-group-btn spinner col-xs-1" style="padding-left: 0px" ng-show="startedSearch && !finishedSearch">
                             <i class="glyphicon glyphicon-refresh spinning"></i>
                           </span>
-                          <small class="helpy col-xs-12"><em>Click to input examples: 
-                          <a href="javascript:void(0);" data-ng-click="category = '科学'">Science</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = '経済'">Economics</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = '政治'">Politics</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = '歴史'">History</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = '数学'">Maths</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = 'アニメ'">Anime</a>. Please click the search button to start the search.
-                          </em></small>
+                          <small class="helpy col-xs-12">
+                            <em>Click to input examples: 
+                              <a href="javascript:void(0);" data-ng-click="category = '科学'">Science</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = '経済'">Economics</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = '政治'">Politics</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = '歴史'">History</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = '数学'">Maths</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = 'アニメ'">Anime</a>. Please click the search button to start the search.
+                            </em>
+                          </small>
                           <small class="helpy col-xs-12"><em>The category provided must be a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em></small>
                         </div>
                       </form>
-                      <div class="alert alert-info" ng-show="startedSearch">
+                      <div ng-if="startedSearch && !finishedSearch" class="alert alert-info" ng-show="startedSearch">
                         <span>Now generating the vocabulary list and corresponding quizzes.</span>
-                        <timer ng-hide="finishedSearch" finish-callback="finishTheSearch()" countdown="10" interval="1000"> Estimated remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}% done).
+                        <timer finish-callback="finishTheSearch()" countdown="30" interval="1000"> Estimated remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}% done).
                         </timer>
-                        <a id="downloadAnchorElem" style="display:none"></a>
+                      </div>
+                      <a id="downloadAnchorElem" style="display:none"></a>
+                      <div ng-if="finishedSearch" class="alert alert-success">
+                        <span>File successfully generated. Should have been automatically downloaded as "vocablist.json".</span>
                       </div>
 
                     </div>

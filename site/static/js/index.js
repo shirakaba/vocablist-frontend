@@ -119,6 +119,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                     dlAnchorElem.setAttribute("download", "vocablist.json");
                                     dlAnchorElem.click();
 
+                                    sc.finishedSearch = true;
+
                                     // // TODO: insertAnswers, insertDummy, etc. should be handled on quiz side
                                     // console.log(sc.makeQuiz);
                                     // // console.log(response);
