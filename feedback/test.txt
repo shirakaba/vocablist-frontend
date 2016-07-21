@@ -1,1 +1,7 @@
-Hey there!data to append
+Hey there!data to append[object Object]{
+  "info": "結社",
+  "target": "association ･ society"
+}{
+  "info": "結社",
+  "target": "association ･ society"
+}

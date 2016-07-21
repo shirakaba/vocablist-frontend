@@ -4,7 +4,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
     // by default, angular animates every class, so we need to configure its selection.
     .config(['$animateProvider', '$stateProvider', '$urlRouterProvider', '$sceProvider',
         function($animateProvider, $stateProvider, $urlRouterProvider, $sceProvider){
-            $urlRouterProvider.otherwise("/search");
+            $urlRouterProvider.otherwise("/generator");
             $animateProvider.classNameFilter(/houdini/); // filter for any class containing the string 'houdini'
 
             // Completely disable SCE.  For demonstration purposes only!
@@ -26,7 +26,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         proficiency: 2,
                         source: "other",
                         issues: "",
-                        // category: "none",
+                        reportSent: false,
                         ownchoice: false,
                         startedSearch: false,
                         finishedSearch: false,
@@ -64,6 +64,30 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             }
                         },
                     });
+
+                    sc.report = function(feedback){
+                        console.log("feedback: " + feedback);
+                        // feedback = JSON.parse(feedback);
+                        $.ajax({
+                                url        : "http://127.0.0.1:3000/generator",
+                                dataType   : 'json',
+                                contentType: 'application/json; charset=UTF-8',
+                                data       : JSON.stringify({
+                                    "feedback": feedback
+                                }),
+                                type       : 'POST'
+                            })
+                            .done(function(data, textStatus, jqXHR) {
+                                console.log(data); // logs the incoming data as javascript objects
+                                sc.$apply(function() {
+                                    sc.reportSent = true;
+                                });
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                console.error(arguments);
+                            })
+                        ;
+                    },
                     // TODO: inform if error (ie. Spring app not running)
                     sc.generate = function(cat) {
                         if(cat == null) {
@@ -114,6 +138,12 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             );
                     };
 
+                    console.log("starting functions.");
+                    var fb = {
+                     "info":"結社",
+                     "target":"association ･ society"
+                    };
+                    sc.report(fb);
                 }]
             })
             
