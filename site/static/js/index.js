@@ -272,30 +272,55 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
             .state({
                 name: 'quiz',
                 url: "/quiz",
+                uid: "abcdef123",
                 templateUrl: "partials/quiz.html",
+                uidSelected: false,
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
                 controller: ["$scope", "$http", function(sc, $http) {
                     angular.extend(sc, {
                         // allResponse: {},
                         ready: false,
                         qScore: 0,
-                        // http://stackoverflow.com/questions/18571001/file-upload-using-angularjs
-                        add : function(){
-                            var f = document.getElementById('file').files[0];
-                            var r = new FileReader();
-
-                            r.onloadend = function(e){
+                        read : function(uid){
+                            $.ajax({
+                                url        : "http://127.0.0.1:3000/quiz",
+                                dataType   : 'json',
+                                contentType: 'application/json; charset=UTF-8',
+                                data       : JSON.stringify({
+                                    "uid": uid
+                                }),
+                                type       : 'POST'
+                            })
+                            .done(function(contents, textStatus, jqXHR) {
+                                // console.log(contents);
                                 sc.$apply(function() {
-                                    // sc.allResponse = e.target.result;
-                                    console.log(e.target.result);
-                                    sc.init(JSON.parse(e.target.result));
+                                    sc.init(JSON.parse(contents));
                                     sc.ready = true;
                                 });
-                              //send your binary data via $http or $resource or do anything else with it
-                            }
-
-                            r.readAsText(f, "utf-8");
+                                console.log("done!");
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                console.error(arguments);
+                            })
+                        ;
                         },
+                        // // http://stackoverflow.com/questions/18571001/file-upload-using-angularjs
+                        // add : function(){
+                        //     var f = document.getElementById('file').files[0];
+                        //     var r = new FileReader();
+
+                        //     r.onloadend = function(e){
+                        //         sc.$apply(function() {
+                        //             // sc.allResponse = e.target.result;
+                        //             console.log(e.target.result);
+                        //             sc.init(JSON.parse(e.target.result));
+                        //             sc.ready = true;
+                        //         });
+                        //       //send your binary data via $http or $resource or do anything else with it
+                        //     }
+
+                        //     r.readAsText(f, "utf-8");
+                        // },
 
                         calculateTestScore: function(rTest, answers){
                             var testScore = 0;

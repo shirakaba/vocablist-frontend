@@ -4,9 +4,11 @@
               <div class="panel panel-default">
                 <div class="panel-heading"><span>Set-up</span></div>
                 <div class="panel-body">
-                  <span>Upload your JSON file here.</span>
-                  <input type="file" id="file" name="file"/>
-                  <button ng-click="add()">Add</button>
+                  <span>Input your user id here.</span>
+                  <form data-ng-submit="read(uid)">
+                    <input type="text" class="form-control" title="submitbutton" data-ng-model="uid" ng-disabled="ready" placeholder="User id, eg. abcdef123">
+                  </form>
+                  <!-- <button ng-click="add()">Add</button> -->
                 </div>
               </div>
             </div>

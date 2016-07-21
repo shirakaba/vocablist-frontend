@@ -1,4 +1,4 @@
-var fs = require('fs');
+var fs = require('fs'); // file system for reading/writing to computer
 var express = require('express');
 var bodyParser = require('body-parser'); // allows you to parse JSON.
 var app = express();
@@ -37,3 +37,19 @@ app.post('/generator', function(request, response){
 	);
 
 });
+
+app.post('/quiz', function(request, response){
+	var filepath =  'feedback/' + request.body.uid + '.json';
+
+	fs.readFile(filepath, 'utf8', function (err, contents) {
+	  if (err) {
+	    return console.log(err);
+	  }
+	  var o=JSON.parse(contents);
+	  // console.log(contents);
+	  response.json(o);
+	});
+	
+
+});
+
