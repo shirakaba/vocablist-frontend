@@ -27,8 +27,9 @@ app.post('/generator', function(request, response){
 	//     console.log("The file was saved!");
 	// });
 
+	// If no file exists, creates one :D
 	// http://stackoverflow.com/questions/3459476/how-to-append-to-a-file-in-node
-	fs.appendFile('feedback/test.txt', JSON.stringify(request.body.feedback, null, "  "), function (err) {
+	fs.appendFile('feedback/' + request.body.uid + '.txt', '\n' + JSON.stringify(request.body.feedback, null, "  "), function (err) {
 	  if (err) throw err;
 	  console.log('The "data to append" was appended to file!');
 	});

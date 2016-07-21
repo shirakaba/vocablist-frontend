@@ -65,7 +65,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         },
                     });
 
-                    sc.report = function(feedback){
+                    sc.report = function(uid, feedback){
                         console.log("feedback: " + feedback);
                         // feedback = JSON.parse(feedback);
                         $.ajax({
@@ -73,6 +73,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 dataType   : 'json',
                                 contentType: 'application/json; charset=UTF-8',
                                 data       : JSON.stringify({
+                                    "uid": uid,
                                     "feedback": feedback
                                 }),
                                 type       : 'POST'
@@ -143,7 +144,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                      "info":"結社",
                      "target":"association ･ society"
                     };
-                    sc.report(fb);
+                    sc.report('abcdef123', fb);
                 }]
             })
             
