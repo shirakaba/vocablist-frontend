@@ -17,6 +17,76 @@
             </div>
         </section>
 
+        <section ng-if="ready" class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><span>Set-up</span></div>
+                <div class="panel-body">
+                  <span>Try it out.</span>
+                  
+                  <div class="col-xs-6">
+                        <h4>Questions</h4>
+                          <ol>
+                            <li ng-repeat="question in sampleTestr.qus">
+                              <span ng-bind="question.info"></span>
+
+                              <!-- Buckets -->
+                              <div class="simpleDemo well well-sm"> <!-- $index = that of 'question', or 'i' in tier.kanjiQuiz.qus[i] -->
+                                <ul dnd-list="sampleTestr.answers[$index].bucket"
+                                    dnd-allowed-types="sampleTestr.allowedTypes"
+                                    dnd-disable-if="sampleTestr.answers[$index].bucket.length >= 1">
+                                    <!-- the bucket is an array of tentative answers. -->
+
+                                    <li ng-repeat="bucketContent in sampleTestr.answers[$index].bucket"
+                                        dnd-draggable="bucketContent"
+                                        dnd-type="sampleTestr.eleType"
+                                        dnd-moved="sampleTestr.answers[$parent.$index].bucket.splice($index, 1)"
+                                        dnd-effect-allowed="move"
+                                        >
+                                        {{bucketContent.target}}
+                                    </li>
+
+                                    <li class="dndPlaceholder">
+                                        Drop any <strong>{{sampleTestr.allowedTypes.join(' or ')}}</strong> here
+                                    </li>
+                                </ul>
+                              </div>
+
+                            </li>
+                          </ol>
+                          <span>Test score: </span>[<span ng-bind="calculateTestScore(sampleTestr.qus, sampleTestr.answers)"></span>]
+                      </div>
+
+                      <div class="col-xs-6">
+                        <!-- The draggable list of targets -->
+                        <h4>Choices</h4>
+                        <div class="simpleDemo well well-sm">
+                          <ul dnd-list="sampleTestrw.qus"
+                              dnd-allowed-types="sampleTestrw.allowedTypes"
+                              dnd-disable-if="sampleTestrw.qus.length >= sampleTestrw.qus.max">
+
+                              <li ng-repeat="question in sampleTestrw.qus"
+                                  dnd-draggable="question"
+                                  dnd-type="sampleTestrw.eleType"
+                                  dnd-moved="sampleTestrw.qus.splice($index, 1)"
+                                  dnd-effect-allowed="move"
+                                  >
+                                  {{question.target}}
+                              </li>
+
+                              <li class="dndPlaceholder">
+                                  Drop any <strong>{{rsampleTestrw.allowedTypes.join(' or ')}}</strong> here
+                              </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+            </div>
+          </div>
+        </section>
+
         <!-- The quiz (strictly only one of quizA or quizB) -->
         <section ng-if="ready" class="row">
           <div class="col-xs-12">
