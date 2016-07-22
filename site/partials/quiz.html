@@ -19,12 +19,14 @@
 
         <section ng-if="ready" class="row">
           <div class="col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading"><span>Set-up</span></div>
+            <div class="panel panel-default" style="margin-bottom: 0px;">
+                <div class="panel-heading"><span>Practice area: sample kanji test</span></div>
                 <div class="panel-body">
-                  <span>Try it out.</span>
+                  <span>Answer each question in the <strong>Questions</strong> column by dragging across the corresponding definition for it from the <strong>Choices</strong> column.</span>
                   
-                  <div class="col-xs-6">
+                  <div class="col-xs-12">
+
+                    <div class="col-xs-6">
                         <h4>Questions</h4>
                           <ol>
                             <li ng-repeat="question in sampleTestr.qus">
@@ -47,14 +49,18 @@
                                     </li>
 
                                     <li class="dndPlaceholder">
-                                        Drop any <strong>{{sampleTestr.allowedTypes.join(' or ')}}</strong> here
+                                        Drop your choice here.
                                     </li>
                                 </ul>
                               </div>
 
                             </li>
                           </ol>
-                          <span>Test score: </span>[<span ng-bind="calculateTestScore(sampleTestr.qus, sampleTestr.answers)"></span>]
+                          
+                        <span>Score: </span><span ng-bind="calculateTestScore(sampleTestr.qus, sampleTestr.answers)"></span><br>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-success" style="width: {{calculateTestScore(sampleTestr.qus, sampleTestr.answers) * 25}}%"></div>
+                        </div>
                       </div>
 
                       <div class="col-xs-6">
@@ -75,20 +81,28 @@
                               </li>
 
                               <li class="dndPlaceholder">
-                                  Drop any <strong>{{rsampleTestrw.allowedTypes.join(' or ')}}</strong> here
+                                  Drop your choice here.
                               </li>
                           </ul>
                         </div>
+
+                        <span><em>^ Note that there are more choices than questions.</em></span>
                       </div>
                     </div>
 
+                      
+                  </div>
                 </div>
+                      <div class="alert" ng-class="{'alert-info': calculateTestScore(sampleTestr.qus, sampleTestr.answers) < 4, 'alert-success': calculateTestScore(sampleTestr.qus, sampleTestr.answers) == 4 }">
+                        <span>Once you understand how to operate this quiz, please click the 'OK' button to proceed to the real quiz: </span>
+                        <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.practised = true" ng-disabled="practised">OK</button>
+                      </div>
             </div>
           </div>
         </section>
 
         <!-- The quiz (strictly only one of quizA or quizB) -->
-        <section ng-if="ready" class="row">
+        <section ng-if="ready && practised" class="row">
           <div class="col-xs-12">
             <h1>Quiz score: <span ng-bind="calculateQuizScore(r)"></span></h1>
             <div class="panel panel-primary" ng-repeat="tier in r">
@@ -189,7 +203,7 @@
           </div>
         </section>
 
-        <section ng-if="ready">
+        <section ng-if="ready && practised">
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-primary">
@@ -207,7 +221,7 @@
                   </form> -->
 
                 
-                  <button type="submit" class ="btn btn-default" ng-click="reportScores()">Submit</span>
+                  <button type="submit" class ="btn btn-default" ng-click="reportScores()">Submit</button>
 
                 </div>
               </div>
