@@ -27,8 +27,8 @@ app.listen(3000, function (){
 app.post('/generator', function(request, response){
 	var filepath =  'feedback/' + request.body.uid + request.body.extension;
 	var toappend;
-	if(request.body.extension === '.json') toappend = JSON.stringify(request.body.feedback); // minified
-	else toappend = request.body.separator + '\n' + JSON.stringify(request.body.feedback, null, "  ") + '\n';
+	if(request.body.extension === '.json') toappend = JSON.stringify(request.body.input); // minified
+	else toappend = request.body.separator + '\n' + JSON.stringify(request.body.input, null, "  ") + '\n';
 
 	if(request.body.extension === '.json') {
 		// http://stackoverflow.com/questions/2496710/writing-files-in-node-js

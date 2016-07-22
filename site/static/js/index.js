@@ -99,9 +99,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     // },
 
                     /** Two modes: Append to the user's report, or make main JSON. */
-                    sc.postman = function(uid, extension, feedback, separator){
-                        // console.log("feedback: " + feedback);
-                        // feedback = JSON.parse(feedback);
+                    sc.postman = function(uid, extension, input, separator){
                         // HTTP.POST is the angular version, 
                         $.ajax({
                                 url        : "http://127.0.0.1:3000/generator",
@@ -109,7 +107,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 contentType: 'application/json; charset=UTF-8',
                                 data       : JSON.stringify({
                                     "uid": uid,
-                                    "feedback": feedback,
+                                    "input": input,
                                     "separator": separator,
                                     "extension": extension
                                 }),
@@ -280,6 +278,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             .split('}}}').join('</span>');
                         }
                     });
+
+
                 }]
             })
 
@@ -292,7 +292,6 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
                 controller: ["$scope", "$http", "$stateParams", function(sc, $http, $stateParams) {
                     angular.extend(sc, {
-                        // allResponse: {},
                         ready: false,
                         readError: false,
                         qScore: 0,
@@ -316,6 +315,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                     sc.ready = true;
                                 });
                                 console.log("done!");
+
+                                sc.reportScores(); // TODO: move this to a sensible place rather than its current on-read place.
                             })
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 sc.$apply(function() {
@@ -383,6 +384,9 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         for(var i = 0; i < sc.rw.length; i++) sc.insertAnswers(sc.r[i]);
                         for(var i = 0; i < sc.rw.length; i++) sc.insertDummy(sc.rw[i], sc.dummy[i]);
                         for(var i = 0; i < sc.rw.length; i++) sc.shuffleAllTestsInTier(sc.rw[i]);
+
+                        console.log(sc.r);
+                        console.log(sc.r[0]);
                     }
                     
                     // from http://stackoverflow.com/questions/20789373/shuffle-array-in-ng-repeat-angular
@@ -436,11 +440,64 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         }
                     }
 
+                    /** Two modes: Append to the user's report, or make main JSON. */
+                    sc.postmanQ = function(uid, extension, input, separator){
+                        $.ajax({
+                                url        : "http://127.0.0.1:3000/generator", // using the generator address is actually correct presently.
+                                // dataType   : 'json', // this is the expected payload type. Doesn't like response.status(200).end()
+                                contentType: 'application/json; charset=UTF-8',
+                                data       : JSON.stringify({
+                                    "uid": uid,
+                                    "input": input,
+                                    "separator": separator,
+                                    "extension": extension
+                                }),
+                                type       : 'POST'
+                            })
+                            // HTTP 200 may send you in here
+                            .done(function(data, textStatus, jqXHR) {
+                                // console.log(data); // logs the incoming data as javascript objects
+                                sc.$apply(function() {
+                                    sc.reportSent = true;
+                                    sc.postmanError = false;
+                                });
+                            })
+                            // HTTP 500 may send you in here
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                console.error(arguments);
+                                sc.$apply(function() {
+                                    sc.postmanError = true;
+                                    sc.finishedSearch = false;
+                                    sc.startedSearch = false;
+                                });
+                            })
+                        ;
+                    },
+
+                    /** Generates the main JSON and report via postmanQ(). Currently being triggered inside read(). */
+                    sc.reportScores = function() {
+                        console.log(sc.r);
+                        console.log(sc.r[0].tests[0].qus);
+                        console.log(sc.r[0].tests[0].answers);
+                        var report = {
+                                        "tierOneK": sc.calculateTestScore(sc.r[0].tests[0].qus, sc.r[0].tests[0].answers) + ' / ' + sc.r[0].tests[0].qus.length,
+                                        "tierOneP": sc.calculateTestScore(sc.r[0].tests[1].qus, sc.r[0].tests[1].answers) + ' / ' + sc.r[0].tests[1].qus.length,
+                                        "tierOneD": sc.calculateTestScore(sc.r[0].tests[2].qus, sc.r[0].tests[2].answers) + ' / ' + sc.r[0].tests[2].qus.length
+                                        // TODO: will also need to take a survey of thoughts.
+                                    };
+
+                        console.log(report);
+                        sc.postmanQ(sc.uid, '.txt', report, '/*=== Test results ===*/\n'); // The report
+                    };
+
+                    // THESE START ON PAGE LOAD:
                     sc.uid = $stateParams['uid'];
                     if(sc.uid != null) sc.read(sc.uid);
-                    console.log(sc.uid);
-                    // sc.x = response.data.list;
-                    // console.log(sc.x);
+                    // console.log(sc.uid);
+
+                    // Can't trigger this on page load because sc.read() of JSON occurs asynchronously and thus hasn't completed by the time this line is reached.
+                    // sc.reportScores();
+
                 }]
             });
         }])
