@@ -327,14 +327,14 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
                                     if(extension === '.status'){
                                         sc.stage = contents.stage;
-                                        console.log("status read.");
+                                        // console.log("status read.");
                                     }
                                     if(extension === '.json'){
                                         // can access sc.stage √
                                         sc.readError = false;
                                         sc.init(contents, sc.stage);
                                         sc.ready = true;
-                                        console.log("JSON read.");
+                                        // console.log("JSON read.");
                                         // sc.reportScores(); // TODO: move this to a sensible place rather than its current on-read place.
                                     }
                                 });
@@ -402,7 +402,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         if(sc.stage === 'quizAPending') sc.rw = jsonParsedresponse.quizA;
                         else if(sc.stage === 'quizBPending') sc.rw = jsonParsedresponse.quizB;
                         else alert("Error: uid.status file didn't contain a recognised 'stage' of quiz progression.");
-                        console.log(sc.rw);
+                        // console.log(sc.rw);
                         sc.dummy = jsonParsedresponse.quizC;
                         sc.r = JSON.parse(JSON.stringify(sc.rw));
                         // r[0] is tierOne.
@@ -410,8 +410,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         for(var i = 0; i < sc.rw.length; i++) sc.insertDummy(sc.rw[i], sc.dummy[i]);
                         for(var i = 0; i < sc.rw.length; i++) sc.shuffleAllTestsInTier(sc.rw[i]);
 
-                        console.log(sc.r);
-                        console.log(sc.r[0]);
+                        // console.log(sc.r);
                     }
                     
                     // from http://stackoverflow.com/questions/20789373/shuffle-array-in-ng-repeat-angular
