@@ -331,7 +331,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                         sc.init(contents, sc.stage);
                                         sc.ready = true;
                                         console.log("JSON read.");
-                                        sc.reportScores(); // TODO: move this to a sensible place rather than its current on-read place.
+                                        // sc.reportScores(); // TODO: move this to a sensible place rather than its current on-read place.
                                     }
                                 });
 
@@ -500,8 +500,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         var kTotalMin = 0;
                         var kTotalMax = 0;
                         var pTotalMin = 0;
-                        var dTotalMin = 0;
                         var pTotalMax = 0;
+                        var dTotalMin = 0;
                         var dTotalMax = 0;
                         var tierMins = [];
                         var tierMaxes = [];
@@ -527,14 +527,17 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                         rpQuiz.tiers[i].kanji = minMax;
                                         kTotalMin += min;
                                         kTotalMax += max;
+                                        break;
                                     case 1:
                                         rpQuiz.tiers[i].pron = minMax;
                                         pTotalMin += min;
                                         pTotalMax += max;
+                                        break;
                                     case 2:
                                         rpQuiz.tiers[i].def = minMax;
                                         dTotalMin += min;
                                         dTotalMax += max;
+                                        break;
                                 }
 
                                 tierMins[i] += min;

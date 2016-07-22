@@ -118,4 +118,30 @@
 
           </div>
         </section>
+
+        <section ng-if="ready">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="panel panel-primary">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+
+<!--                   <form data-ng-submit="generate(category)">
+                        <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
+                        <div class="row">
+                          <div class="col-xs-10" style="padding-right: 0px;">
+                            <input type="text" class="form-control" title="submitbutton" data-ng-model="category" ng-disabled="startedSearch" placeholder="Category name in Japanese, eg. 科学">
+
+                          </div>
+                        </div>
+                  </form> -->
+
+                
+                  <button type="submit" class ="btn btn-default" ng-click="reportScores()">Submit</span>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
     </article>
