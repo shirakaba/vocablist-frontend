@@ -26,15 +26,17 @@ app.listen(3000, function (){
   */
 app.post('/generator', function(request, response){
 	var filepath =  'feedback/' + request.body.uid + request.body.extension;
-	var toappend;
-	if(request.body.extension === '.json') toappend = JSON.stringify(request.body.input); // minified
-	else toappend = request.body.separator + '\n' + JSON.stringify(request.body.input, null, "  ") + '\n';
+	var payload;
+
+	if(request.body.extension === '.txt') payload = request.body.separator + '\n' + JSON.stringify(request.body.input, null, "  ") + '\n';
+	else if(request.body.extension === '.json') payload = JSON.stringify(request.body.input); // minified
+	else if(request.body.extension === '.status') payload = JSON.stringify(request.body.input); // minified
 
 	if(request.body.extension === '.json') {
 		// http://stackoverflow.com/questions/2496710/writing-files-in-node-js
 		fs.writeFile(
 			filepath,
-		 	toappend,
+		 	payload,
 
 		  	function (err) {
 		  		if (err) {
@@ -47,11 +49,11 @@ app.post('/generator', function(request, response){
 			}
 		);
 	}
-	else {
+	else if (request.body.extension === '.txt'){
 		// http://stackoverflow.com/questions/3459476/how-to-append-to-a-file-in-node
 		fs.appendFile(
 			filepath,
-		 	toappend,
+		 	payload,
 
 		  	function (err) {
 		  		if (err) {
@@ -64,6 +66,23 @@ app.post('/generator', function(request, response){
 			}
 		);
 	}
+	else if (request.body.extension === '.status'){
+		fs.writeFile(
+			filepath,
+		 	payload,
+
+		  	function (err) {
+		  		if (err) {
+		  			console.log("Error: " + err);
+		  			response.status(500).end(); // server-internal error
+		  			throw err;
+		  		}
+		  		console.log('The "data to write" was written to file!');
+		  		response.status(200).end();
+			}
+		);
+	}
+	// else throw notImplementedException
 
 });
 
@@ -71,18 +90,18 @@ app.post('/generator', function(request, response){
   * Reads the main JSON file based on the uid passed in.
   */
 app.post('/quiz', function(request, response){
-	var filepath =  'feedback/' + request.body.uid + '.json';
+	var filepath =  'feedback/' + request.body.uid + request.body.extension;
 
 	fs.readFile(filepath, 'utf8', function (err, contents) {
 	  if (err) {
 	  	response.status(500).end(); // server-internal error
 	    return console.log(err);
 	  }
-	  var o=JSON.parse(contents);
+	  var o = JSON.parse(contents);
 	  // console.log(contents);
 	  response.json(o);
 	});
-	
+
 
 });
 

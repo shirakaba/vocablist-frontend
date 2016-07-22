@@ -171,9 +171,13 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                         "issues": sc.formData.issues,
                                         "category": sc.category
                                     };
+                                    var stage = {
+                                        "stage": 'quizAPending'
+                                    };
                                     console.log(report);
                                     sc.postman(sc.uid, '.json', response.data, ''); // The JSON
                                     sc.postman(sc.uid, '.txt', report, '/*=== First contents ===*/\n'); // The report
+                                    sc.postman(sc.uid, '.status', stage, ''); // The report
                                 }
 
                                 /** For automatically serving the user a .txt file of the GET response (the main JSON) */
@@ -295,14 +299,20 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         ready: false,
                         readError: false,
                         qScore: 0,
-                        /** Reads the main JSON file (eg. 'abcd.json') stored on the host machine, given a uid. */
-                        read : function(uid){
+                        // stage: 'quizAPending',
+                        /** 
+                          * Looks up file name corresponding to uid stored on the host machine, with two modes:
+                          * (1) if extension is '.json', reads the main JSON file.
+                          * (2) if extension is '.status', reads the quiz status file.
+                          * */
+                        read : function(uid, extension){
                             $.ajax({
                                 url        : "http://127.0.0.1:3000/quiz",
                                 dataType   : 'json',
                                 contentType: 'application/json; charset=UTF-8',
                                 data       : JSON.stringify({
-                                    "uid": uid
+                                    "uid": uid,
+                                    "extension": extension
                                 }),
                                 type       : 'POST'
                             })
@@ -310,13 +320,21 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 // console.log(contents);
                                 sc.$apply(function() {
                                     // var fullResponse = JSON.parse(contents);
-                                    sc.readError = false;
-                                    sc.init(contents);
-                                    sc.ready = true;
-                                });
-                                console.log("done!");
 
-                                sc.reportScores(); // TODO: move this to a sensible place rather than its current on-read place.
+                                    if(extension === '.status'){
+                                        sc.stage = contents.stage;
+                                        console.log("status read.");
+                                    }
+                                    if(extension === '.json'){
+                                        // can access sc.stage √
+                                        sc.readError = false;
+                                        sc.init(contents, sc.stage);
+                                        sc.ready = true;
+                                        console.log("JSON read.");
+                                        sc.reportScores(); // TODO: move this to a sensible place rather than its current on-read place.
+                                    }
+                                });
+
                             })
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 sc.$apply(function() {
@@ -377,7 +395,10 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         
                         sc.x = jsonParsedresponse.list;
                         sc.articles = ["article1", "article2", "article3"];
-                        sc.rw = jsonParsedresponse.quizA;
+                        if(sc.stage === 'quizAPending') sc.rw = jsonParsedresponse.quizA;
+                        else if(sc.stage === 'quizBPending') sc.rw = jsonParsedresponse.quizB;
+                        else alert("Error: uid.status file didn't contain a recognised 'stage' of quiz progression.");
+                        console.log(sc.rw);
                         sc.dummy = jsonParsedresponse.quizC;
                         sc.r = JSON.parse(JSON.stringify(sc.rw));
                         // r[0] is tierOne.
@@ -405,7 +426,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                       }
 
                       return array;
-                    };
+                    }
 
                     sc.shuffleAllTestsInTier = function(tier){
                         for(var i=0; i < tier.tests.length; i++){
@@ -472,27 +493,86 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 });
                             })
                         ;
-                    },
+                    }
+
+                    sc.quizResultsObj = function(quiz) {
+                        var rpQuiz = {};
+                        var kTotalMin = 0;
+                        var kTotalMax = 0;
+                        var pTotalMin = 0;
+                        var dTotalMin = 0;
+                        var pTotalMax = 0;
+                        var dTotalMax = 0;
+                        var tierMins = [];
+                        var tierMaxes = [];
+
+                        rpQuiz.tiers = [];
+
+                        for(var i = 0; i < quiz.length; i++){ // tiers
+                            rpQuiz.tiers.push({});
+
+                            tierMins[i] = 0;
+                            tierMaxes[i] = 0;
+
+                            for(var j = 0; j < quiz[i].tests.length; j++){ // tests
+                                var min = sc.calculateTestScore(quiz[i].tests[j].qus, quiz[i].tests[j].answers);
+                                var max = quiz[i].tests[j].qus.length;
+                                var minMax = {
+                                    "min": min,
+                                    "max": max
+                                };
+
+                                switch(j){
+                                    case 0:
+                                        rpQuiz.tiers[i].kanji = minMax;
+                                        kTotalMin += min;
+                                        kTotalMax += max;
+                                    case 1:
+                                        rpQuiz.tiers[i].pron = minMax;
+                                        pTotalMin += min;
+                                        pTotalMax += max;
+                                    case 2:
+                                        rpQuiz.tiers[i].def = minMax;
+                                        dTotalMin += min;
+                                        dTotalMax += max;
+                                }
+
+                                tierMins[i] += min;
+                                tierMaxes[i] += max;
+                            }
+                            rpQuiz.tiers[i].tiermin = tierMins[i];
+                            rpQuiz.tiers[i].tiermax = tierMaxes[i];
+                        }
+                        rpQuiz.totals = {};
+                        rpQuiz.totals.kanji = { "min": kTotalMin, "max": kTotalMax };
+                        rpQuiz.totals.pron = { "min": pTotalMin, "max": pTotalMax };
+                        rpQuiz.totals.def = { "min": dTotalMin, "max": dTotalMax };
+
+                        return rpQuiz;
+                    }
 
                     /** Generates the main JSON and report via postmanQ(). Currently being triggered inside read(). */
                     sc.reportScores = function() {
-                        console.log(sc.r);
-                        console.log(sc.r[0].tests[0].qus);
-                        console.log(sc.r[0].tests[0].answers);
-                        var report = {
-                                        "tierOneK": sc.calculateTestScore(sc.r[0].tests[0].qus, sc.r[0].tests[0].answers) + ' / ' + sc.r[0].tests[0].qus.length,
-                                        "tierOneP": sc.calculateTestScore(sc.r[0].tests[1].qus, sc.r[0].tests[1].answers) + ' / ' + sc.r[0].tests[1].qus.length,
-                                        "tierOneD": sc.calculateTestScore(sc.r[0].tests[2].qus, sc.r[0].tests[2].answers) + ' / ' + sc.r[0].tests[2].qus.length
-                                        // TODO: will also need to take a survey of thoughts.
-                                    };
+                        var report = sc.quizResultsObj(sc.r);
+
+                        // var report = {
+                        //                 "tierOneK": sc.calculateTestScore(sc.r[0].tests[0].qus, sc.r[0].tests[0].answers) + ' / ' + sc.r[0].tests[0].qus.length,
+                        //                 "tierOneP": sc.calculateTestScore(sc.r[0].tests[1].qus, sc.r[0].tests[1].answers) + ' / ' + sc.r[0].tests[1].qus.length,
+                        //                 "tierOneD": sc.calculateTestScore(sc.r[0].tests[2].qus, sc.r[0].tests[2].answers) + ' / ' + sc.r[0].tests[2].qus.length
+                        //             };
+                        // TODO: will also need to take a survey of thoughts.
 
                         console.log(report);
-                        sc.postmanQ(sc.uid, '.txt', report, '/*=== Test results ===*/\n'); // The report
+                        var st;
+                        if(sc.stage === 'quizAPending') st = 'A';
+                        if(sc.stage === 'quizBPending') st = 'B';
+                        sc.postmanQ(sc.uid, '.txt', report, '/*=== Quiz' + st + ' results ===*/\n'); // The report
                     };
 
                     // THESE START ON PAGE LOAD:
                     sc.uid = $stateParams['uid'];
-                    if(sc.uid != null) sc.read(sc.uid);
+                    if(sc.uid != null) sc.read(sc.uid, '.status');
+                    if(sc.uid != null) sc.read(sc.uid, '.json');
                     // console.log(sc.uid);
 
                     // Can't trigger this on page load because sc.read() of JSON occurs asynchronously and thus hasn't completed by the time this line is reached.
