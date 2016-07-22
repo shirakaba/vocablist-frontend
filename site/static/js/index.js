@@ -19,18 +19,23 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                 templateUrl: "partials/generator.html",
                 controller: ["$scope", "$http", function(sc, $http) {
                     angular.extend(sc, {
-                        gender: "other",
-                        age: 100,
+                        // http://stackoverflow.com/questions/12618342/ng-model-does-not-update-controller-value
+                        formData: {
+                            consent: false,
+                            gender: "other",
+                            age: 100,
+                            exposure: "low",
+                            source: "other",
+                            issues: "",
+                            ownchoice: false,
+                            // category: null,
+                            proficiency: 2
+                        },
                         uid: "",
-                        exposure: "low",
-                        consent: false,
+                        // consent: false,
                         overtime: false,
-                        proficiency: 2,
-                        source: "other",
-                        issues: "",
                         postmanError: false,
                         reportSent: false,
-                        ownchoice: false,
                         startedSearch: false,
                         finishedSearch: false,
                         generatedSelection: "none",
@@ -134,6 +139,9 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     sc.generate = function(cat) {
                         if(cat == null) {
                             console.log("category was null.");
+                            sc.$apply(function() {
+                                sc.startedSearch = false;
+                            });
                             return;
                         }
                         $http.get(
@@ -141,7 +149,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             +'partition='+encodeURIComponent(250)
                             +'&makequiz='+encodeURIComponent(true)
                             +'&maxarticles='+encodeURIComponent(1)
-                            +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.filtering))
+                            +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.proficiency))
                             +'&egs='+encodeURIComponent(2)
                             +'&limit='+encodeURIComponent(100.0)
                             +'&minyield='+encodeURIComponent(0.0)
@@ -155,12 +163,19 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                     sc.uid = sc.generateUid();
 
                                     console.log(sc.uid);
-                                    var fb = {
-                                        "info":"結社",
-                                        "target":"association ･ society"
+                                    var report = {
+                                        "uid": sc.uid,
+                                        "gender": sc.formData.gender,
+                                        "age": sc.ageReport(sc.formData.age),
+                                        "exposure": sc.formData.exposure,
+                                        "proficiency": sc.filteringEnum(sc.formData.proficiency),
+                                        "source": sc.formData.source,
+                                        "issues": sc.formData.issues,
+                                        "category": sc.category
                                     };
+                                    console.log(report);
                                     sc.postman(sc.uid, '.json', response.data, ''); // The JSON
-                                    sc.postman(sc.uid, '.txt', fb, '/*=== First contents ===*/\n'); // The report
+                                    sc.postman(sc.uid, '.txt', report, '/*=== First contents ===*/\n'); // The report
                                 }
 
                                 /** For automatically serving the user a .txt file of the GET response (the main JSON) */
