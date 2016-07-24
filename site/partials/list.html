@@ -102,12 +102,12 @@
             <div class="col-xs-12">
                 <div class="col-xs-6">
                   <p>Display tokens of ability level: </p>
-                  <label>Fundamental: <input type="checkbox" style="margin-right: 1em;" id="fundamental" ng-model="fundChecked"/></label>
-                  <label>N5: <input type="checkbox" style="margin-right: 1em;" id="n5" ng-model="n5Checked"/></label>
-                  <label>N4: <input type="checkbox" style="margin-right: 1em;" id="n4" ng-model="n4Checked"/></label>
-                  <label>N3: <input type="checkbox" style="margin-right: 1em;" id="n3" ng-model="n3Checked"/></label>
-                  <label>N2: <input type="checkbox" style="margin-right: 1em;" id="n2" ng-model="n2Checked"/></label>
-                  <label>N1: <input type="checkbox" style="margin-right: 1em;" id="n1" ng-model="n1Checked"/></label>
+                  <label ng-if="filteringEnumR(prefiltering) < 1">Fundamental: <input type="checkbox" style="margin-right: 1em;" id="fundamental" ng-model="f.fundChecked"/></label>
+                  <label ng-if="filteringEnumR(prefiltering) < 2">N5: <input type="checkbox" style="margin-right: 1em;" id="n5" ng-model="f.n5Checked"/></label>
+                  <label ng-if="filteringEnumR(prefiltering) < 3">N4: <input type="checkbox" style="margin-right: 1em;" id="n4" ng-model="f.n4Checked"/></label>
+                  <label ng-if="filteringEnumR(prefiltering) < 4">N3: <input type="checkbox" style="margin-right: 1em;" id="n3" ng-model="f.n3Checked"/></label>
+                  <label ng-if="filteringEnumR(prefiltering) < 5">N2: <input type="checkbox" style="margin-right: 1em;" id="n2" ng-model="f.n2Checked"/></label>
+                  <label ng-if="filteringEnumR(prefiltering) < 6">N1: <input type="checkbox" style="margin-right: 1em;" id="n1" ng-model="f.n1Checked"/></label>
                 </div>
                 <div class="col-xs-6">
                   <p>Display of example sentences: </p>

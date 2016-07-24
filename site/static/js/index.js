@@ -227,33 +227,35 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         filtering: 0,
                         maxArticles: 1,
                         makeQuiz: true,
-                        fundChecked: true,
-                        n1Checked: true,
-                        n2Checked: true,
-                        n3Checked: true,
-                        n4Checked: true,
-                        n5Checked: true,
+                        f: {
+                            fundChecked: true,
+                            n1Checked: true,
+                            n2Checked: true,
+                            n3Checked: true,
+                            n4Checked: true,
+                            n5Checked: true
+                        },
                         showEg: false,
                         showFirstEg: true,
                         qScore: 0,
                         ready: false,
                         fundamentalsFilter: function(item) {
-                            return sc.fundChecked || !item.fundamental;
+                            return sc.f.fundChecked || !item.fundamental;
                         },
                         n1Filter: function(item) {
-                            return sc.n1Checked || !item.n1;
+                            return sc.f.n1Checked || !item.n1;
                         },
                         n2Filter: function(item) {
-                            return sc.n2Checked || !item.n2;
+                            return sc.f.n2Checked || !item.n2;
                         },
                         n3Filter: function(item) {
-                            return sc.n3Checked || !item.n3;
+                            return sc.f.n3Checked || !item.n3;
                         },
                         n4Filter: function(item) {
-                            return sc.n4Checked || !item.n4;
+                            return sc.f.n4Checked || !item.n4;
                         },
                         n5Filter: function(item) {
-                            return sc.n5Checked || !item.n5;
+                            return sc.f.n5Checked || !item.n5;
                         },
                         filteringEnum: function(value) {
                             switch(value){
@@ -273,6 +275,26 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                     return "n1";
                                 default:
                                     return "mandatory";
+                            }
+                        },
+                        filteringEnumR: function(label) {
+                            switch(label){
+                                case "mandatory":
+                                    return 0;
+                                case "fundamental":
+                                    return 1;
+                                case "n5":
+                                    return 2;
+                                case "n4":
+                                    return 3;
+                                case "n3":
+                                    return 4;
+                                case "n2":
+                                    return 5;
+                                case "n1":
+                                    return 6;
+                                default:
+                                    return 0;
                             }
                         },
                         mySearch: "東方Project",
