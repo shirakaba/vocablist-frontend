@@ -135,6 +135,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
                     /** Generates the main JSON and report via postman(). */
                     sc.generate = function(cat) {
+                        console.log('input proficiency was:' + sc.formData.proficiency);
                         if(cat == null) {
                             console.log("category was null.");
                             sc.$apply(function() {
@@ -147,7 +148,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             +'partition='+encodeURIComponent(250)
                             +'&makequiz='+encodeURIComponent(true)
                             +'&maxarticles='+encodeURIComponent(1)
-                            +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.proficiency))
+                            +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.formData.proficiency))
                             +'&egs='+encodeURIComponent(2)
                             +'&limit='+encodeURIComponent(100.0)
                             +'&minyield='+encodeURIComponent(0.0)
@@ -160,7 +161,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                     sc.finishedSearch = true;
                                     sc.uid = sc.generateUid();
 
-                                    console.log(sc.uid);
+                                    console.log('reported proficiency was:' + sc.formData.proficiency);
                                     var report = {
                                         "uid": sc.uid,
                                         "gender": sc.formData.gender,
@@ -235,6 +236,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         showEg: false,
                         showFirstEg: true,
                         qScore: 0,
+                        ready: false,
                         fundamentalsFilter: function(item) {
                             return sc.fundChecked || !item.fundamental;
                         },
@@ -330,6 +332,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         sc.x = jsonParsedresponse.list;
                         sc.topic = jsonParsedresponse.topic;
                         sc.articles = jsonParsedresponse.successfulArticles;
+                        sc.prefiltering = jsonParsedresponse.prefiltering;
                     }
 
 

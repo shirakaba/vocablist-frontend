@@ -1,17 +1,48 @@
 <nav>
-      <div class="row">
+      <section class="row">
+          <div class="col-xs-12">
+              <div class="panel panel-default">
+                  <div class="panel-heading">Info</div>
+
+                  <div class="panel-body">
+                    <div ng-hide="ready || readError" class="alert alert-info">
+                        <p>Loading...</p>
+                    </div>
+                    <div ng-if="readError" class="alert alert-danger">
+                        <p>No list was able to be read for the given user id.</p>
+                    </div>
+                    <div ng-show="ready">
+                        
+                        <dl class="dl-horizontal">
+                          <dt>Topic</dt>
+                          <dd><span ng-bind="topic"></span></dd>
+                          <dt>Pre-filtering</dt>
+                          <dd>Any words of level <strong><span class="text-uppercase" ng-bind="prefiltering"></span></strong> or below were excluded</dd>
+                          <!-- The list of articles. -->
+                          <dt>List of articles</dt>
+                          <dd>
+                              <textarea class="form-control" rows="3" ng-bind="articles.join('\n')" placeholder="Loading article names now..."></textarea>
+                          </dd>
+                        </dl>
+                    </div>
+                      <!-- <h2>Topic: <span ng-bind="topic"></span></h2> -->
+                  </div>
+              </div>
+          </div>
+      </section>
+
+<!--       <div class="row">
           <div class="col-xs-12">
             <h2>Topic: <span ng-bind="topic"></span></h2>
           </div>
       </div>
-    </nav>
-    <article>
-    <!-- The list of articles. -->
         <section class="row">
             <div class="col-xs-12">
               <textarea class="form-control" rows="3" ng-bind="articles.join('\n')" placeholder="Loading article names now..."></textarea>
             </div>
-        </section>
+        </section> -->
+</nav>
+    <article ng-show="ready">
     <!-- The control sliders -->
 <!--         <section class="row">
             <div class="col-xs-12">

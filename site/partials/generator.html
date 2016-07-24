@@ -108,14 +108,14 @@
               <div class="panel-body">
                 <div style="padding-bottom: 2em">
                   <p>Please specify what level of Japanese language you already generally understand, so that it needn't be added to your quizzes and vocabulary list.</p>
-                  <dt >Proficiency > <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span></dt>
+                  <dt >Proficiency > <span class="text-uppercase" ng-bind="filteringEnum(formData.proficiency)"></span></dt>
                   <dd>
                     <div class="col-xs-12">
                       <slider class="col-xs-11" tooltip="hide" ng-model="formData.proficiency" ticks="[2, 3, 4, 5, 6]"
                   ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
                       <span class="col-xs-1"></span>
                     </div>
-                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
+                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span class="text-uppercase" ng-bind="filteringEnum(formData.proficiency)"></span>)</em></span></small><br>
                     <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
                   </dd>
                 </div>
