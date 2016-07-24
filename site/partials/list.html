@@ -72,8 +72,11 @@
                   N1 <input type="checkbox" id="n1" ng-model="n1Checked"/>
                 </div>
                 <div class="col-xs-6">
-                  <p>Display all example sentences: </p>
-                  <input type="checkbox" id="egbox" ng-model="showEg"/>
+                  <p>Display of example sentences: </p>
+                  At least the first example <input type="checkbox" id="egbox" ng-model="showFirstEg"/>
+                  All examples <input type="checkbox" id="egbox" ng-model="showEg"/>
+                  <!-- <label class="radio-inline"><input type="radio" data-ng-model="showEg" value="true">First</label> -->
+                  <!-- <label class="radio-inline"><input type="radio" data-ng-model="showEg" value="false">All</label> -->
                 </div>
             </div>
         </section>
@@ -134,12 +137,12 @@
 
                                             </td>
                                           </tr>
-                                          <tr class="eg" ng-repeat="eg in item.exampleSentences">
+                                          <tr class="eg" ng-repeat="eg in item.exampleSentences" ng-if="showEg || showFirstEg">
                                             <td>
                                               <!-- there is a global default showEg, but we also attach an overriding showEg to the row's item' object. -->
                                               <a href="javascript:void(0);" ng-click="item.showEg = !item.showEg" ng-if="$first && !item.showEg && !$last && !showEg"> [Show more]</a>
                                               <a href="javascript:void(0);" ng-click="item.showEg = !item.showEg" ng-if="$first && item.showEg && !showEg"> [Show less]</a>
-                                              <span ng-if="$first || item.showEg || showEg" ng-bind-html="parseSentence(eg)"></span>
+                                              <span ng-if="$first && showFirstEg || item.showEg || showEg" ng-bind-html="parseSentence(eg)"></span>
                                             </td>
                                           </tr>
                                         </tbody>

@@ -233,6 +233,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         n4Checked: true,
                         n5Checked: true,
                         showEg: false,
+                        showFirstEg: true,
                         qScore: 0,
                         fundamentalsFilter: function(item) {
                             return sc.fundChecked || !item.fundamental;
