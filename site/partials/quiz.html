@@ -1,15 +1,119 @@
     <article>
-    <!-- The list of articles. -->
         <section class="row">
             <div class="col-xs-12">
-              <textarea class="form-control" rows="3" ng-model="articles.join('\n')" placeholder="articles to come."></textarea>
+              <div class="panel panel-default">
+                <div class="panel-heading"><span>Set-up</span></div>
+                <div class="panel-body">
+                  <span>Input your user id here and press 'enter'.</span>
+                  <form data-ng-submit="twoReads(uid)">
+                    <input type="text" class="form-control" title="submitbutton" data-ng-model="uid" ng-disabled="ready" placeholder="User id, eg. abcdef123">
+                  </form>
+                  <div ng-if="readError" class="alert alert-danger">
+                    <p>Unable to read a file under that user id. Please check whether the user id is correct.</p>
+                  </div>
+                  <div ng-if="stage === 'finished' && !readError && !ready" class="alert alert-danger">
+                    <p>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</p>
+                  </div>
+                  <!-- <button ng-click="add()">Add</button> -->
+                </div>
+              </div>
             </div>
         </section>
 
-        <!-- The quiz (strictly only one of quizA or quizB) -->
-        <section class="row">
+        <section ng-if="ready" class="row">
           <div class="col-xs-12">
-            <h1>Quiz score: <span ng-bind="calculateQuizScore(r)"></span></h1>
+            <div class="panel panel-default" style="margin-bottom: 0px;">
+                <div class="panel-heading"><span>Practice area: sample kanji test</span></div>
+                <div class="panel-body">
+                  <p>Answer each question in the <strong>Questions</strong> column <em>(in this case consisting of four kanji-related questions)</em> by dragging across the corresponding information for it from the <strong>Choices</strong> column <em>(in this case consisting of six dictionary definitions)</em>. Incorrect answers do not subtract from score.</p>
+                  
+                  
+                  <div class="alert alert-info">
+                    <span><strong>How to read the dictionary definitions: </strong>Each word (for this example, '初期') may have multiple senses such as (1) 'early' (days); or (2) 'initial'. Each sense may additionally have multiple ways to be phrased, which are separated by a bullet point, eg: "early (days)・initial stage".</span><br>
+                    <span><strong>Glossary for proper noun definitions: </strong>[given] = given name; [fem] = female name; [masc] = masculine name; [surname] = surname; [place] = place name; and [unclass] = unclassified.</span>
+                  </div>
+
+                  <div class="col-xs-12">
+
+                    <div class="col-xs-6">
+                        <h4>Questions</h4>
+                          <ol>
+                            <li ng-repeat="question in sampleTestr.qus">
+                              <span ng-bind="question.info"></span>
+
+                              <!-- Buckets -->
+                              <div class="simpleDemo well well-sm"> <!-- $index = that of 'question', or 'i' in tier.kanjiQuiz.qus[i] -->
+                                <ul dnd-list="sampleTestr.answers[$index].bucket"
+                                    dnd-allowed-types="sampleTestr.allowedTypes"
+                                    dnd-disable-if="sampleTestr.answers[$index].bucket.length >= 1">
+                                    <!-- the bucket is an array of tentative answers. -->
+
+                                    <li ng-repeat="bucketContent in sampleTestr.answers[$index].bucket"
+                                        dnd-draggable="bucketContent"
+                                        dnd-type="sampleTestr.eleType"
+                                        dnd-moved="sampleTestr.answers[$parent.$index].bucket.splice($index, 1)"
+                                        dnd-effect-allowed="move"
+                                        >
+                                        {{bucketContent.target}}
+                                    </li>
+
+                                    <li class="dndPlaceholder">
+                                        <em>You may drop your choice here.</em>
+                                    </li>
+                                </ul>
+                              </div>
+
+                            </li>
+                          </ol>
+                          
+                        <span>Score: </span><span ng-bind="calculateTestScore(sampleTestr.qus, sampleTestr.answers)"></span><br>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-success" style="width: {{calculateTestScore(sampleTestr.qus, sampleTestr.answers) * 25}}%"></div>
+                        </div>
+                      </div>
+
+                      <div class="col-xs-6">
+                        <!-- The draggable list of targets -->
+                        <h4>Choices</h4>
+                        <div class="simpleDemo well well-sm">
+                          <ul dnd-list="sampleTestrw.qus"
+                              dnd-allowed-types="sampleTestrw.allowedTypes"
+                              dnd-disable-if="sampleTestrw.qus.length >= sampleTestrw.qus.max">
+
+                              <li ng-repeat="question in sampleTestrw.qus"
+                                  dnd-draggable="question"
+                                  dnd-type="sampleTestrw.eleType"
+                                  dnd-moved="sampleTestrw.qus.splice($index, 1)"
+                                  dnd-effect-allowed="move"
+                                  >
+                                  {{question.target}}
+                              </li>
+
+                              <li class="dndPlaceholder">
+                                  <em>You may return your choice here.</em>
+                              </li>
+                          </ul>
+                        </div>
+
+                        <span><em>^ Note that there are usually more choices than questions. Also, choices can be returned to the <strong>Choices</strong> column at any time.</em></span>
+                      </div>
+                    </div>
+
+                      
+                  </div>
+                </div>
+                      <div class="alert" ng-class="{'alert-info': calculateTestScore(sampleTestr.qus, sampleTestr.answers) < 4, 'alert-success': calculateTestScore(sampleTestr.qus, sampleTestr.answers) == 4 }">
+                        <span>Once you understand how to operate this quiz, please click the 'OK' button to proceed to the real quiz: </span>
+                        <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.practised = true" ng-disabled="practised">OK</button>
+                      </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- The quiz (strictly only one of quizA or quizB) -->
+        <section ng-if="ready && practised" class="row">
+          <div class="col-xs-12">
+            <!-- <h1>Quiz score: <span ng-bind="calculateQuizScore(r)"></span></h1> -->
             <div class="panel panel-primary" ng-repeat="tier in r">
             <!-- <div class="panel panel-primary"> -->
               <div class="panel-heading">
@@ -27,13 +131,28 @@
                 </h3>
               </div>
               <div class="panel-body">
-                Tier score: <span ng-bind="calculateTierScore(tier)"></span>
+                <!-- Tier score: <span ng-bind="calculateTierScore(tier)"></span> -->
 
                 <!-- Kanji test (all tiers) -->
                 <div ng-repeat="test in tier.tests">
                   <div class="panel panel-default">
-                    <div class="panel-heading"><span ng-bind="test.testType"></span> test</div>
+                    <div class="panel-heading">
+                      <!-- <span ng-bind="test.testType"></span> test -->
+                      <span ng-switch="test.testType">
+                        <span ng-switch-when="kanji"><span>Kanji test</span></span>
+                        <span ng-switch-when="pron"><span>Pronunciation test</span></span>
+                        <span ng-switch-when="def"><span>Definition test</span></span>
+                        <span ng-switch-default>Undefined test</span>
+                      </span>
+                    </div>
+
                     <div class="panel-body">
+
+                    <div ng-if="test.qus.length === 0" class="alert alert-dismissible alert-info">
+                      <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+                      <span><small><em>This test contains no questions – this is because too few eligible words (eg. ones with unambiguous definitions) were found to create a test with, for the size of the vocabulary list generated and the amount of filtering applied. Don't worry – no points will be lost here!</em></small></span>
+                    </div>
+
                     <!-- <span><i>Answer the questions by dragging the appropriate choice into each question's answer slot.</i></span> -->
                       <!-- The list of infos -->
                       <div class="col-xs-6">
@@ -59,14 +178,14 @@
                                     </li>
 
                                     <li class="dndPlaceholder">
-                                        Drop any <strong>{{test.allowedTypes.join(' or ')}}</strong> here
+                                        <em>You may drop your choice here.</em>
                                     </li>
                                 </ul>
                               </div>
 
                             </li>
                           </ol>
-                          <span>Test score: </span>[<span ng-bind="calculateTestScore(test.qus, test.answers)"></span>]
+                          <!-- <span>Test score: </span>[<span ng-bind="calculateTestScore(test.qus, test.answers)"></span>] -->
                       </div>
 
                       <div class="col-xs-6">
@@ -87,7 +206,7 @@
                               </li>
 
                               <li class="dndPlaceholder">
-                                  Drop any <strong>{{rw[$parent.$index].tests[$index].allowedTypes.join(' or ')}}</strong> here
+                                  <em>You may return your choice here.</em>
                               </li>
                           </ul>
                         </div>
@@ -99,6 +218,37 @@
               </div>
             </div>
 
+          </div>
+        </section>
+
+        <section ng-if="ready && practised">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="panel panel-primary">
+                <div class="panel-heading">Submission of results</div>
+                <div class="panel-body">
+                <span>Once you have finished the quiz, press 'submit' to send your answers to the researcher.</span>
+                  <button type="submit" style="margin-left: 1em;" class ="btn btn-info" ng-click="reportScores()" ng-disabled="reportSent">Submit</button>
+                  <div ng-if="reportSent">
+                    <div ng-if="!postmanError && stage === 'quizAPending'" class="alert alert-success">
+                      <p>Test results successfully submitted.</p>
+                      <!-- <p>Your user id is: <span ng-bind="uid"></span></p> -->
+                      <p>Part 2/3: <a href="#/list?uid={{uid}}" class="alert-link">Access the vocabulary list from which to study here!</a></p>
+                    </div>
+                    <div ng-if="!postmanError && stage === 'quizBPending'" class="alert alert-success">
+                      <p>Test results successfully submitted.</p>
+                      <!-- <p>Your user id is: <span ng-bind="uid"></span></p> -->
+                      <p>You've finished the study! Thank you very much :)</p>
+                    </div>
+
+                    <div ng-if="postmanError" class="alert alert-danger">
+                      <p>Submission of test results failed.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
         </section>
     </article>

@@ -38,8 +38,8 @@
                 <dl class="dl-horizontal">
                   <dt>Consent to participate</dt>
                   <dd>
-                    <label class="radio-inline"><input type="radio" ng-model="consent" data-ng-value="true">Yes (I consent)</label>
-                    <label class="radio-inline" ng-hide="consent"><input type="radio" ng-model="consent" data-ng-value="false">No (I don't consent)</label>
+                    <label class="radio-inline"><input type="radio" ng-model="formData.consent" data-ng-value="true">Yes (I consent)</label>
+                    <label class="radio-inline" ng-hide="consent"><input type="radio" ng-model="formData.consent" data-ng-value="false">No (I don't consent)</label>
                   </dd>
               </div>
           </div>
@@ -47,7 +47,7 @@
   </section>
 
   <!-- <section class="row ng-hide houdini" data-ng-show="consent"> -->
-  <section class="row" data-ng-if="consent">
+  <section class="row" data-ng-if="formData.consent">
       <div class="col-xs-12">
 
           <div class="panel panel-default">
@@ -58,31 +58,31 @@
 
                     <dt>Gender</dt>
                     <dd>
-                      <label class="radio-inline"><input type="radio" ng-model="gender" value="male">Male</label>
-                      <label class="radio-inline"><input type="radio" ng-model="gender" value="female">Female</label>
-                      <label class="radio-inline"><input type="radio" ng-model="gender" value="other">Other category/unspecified</label>
+                      <label class="radio-inline"><input type="radio" ng-model="formData.gender" value="male">Male</label>
+                      <label class="radio-inline"><input type="radio" ng-model="formData.gender" value="female">Female</label>
+                      <label class="radio-inline"><input type="radio" ng-model="formData.gender" value="other">Other category/unspecified</label>
                     </dd>
 
                     <div class="controlRow-s">
-                      <dt>Age = <span ng-bind="ageReport(age)"/></dt>
-                      <dd><slider class="col-xs-11" ng-model="age" min="10" step="1" max="100" ticks="[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]" ticks-labels='[10, 20, 30, 40, 50, 60, 70, 80, 90, "Unspecified"]'></slider><span class="col-xs-1"></span></dd>
+                      <dt>Age = <span ng-bind="ageReport(formData.age)"/></dt>
+                      <dd><slider class="col-xs-11" ng-model="formData.age" min="10" step="1" max="100" ticks="[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]" ticks-labels='[10, 20, 30, 40, 50, 60, 70, 80, 90, "Unspecified"]'></slider><span class="col-xs-1"></span></dd>
                     </div>
 
                     <dt>Japanese language exposure</dt>
                     <dd>
-                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="$parent.proficiency = 2" value="low">Low environmental exposure <p><em>(eg. have spent no more than one year living in a primarily Japanese language environment*)</em></p></label>
-                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="$parent.proficiency = 4" value="some">Some environmental exposure <p><em>(eg. have spent some years in a primarily Japanese language environment*, but have completed no more than a junior high school education there; or comprehend at least high school-level Chinese, as it helps with Japanese recognition)</em></p></label>
-                      <label class="radio"><input type="radio" ng-model="exposure" ng-click="$parent.proficiency = 6" value="high">High environmental exposure <p><em>(eg. have completed at least a high school education in a primarily Japanese language environment*)</em></p></label>
+                      <label class="radio"><input type="radio" ng-model="formData.exposure" ng-click="formData.proficiency = 2" value="low">Low environmental exposure <p><em>(eg. have spent no more than one year living in a primarily Japanese language environment*)</em></p></label>
+                      <label class="radio"><input type="radio" ng-model="formData.exposure" ng-click="formData.proficiency = 4" value="some">Some environmental exposure <p><em>(eg. have spent some years in a primarily Japanese language environment*, but have completed no more than a junior high school education there; or comprehend at least high school-level Chinese, as it helps with Japanese recognition)</em></p></label>
+                      <label class="radio"><input type="radio" ng-model="formData.exposure" ng-click="formData.proficiency = 6" value="high">High environmental exposure <p><em>(eg. have completed at least a high school education in a primarily Japanese language environment*)</em></p></label>
                       <small class="helpy"><em>* This may include international schools outside of Japan.</em></small>
                     </dd>
 
                     <div class="controlRow-s">
                       <dt>Source</dt>
                       <dd>
-                        <label class="radio-inline"><input type="radio" ng-model="source" value="uni">Bristol University</label>
-                        <label class="radio-inline"><input type="radio" ng-model="source" value="reddit">Reddit</label>
-                        <label class="radio-inline"><input type="radio" ng-model="source" value="koohii">Koohii</label>
-                        <label class="radio-inline"><input type="radio" ng-model="source" value="other">Other/unspecified</label>
+                        <label class="radio-inline"><input type="radio" ng-model="formData.source" value="uni">Bristol University</label>
+                        <label class="radio-inline"><input type="radio" ng-model="formData.source" value="reddit">Reddit</label>
+                        <label class="radio-inline"><input type="radio" ng-model="formData.source" value="koohii">Koohii</label>
+                        <label class="radio-inline"><input type="radio" ng-model="formData.source" value="other">Other/unspecified</label>
                       </dd>
                     </div>
 
@@ -90,7 +90,7 @@
                       <dt>Other</dt>
                       <dd>
                         <span>If you had any problems with the options on this form (eg. categorising your level of environmental exposure), please report them here so that I may make manual adjustments.</span><br>
-                        <textarea class="form-control" rows="3" ng-model="issues" maxlength="400" placeholder="Input any issues here - maximum of 400 characters."></textarea>
+                        <textarea class="form-control" rows="3" ng-model="formData.issues" maxlength="400" placeholder="Input any issues here - maximum of 400 characters."></textarea>
                       </dd>
                     </div>
 
@@ -106,22 +106,36 @@
           <div class="panel panel-default">
               <div class="panel-heading"><span>Vocabulary of interest</span></div>
               <div class="panel-body">
+                <div style="padding-bottom: 2em">
+                  <p>Please specify what level of Japanese language you already generally understand, so that it needn't be added to your quizzes and vocabulary list.</p>
+                  <dt >Proficiency > <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span></dt>
+                  <dd>
+                    <div class="col-xs-12">
+                      <slider class="col-xs-11" tooltip="hide" ng-model="formData.proficiency" ticks="[2, 3, 4, 5, 6]"
+                  ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
+                      <span class="col-xs-1"></span>
+                    </div>
+                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
+                    <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
+                  </dd>
+                </div>
+
                 <p>Please select a vocabulary area of interest either from within the pre-generated options (which are instant), or by providing one yourself (which may take up to two minutes).</p>
 
                 <dl class="dl-horizontal">
                   <dt>Selection</dt>
                   <dd>
-                    <label class="radio-inline col-xs-5"><input type="radio" ng-model="ownchoice" data-ng-value="true">From own choice <span ng-show="ownchoice">(visible below)</span></label>
-                    <label class="radio-inline col-xs-5"><input type="radio" ng-model="ownchoice" data-ng-value="false">From pre-generated <span ng-hide="ownchoice">(visible below)</span></label>
+                    <label class="radio-inline col-xs-5"><input type="radio" ng-model="formData.ownchoice" data-ng-value="true">From own choice <span ng-show="ownchoice">(visible below)</span></label>
+                    <label class="radio-inline col-xs-5"><input type="radio" ng-model="formData.ownchoice" data-ng-value="false">From pre-generated <span ng-hide="ownchoice">(visible below)</span></label>
                   </dd>
                 </dl>
 
-                <div class="form-group well well-sm" ng-hide="ownchoice">
+                <div class="form-group well well-sm" ng-hide="formData.ownchoice">
                   <form data-ng-submit="submit(generatedSelection)">
                     <label for="select" class="control-label">Pre-generated options</label>
                     <div class="row">
                       <div class="col-xs-9" style="padding-right: 0px;">
-                        <select class="form-control" ng-model="generatedSelection">
+                        <select class="form-control" ng-model="formData.generatedSelection" ng-disabled="startedSearch">
                           <option ng-bind="gen" data-ng-value="gen" ng-repeat="gen in generatedOptions"></option>
                         </select>
                         <!-- <span>{{category}}</span> -->
@@ -137,12 +151,12 @@
 
                 <div class="row">
                   <div class="col-xs-12">
-                    <div class="input-group well well-sm" ng-show="ownchoice">
+                    <div class="input-group well well-sm" ng-show="formData.ownchoice">
                       <form data-ng-submit="generate(category)">
                         <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
                         <div class="row">
                           <div class="col-xs-10" style="padding-right: 0px;">
-                            <input type="text" class="form-control" title="submitbutton" data-ng-model="category" placeholder="Category name in Japanese, eg. 科学">
+                            <input type="text" class="form-control" title="submitbutton" data-ng-model="category" ng-disabled="startedSearch" placeholder="Category name in Japanese, eg. 科学">
                           </div>
                           <span class="input-group-btn col-xs-1" style="vertical-align: bottom; padding-left: 0px;" ng-hide="startedSearch">
                             <input type="submit" name = "button1" value = "" class ="btn" ng-click="startedSearch = true"/>
@@ -150,41 +164,38 @@
                           <span class="input-group-btn spinner col-xs-1" style="padding-left: 0px" ng-show="startedSearch && !finishedSearch">
                             <i class="glyphicon glyphicon-refresh spinning"></i>
                           </span>
-                          <small class="helpy col-xs-12"><em>Click to input examples: 
-                          <a href="javascript:void(0);" data-ng-click="category = '科学'">Science</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = '経済'">Economics</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = '政治'">Politics</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = '歴史'">History</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = '数学'">Maths</a>, 
-                          <a href="javascript:void(0);" data-ng-click="category = 'アニメ'">Anime</a>. Please click the search button to start the search.
-                          </em></small>
-                          <small class="helpy col-xs-12"><em>The category provided must be a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em></small>
+                          <small class="helpy col-xs-12">
+                            <em>Click to input examples: 
+                              <a href="javascript:void(0);" data-ng-click="category = '科学'">Science</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = '経済'">Economics</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = '政治'">Politics</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = '歴史'">History</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = '数学'">Maths</a>, 
+                              <a href="javascript:void(0);" data-ng-click="category = 'アニメ'">Anime</a>. Please click the search button to start the search.
+                            </em>
+                          </small>
+                          <small class="helpy col-xs-12"><em>The category provided must be a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em><br></small>
                         </div>
                       </form>
-                      <div class="alert alert-info" ng-show="startedSearch">
+                      <div ng-if="startedSearch && !finishedSearch" class="alert alert-info" ng-show="startedSearch">
                         <span>Now generating the vocabulary list and corresponding quizzes.</span>
-                        <timer ng-hide="finishedSearch" finish-callback="finishTheSearch()" countdown="10" interval="1000"> Estimated remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}% done).
+                        <timer finish-callback="overTime()" countdown="30" interval="1000"> Estimated remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}% done).
                         </timer>
-                        <a id="downloadAnchorElem" style="display:none"></a>
+                        <span ng-if="overtime"><br>Generation is taking longer than usual. Please wait :(</span>
+                      </div>
+                      <!-- <a id="downloadAnchorElem" style="display:none"></a> -->
+                      <div ng-if="finishedSearch && !postmanError" class="alert alert-success">
+                        <p>File successfully generated on our server. Can now be accessed by your user id.</p>
+                        <p>Your user id is: <span ng-bind="uid"></span></p>
+                        <p>Part 1/3: <a href="#/quiz?uid={{uid}}" class="alert-link">Access the first of two quizzes here!</a></p>
+                      </div>
+
+                      <div ng-if="postmanError" class="alert alert-danger">
+                        <p>Generation of the vocabulary list or demographic report failed. Perhaps try again with a different category :(</p>
                       </div>
 
                     </div>
                   </div>
-                </div>
-
-
-
-                <div class="controlRow-s">
-                  <dt >Proficiency > <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span></dt>
-                  <dd>
-                    <div class="col-xs-12">
-                      <slider class="col-xs-11" tooltip="hide" ng-model="proficiency" ticks="[2, 3, 4, 5, 6]"
-                  ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
-                      <span class="col-xs-1"></span>
-                    </div>
-                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span class="text-uppercase" ng-bind="filteringEnum(proficiency)"></span>)</em></span></small><br>
-                    <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
-                  </dd>
                 </div>
 
               </div>
