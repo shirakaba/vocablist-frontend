@@ -177,9 +177,17 @@
                                           </tr>
                                           <tr class="eg" ng-repeat="eg in item.exampleSentences" ng-if="showEg || showFirstEg">
                                             <td>
+                                              <!-- <label class="label label-default" ng-if="$first">examples</label> -->
+                                              <!-- <div class="progress"> -->
+                                              <div class="progress-bar progress-bar-default" style="width: 100%; background-color:silver;" ng-if="$first">
+                                                <span style="margin-right:1em;">examples</span>
+                                                <a style="color:slategrey;" href="javascript:void(0);" ng-click="item.showEg = !item.showEg" ng-if="$first && !item.showEg && !$last && !showEg"> [Show more]</a>
+                                                <a style="color:slategrey;" href="javascript:void(0);" ng-click="item.showEg = !item.showEg" ng-if="$first && item.showEg && !showEg"> [ Show &nbsp;less ]</a>
+                                              </div>
+                                              <!-- </div> -->
                                               <!-- there is a global default showEg, but we also attach an overriding showEg to the row's item' object. -->
-                                              <a href="javascript:void(0);" ng-click="item.showEg = !item.showEg" ng-if="$first && !item.showEg && !$last && !showEg"> [Show more]</a>
-                                              <a href="javascript:void(0);" ng-click="item.showEg = !item.showEg" ng-if="$first && item.showEg && !showEg"> [Show less]</a>
+                                              
+                                              <br ng-if="$first">
                                               <span ng-if="$first && showFirstEg || item.showEg || showEg" ng-bind-html="parseSentence(eg)"></span>
                                             </td>
                                           </tr>
