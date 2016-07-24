@@ -212,9 +212,9 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
             
             // state for search partial.
             .state({
-                name: 'search',
-                url: "/search",
-                templateUrl: "partials/search.html",
+                name: 'list',
+                url: "/list",
+                templateUrl: "partials/list.html",
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
                 controller: ["$scope", "$http", function(sc, $http) {
                     angular.extend(sc, {
@@ -296,6 +296,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
                 controller: ["$scope", "$http", "$stateParams", function(sc, $http, $stateParams) {
                     angular.extend(sc, {
+                        finishedAlready: false,
                         ready: false,
                         practised: false,
                         readError: false,
@@ -322,6 +323,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 type       : 'POST'
                             })
                             .done(function(contents, textStatus, jqXHR) {
+                                console.log("reading.");
                                 // console.log(contents);
                                 sc.$apply(function() {
                                     // var fullResponse = JSON.parse(contents);
@@ -344,6 +346,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 sc.$apply(function() {
                                     sc.readError = true;
+                                    sc.ready = false;
                                 });
                                 console.error(arguments);
                             })
@@ -402,6 +405,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         sc.articles = ["article1", "article2", "article3"];
                         if(sc.stage === 'quizAPending') sc.rw = jsonParsedresponse.quizA;
                         else if(sc.stage === 'quizBPending') sc.rw = jsonParsedresponse.quizB;
+                        else if(sc.stage === 'finished') sc.finishedAlready = true;
                         else alert("Error: uid.status file didn't contain a recognised 'stage' of quiz progression.");
                         // console.log(sc.rw);
                         sc.dummy = jsonParsedresponse.quizC;
@@ -491,9 +495,10 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             .fail(function(jqXHR, textStatus, errorThrown) {
                                 console.error(arguments);
                                 sc.$apply(function() {
+                                    sc.reportSent = false;
                                     sc.postmanError = true;
-                                    sc.finishedSearch = false;
-                                    sc.startedSearch = false;
+                                    // sc.finishedSearch = false;
+                                    // sc.startedSearch = false;
                                 });
                             })
                         ;
@@ -572,16 +577,31 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
                         console.log(report);
                         var st;
-                        if(sc.stage === 'quizAPending') st = 'A';
-                        if(sc.stage === 'quizBPending') st = 'B';
+                        var stage;
+                        if(sc.stage === 'quizAPending'){
+                            stage = { "stage": 'quizBPending' };
+                            st = 'A';
+                            sc.postmanQ(sc.uid, '.status', stage, '');
+                        }
+                        if(sc.stage === 'quizBPending'){
+                            stage = { "stage": 'finished' };
+                            st = 'B';  
+                            sc.postmanQ(sc.uid, '.status', stage, '');
+                        }
+
                         sc.postmanQ(sc.uid, '.txt', report, '/*=== Quiz' + st + ' results ===*/\n'); // The report
+                    };
+
+                    sc.twoReads = function(uid){
+                        if(uid != null) sc.read(uid, '.status');
+                        if(uid != null) sc.read(uid, '.json');
                     };
 
                     // THESE START ON PAGE LOAD:
                     sc.uid = $stateParams['uid'];
-                    if(sc.uid != null) sc.read(sc.uid, '.status');
-                    if(sc.uid != null) sc.read(sc.uid, '.json');
-                    // console.log(sc.uid);
+                    sc.twoReads(sc.uid);
+                    // if(sc.uid != null) sc.read(sc.uid, '.status');
+                    // if(sc.uid != null) sc.read(sc.uid, '.json');
 
                     // Can't trigger this on page load because sc.read() of JSON occurs asynchronously and thus hasn't completed by the time this line is reached.
                     // sc.reportScores();

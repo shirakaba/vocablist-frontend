@@ -5,11 +5,14 @@
                 <div class="panel-heading"><span>Set-up</span></div>
                 <div class="panel-body">
                   <span>Input your user id here and press 'enter'.</span>
-                  <form data-ng-submit="read(uid)">
+                  <form data-ng-submit="twoReads(uid)">
                     <input type="text" class="form-control" title="submitbutton" data-ng-model="uid" ng-disabled="ready" placeholder="User id, eg. abcdef123">
                   </form>
                   <div ng-if="readError" class="alert alert-danger">
                     <p>Unable to read a file under that user id. Please check whether the user id is correct.</p>
+                  </div>
+                  <div ng-if="stage === 'finished' && !readError && !ready" class="alert alert-danger">
+                    <p>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</p>
                   </div>
                   <!-- <button ng-click="add()">Add</button> -->
                 </div>
@@ -22,7 +25,7 @@
             <div class="panel panel-default" style="margin-bottom: 0px;">
                 <div class="panel-heading"><span>Practice area: sample kanji test</span></div>
                 <div class="panel-body">
-                  <span>Answer each question in the <strong>Questions</strong> column by dragging across the corresponding definition for it from the <strong>Choices</strong> column.</span>
+                  <span>Answer each question in the <strong>Questions</strong> column by dragging across the corresponding definition for it from the <strong>Choices</strong> column. Incorrect answers do not subtract from score.</span>
                   
                   <div class="col-xs-12">
 
@@ -86,7 +89,7 @@
                           </ul>
                         </div>
 
-                        <span><em>^ Note that there are more choices than questions.</em></span>
+                        <span><em>^ Note that there are usually more choices than questions.</em></span>
                       </div>
                     </div>
 
@@ -207,21 +210,26 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-primary">
-                <div class="panel-heading"></div>
+                <div class="panel-heading">Submission of results</div>
                 <div class="panel-body">
+                <span>Once you have finished the quiz, press 'submit' to send your answers to the researcher.</span>
+                  <button type="submit" style="margin-left: 1em;" class ="btn btn-info" ng-click="reportScores()" ng-disabled="reportSent">Submit</button>
+                  <div ng-if="reportSent">
+                    <div ng-if="!postmanError && stage === 'quizAPending'" class="alert alert-success">
+                      <p>Test results successfully submitted.</p>
+                      <!-- <p>Your user id is: <span ng-bind="uid"></span></p> -->
+                      <p>Part 2/3: <a href="#/list?uid={{uid}}" class="alert-link">Access the vocabulary list from which to study here!</a></p>
+                    </div>
+                    <div ng-if="!postmanError && stage === 'quizBPending'" class="alert alert-success">
+                      <p>Test results successfully submitted.</p>
+                      <!-- <p>Your user id is: <span ng-bind="uid"></span></p> -->
+                      <p>You've finished the study! Thank you very much :)</p>
+                    </div>
 
-<!--                   <form data-ng-submit="generate(category)">
-                        <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
-                        <div class="row">
-                          <div class="col-xs-10" style="padding-right: 0px;">
-                            <input type="text" class="form-control" title="submitbutton" data-ng-model="category" ng-disabled="startedSearch" placeholder="Category name in Japanese, eg. 科学">
-
-                          </div>
-                        </div>
-                  </form> -->
-
-                
-                  <button type="submit" class ="btn btn-default" ng-click="reportScores()">Submit</button>
+                    <div ng-if="postmanError" class="alert alert-danger">
+                      <p>Submission of test results failed.</p>
+                    </div>
+                  </div>
 
                 </div>
               </div>

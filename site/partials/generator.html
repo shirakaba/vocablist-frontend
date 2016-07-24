@@ -187,7 +187,7 @@
                       <div ng-if="finishedSearch && !postmanError" class="alert alert-success">
                         <p>File successfully generated on our server. Can now be accessed by your user id.</p>
                         <p>Your user id is: <span ng-bind="uid"></span></p>
-                        <p><a href="#/quiz?uid={{uid}}" class="alert-link">Access the first of two quizzes here.</a></p>
+                        <p>Part 1/3: <a href="#/quiz?uid={{uid}}" class="alert-link">Access the first of two quizzes here!</a></p>
                       </div>
 
                       <div ng-if="postmanError" class="alert alert-danger">
