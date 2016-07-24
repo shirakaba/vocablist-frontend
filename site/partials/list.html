@@ -1,14 +1,7 @@
 <nav>
       <div class="row">
           <div class="col-xs-12">
-              <form data-ng-submit="generate(mySearch)">
-                  <div class="input-group">
-                      <input type ="text" data-ng-model="mySearch" class="form-control" title="submitbutton"/> <!-- This input field's value is bound to $scope.mySearch -->
-                          <span class="input-group-btn">
-                              <input type="submit" name = "button1" value = "" class ="btn"/>
-                          </span>
-                  </div>
-              </form>
+            <h2>Topic: <span ng-bind="topic"></span></h2>
           </div>
       </div>
     </nav>
@@ -16,11 +9,11 @@
     <!-- The list of articles. -->
         <section class="row">
             <div class="col-xs-12">
-              <textarea class="form-control" rows="3" ng-model="articles.join('\n')" placeholder="articles to come."></textarea>
+              <textarea class="form-control" rows="3" ng-bind="articles.join('\n')" placeholder="Loading article names now..."></textarea>
             </div>
         </section>
     <!-- The control sliders -->
-        <section class="row">
+<!--         <section class="row">
             <div class="col-xs-12">
                 <span class="col-xs-3"></span>
                 <span class="col-xs-3"><- (faster, but less data)</span>
@@ -65,7 +58,7 @@
                 </div>
                 <span class="col-xs-12" style="font-style:italic;">* Setting to zero fetches all.</span>
             </div>
-        </section>
+        </section> -->
         <!-- The display checkboxes -->
         <section class="row">
             <div class="col-xs-12">

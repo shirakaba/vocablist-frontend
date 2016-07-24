@@ -213,10 +213,10 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
             // state for search partial.
             .state({
                 name: 'list',
-                url: "/list",
+                url: "/list?uid",
                 templateUrl: "partials/list.html",
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
-                controller: ["$scope", "$http", function(sc, $http) {
+                controller: ["$scope", "$http", "$stateParams", function(sc, $http, $stateParams) {
                     angular.extend(sc, {
                         // articles: ["", ""],
                         limit: 100,
@@ -280,10 +280,61 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             return sentence
                             .split('{{{').join('<span class="sentence-bold">')
                             .split('}}}').join('</span>');
+                        },
+                        readI : function(uid, extension){
+                            $.ajax({
+                                url        : "http://127.0.0.1:3000/quiz",
+                                dataType   : 'json',
+                                contentType: 'application/json; charset=UTF-8',
+                                data       : JSON.stringify({
+                                    "uid": uid,
+                                    "extension": extension
+                                }),
+                                type       : 'POST'
+                            })
+                            .done(function(contents, textStatus, jqXHR) {
+                                // console.log("reading.");
+                                // console.log(contents);
+                                sc.$apply(function() {
+                                    // var fullResponse = JSON.parse(contents);
+
+                                    if(extension === '.status'){
+                                        sc.stage = contents.stage;
+                                        // console.log("status read.");
+                                    }
+                                    if(extension === '.json'){
+                                        // can access sc.stage √
+                                        sc.readError = false;
+                                        sc.initI(contents, sc.stage);
+                                        sc.ready = true;
+                                        // console.log("JSON read.");
+                                        // sc.reportScores(); // TODO: move this to a sensible place rather than its current on-read place.
+                                    }
+                                });
+
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                sc.$apply(function() {
+                                    sc.readError = true;
+                                    sc.ready = false;
+                                });
+                                console.error(arguments);
+                            })
+                        ;
                         }
                     });
 
+                    /** Initialises the quiz based on a JSON. */
+                    sc.initI = function(jsonParsedresponse){
+                        sc.x = jsonParsedresponse.list;
+                        sc.topic = jsonParsedresponse.topic;
+                        sc.articles = jsonParsedresponse.successfulArticles;
+                    }
 
+
+                    // THESE START ON PAGE LOAD:
+                    sc.uid = $stateParams['uid'];
+                    if(sc.uid != null) sc.readI(sc.uid, '.json');
                 }]
             })
 
@@ -323,7 +374,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 type       : 'POST'
                             })
                             .done(function(contents, textStatus, jqXHR) {
-                                console.log("reading.");
+                                // console.log("reading.");
                                 // console.log(contents);
                                 sc.$apply(function() {
                                     // var fullResponse = JSON.parse(contents);
