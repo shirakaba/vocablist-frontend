@@ -5,11 +5,18 @@
                   <div class="panel-heading">Info</div>
 
                   <div class="panel-body">
-                    <div ng-hide="ready || readError" class="alert alert-info">
-                        <p>Loading...</p>
-                    </div>
-                    <div ng-if="readError" class="alert alert-danger">
+                    <div ng-if="readError || uid == null">
+                      <span>Input your user id here and press 'enter'.</span>
+                      <form data-ng-submit="readI(uid, '.json')">
+                        <input type="text" class="form-control" title="submitbutton" data-ng-model="uid" ng-disabled="ready" placeholder="User id, eg. abcdef123">
+                      </form>
+                      <div ng-if="readError" class="alert alert-danger">
                         <p>No list was able to be read for the given user id.</p>
+                      </div>
+                    </div>
+
+                    <div ng-hide="ready || readError || uid == null" class="alert alert-info">
+                        <p>Loading...</p>
                     </div>
                     <div ng-show="ready">
                         

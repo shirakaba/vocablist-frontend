@@ -285,6 +285,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             .split('}}}').join('</span>');
                         },
                         readI : function(uid, extension){
+                            sc.readError = false;
+                            sc.uid = uid; // Redundant except for when landing on the page without giving a uid.
                             $.ajax({
                                 url        : "http://127.0.0.1:3000/quiz",
                                 dataType   : 'json',
