@@ -25,7 +25,7 @@
             <div class="panel panel-default" style="margin-bottom: 0px;">
                 <div class="panel-heading"><span>Practice area: sample kanji test</span></div>
                 <div class="panel-body">
-                  <span>Answer each question in the <strong>Questions</strong> column by dragging across the corresponding definition for it from the <strong>Choices</strong> column. Incorrect answers do not subtract from score.</span>
+                  <span>Answer each question in the <strong>Questions</strong> column <em>(in this case consisting of four kanji-related questions)</em> by dragging across the corresponding information for it from the <strong>Choices</strong> column <em>(in this case consisting of six dictionary definitions)</em>. Incorrect answers do not subtract from score.</span>
                   
                   <div class="col-xs-12">
 
@@ -130,7 +130,16 @@
                 <!-- Kanji test (all tiers) -->
                 <div ng-repeat="test in tier.tests">
                   <div class="panel panel-default">
-                    <div class="panel-heading"><span ng-bind="test.testType"></span> test</div>
+                    <div class="panel-heading">
+                      <!-- <span ng-bind="test.testType"></span> test -->
+                      <span ng-switch="test.testType">
+                        <span ng-switch-when="kanji"><span>Kanji test</span></span>
+                        <span ng-switch-when="pron"><span>Pronunciation test</span></span>
+                        <span ng-switch-when="def"><span>Definition test</span></span>
+                        <span ng-switch-default>Undefined test</span>
+                      </span>
+                    </div>
+
                     <div class="panel-body">
 
                     <div ng-if="test.qus.length === 0" class="alert alert-dismissible alert-info">
