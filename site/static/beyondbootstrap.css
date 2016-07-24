@@ -1,17 +1,12 @@
-/* Loading spinner */
-/*#lol{
-    height:40px;
-    border:1px solid #555;
-  width:50%;
-  margin:30px;
+/* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently not supported by any browser */
 }
-#lol:before{
-  content:"\2b";
-  font-family:"Glyphicons Halflings";
-  line-height:1;
-  margin:10px;
-  display:inline-block;
-}*/
 
 .spinner {
   float: none;
