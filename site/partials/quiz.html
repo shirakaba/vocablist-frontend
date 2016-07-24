@@ -5,7 +5,7 @@
                 <div class="panel-heading"><span>Set-up</span></div>
                 <div class="panel-body">
                   <span>Input your user id here and press 'enter'.</span>
-                  <form data-ng-submit="twoReads(uid)">
+                  <form data-ng-submit="$state.go('quiz', {'uid':uid})">
                     <input type="text" class="form-control" title="submitbutton" data-ng-model="uid" ng-disabled="ready" placeholder="User id, eg. abcdef123">
                   </form>
                   <div ng-if="readError" class="alert alert-danger">
