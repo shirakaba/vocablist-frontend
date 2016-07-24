@@ -7,7 +7,7 @@
                   <div class="panel-body">
                     <div ng-if="readError || uid == null">
                       <span>Input your user id here and press 'enter'.</span>
-                      <form data-ng-submit="readI(uid, '.json')">
+                      <form data-ng-submit="$state.go('list', {'uid':uid})">
                         <input type="text" class="form-control" title="submitbutton" data-ng-model="uid" ng-disabled="ready" placeholder="User id, eg. abcdef123">
                       </form>
                       <div ng-if="readError" class="alert alert-danger">

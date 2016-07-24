@@ -217,7 +217,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                 url: "/list?uid",
                 templateUrl: "partials/list.html",
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
-                controller: ["$scope", "$http", "$stateParams", function(sc, $http, $stateParams) {
+                controller: ["$scope", "$http", "$stateParams", "$state", function(sc, $http, $stateParams, $state) {
                     angular.extend(sc, {
                         // articles: ["", ""],
                         limit: 100,
@@ -239,6 +239,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         showFirstEg: true,
                         qScore: 0,
                         ready: false,
+                        $state: $state,
                         fundamentalsFilter: function(item) {
                             return sc.f.fundChecked || !item.fundamental;
                         },
@@ -309,6 +310,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         readI : function(uid, extension){
                             sc.readError = false;
                             sc.uid = uid; // Redundant except for when landing on the page without giving a uid.
+
                             $.ajax({
                                 url        : "http://127.0.0.1:3000/quiz",
                                 dataType   : 'json',
