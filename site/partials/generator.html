@@ -107,51 +107,25 @@
               <div class="panel-heading"><span>Vocabulary of interest</span></div>
               <div class="panel-body">
                 <div style="padding-bottom: 2em">
-                  <p>Please specify what level of Japanese language you already generally understand, so that it needn't be added to your quizzes and vocabulary list.</p>
-                  <dt >Proficiency > <span class="text-uppercase" ng-bind="filteringEnum(formData.proficiency)"></span></dt>
+                  <p>Please specify what level of Japanese language you already generally understand, so that any vocabulary that is too simple can be excluded from your vocabulary list and proficiency quiz. General approximations are provided beside each level on the slider below, although a detailed summary of the JLPT grades can be found <a href="http://www.jlpt.jp/e/about/levelsummary.html">here</a>.</p>
+                  <dt >Ignore vocabulary from: <span class="text-uppercase" ng-bind="filteringEnum(formData.proficiency)"></span> and below.</dt>
                   <dd>
                     <div class="col-xs-12">
                       <slider class="col-xs-11" tooltip="hide" ng-model="formData.proficiency" ticks="[2, 3, 4, 5, 6]"
-                  ticks-labels='["N5", "N4", "N3", "N2", "N1"]'></slider>
+                  ticks-labels='["N5 (basic)", "N4 (basic+)", "N3 (everyday)", "N2 (business)", "N1 (business+)"]'></slider>
                       <span class="col-xs-1"></span>
                     </div>
-                    <small><span><em>(ie. do not bother including in the vocabulary list (or quiz) any vocabulary at or below JLPT level <span class="text-uppercase" ng-bind="filteringEnum(formData.proficiency)"></span>)</em></span></small><br>
                     <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
                   </dd>
                 </div>
 
-                <p>Please select a vocabulary area of interest either from within the pre-generated options (which are instant), or by providing one yourself (which may take up to two minutes).</p>
+                <p>Please select a vocabulary area of interest. Generating the vocabulary list and quizzes may take up to five minutes.</p>
 
-                <dl class="dl-horizontal">
-                  <dt>Selection</dt>
-                  <dd>
-                    <label class="radio-inline col-xs-5"><input type="radio" ng-model="formData.ownchoice" data-ng-value="true">From own choice <span ng-show="ownchoice">(visible below)</span></label>
-                    <label class="radio-inline col-xs-5"><input type="radio" ng-model="formData.ownchoice" data-ng-value="false">From pre-generated <span ng-hide="ownchoice">(visible below)</span></label>
-                  </dd>
-                </dl>
-
-                <div class="form-group well well-sm" ng-hide="formData.ownchoice">
-                  <form data-ng-submit="submit(generatedSelection)">
-                    <label for="select" class="control-label">Pre-generated options</label>
-                    <div class="row">
-                      <div class="col-xs-9" style="padding-right: 0px;">
-                        <select class="form-control" ng-model="formData.generatedSelection" ng-disabled="startedSearch">
-                          <option ng-bind="gen" data-ng-value="gen" ng-repeat="gen in generatedOptions"></option>
-                        </select>
-                        <!-- <span>{{category}}</span> -->
-                      </div>
-                      <a href="#" class="btn btn-default col-xs-2">Download JSON as .txt</a>
-                      <small class="helpy col-xs-12"><em>Several samples have been pre-generated in case there are any problems with the automatic generation of vocabulary lists and quizzes. These samples are, however, only available for proficiency levels above JLPT level N3.</em></small>
-                    </div>
-                  </form>
-
-                  <!-- <div class="row"> -->
-                  <!-- </div> -->
                 </div>
 
                 <div class="row">
                   <div class="col-xs-12">
-                    <div class="input-group well well-sm" ng-show="formData.ownchoice">
+                    <div class="input-group well well-sm">
                       <form data-ng-submit="generate(category)">
                         <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
                         <div class="row">
