@@ -99,6 +99,38 @@
         </section> -->
         <!-- The display checkboxes -->
         <section class="row">
+          <div class="col-xs-12">
+              <div class="panel panel-primary">
+                  <div class="panel-heading">Display</div>
+
+                  <div class="panel-body">
+                    <p>Adjust these options to reduce or increase the amount of information displayed in the list below.</p>
+                    <dl class="dl-horizontal">
+
+                      <dt>Tokens</dt>
+                      <dd>
+                        <label style="font-weight:normal" ng-if="filteringEnumR(prefiltering) < 1">Fundamental: <input type="checkbox" style="margin-right: 1em" id="fundamental" ng-model="f.fundChecked"/></label>
+                        <label style="font-weight:normal" ng-if="filteringEnumR(prefiltering) < 2">N5: <input type="checkbox" style="margin-right: 1em" id="n5" ng-model="f.n5Checked"/></label>
+                        <label style="font-weight:normal" ng-if="filteringEnumR(prefiltering) < 3">N4: <input type="checkbox" style="margin-right: 1em" id="n4" ng-model="f.n4Checked"/></label>
+                        <label style="font-weight:normal" ng-if="filteringEnumR(prefiltering) < 4">N3: <input type="checkbox" style="margin-right: 1em" id="n3" ng-model="f.n3Checked"/></label>
+                        <label style="font-weight:normal" ng-if="filteringEnumR(prefiltering) < 5">N2: <input type="checkbox" style="margin-right: 1em" id="n2" ng-model="f.n2Checked"/></label>
+                        <label style="font-weight:normal" ng-if="filteringEnumR(prefiltering) < 6">N1: <input type="checkbox" style="margin-right: 1em" id="n1" ng-model="f.n1Checked"/></label>
+                      </dd>
+
+                      <dt>Examples</dt>
+                      <dd>
+                        <label style="font-weight:normal">At least the first example: <input type="checkbox" style="margin-right: 1em;" id="egbox" ng-model="showFirstEg"/></label>
+                        <label style="font-weight:normal">All examples: <input type="checkbox" style="margin-right: 1em;" id="egbox" ng-model="showEg"/></label>
+                      </dd>
+                    </dl>
+                  </div>
+
+              </div>
+          </div>
+        </section>
+
+
+<!--         <section class="row">
             <div class="col-xs-12">
                 <div class="col-xs-6">
                   <p>Display tokens of ability level: </p>
@@ -113,11 +145,10 @@
                   <p>Display of example sentences: </p>
                   <label>At least the first example: <input type="checkbox" style="margin-right: 1em;" id="egbox" ng-model="showFirstEg"/></label>
                   <label>All examples: <input type="checkbox" style="margin-right: 1em;" id="egbox" ng-model="showEg"/></label>
-                  <!-- <label class="radio-inline"><input type="radio" data-ng-model="showEg" value="true">First</label> -->
-                  <!-- <label class="radio-inline"><input type="radio" data-ng-model="showEg" value="false">All</label> -->
                 </div>
             </div>
-        </section>
+        </section> -->
+
         <!-- The table of tokens, definitions, etc. -->
         <section class="row">
             <div class="col-xs-12">
