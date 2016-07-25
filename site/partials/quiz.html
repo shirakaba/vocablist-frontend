@@ -5,7 +5,7 @@
                 <div class="panel-heading"><span>Set-up</span></div>
                 <div class="panel-body">
                   <span>Input your user id here and press 'enter'.</span>
-                  <form data-ng-submit="twoReads(uid)">
+                  <form data-ng-submit="$state.go('quiz', {'uid':uid})">
                     <input type="text" class="form-control" title="submitbutton" data-ng-model="uid" ng-disabled="ready" placeholder="User id, eg. abcdef123">
                   </form>
                   <div ng-if="readError" class="alert alert-danger">
@@ -13,6 +13,12 @@
                   </div>
                   <div ng-if="stage === 'finished' && !readError && !ready" class="alert alert-danger">
                     <p>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</p>
+                  </div>
+                  <div ng-if="!readError && (stage === 'quizAPending' || stage === 'quizBPending')" style="margin-top:21px" class="alert alert-info" ng-switch="stage">
+                    <span ng-switch-when="quizAPending"><span>After an opportunity to practice, you will be completing quiz <strong>1</strong> out of 2 (the before-studying quiz, which gauges your current level of vocabulary comprehension).</span></span>
+                    <span ng-switch-when="quizBPending"><span>After an opportunity to practice, you will be completing quiz <strong>2</strong> out of 2 (the after-studying quiz, which gauges whether your vocabulary comprehension improved after study).</span></span>
+                    <span ng-switch-when="finished"><span>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</span></span>
+                    <span ng-switch-default>Stage not recognised.</span>
                   </div>
                   <!-- <button ng-click="add()">Add</button> -->
                 </div>
@@ -100,12 +106,16 @@
                     </div>
 
                       
-                  </div>
                 </div>
-                      <div class="alert" ng-class="{'alert-info': calculateTestScore(sampleTestr.qus, sampleTestr.answers) < 4, 'alert-success': calculateTestScore(sampleTestr.qus, sampleTestr.answers) == 4 }">
-                        <span>Once you understand how to operate this quiz, please click the 'OK' button to proceed to the real quiz: </span>
-                        <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.practised = true" ng-disabled="practised">OK</button>
-                      </div>
+              </div>
+              <div class="alert" ng-class="{'alert-info': calculateTestScore(sampleTestr.qus, sampleTestr.answers) < 4, 'alert-success': calculateTestScore(sampleTestr.qus, sampleTestr.answers) == 4 }">
+                <div ng-show="!$parent.practised">
+                  <span>Once you understand how to operate this quiz, please click the 'OK' button to proceed to the real quiz. Please note that it is not timed: </span>
+                  <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.practised = true" ng-disabled="practised">OK</button>
+                </div>
+
+                <span ng-if="$parent.practised">Please scroll down!</span>
+              </div>
             </div>
           </div>
         </section>
@@ -221,19 +231,191 @@
           </div>
         </section>
 
-        <section ng-if="ready && practised">
+        <section ng-if="ready && practised && stage === 'quizBPending'">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="panel panel-primary">
+                <div class="panel-heading">Feedback</div>
+                <div class="panel-body">
+                  <p>If you have finished the quiz above, please complete this short feedback form before submitting your results.</p>
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">The vocabulary list</div>
+                        <div class="panel-body">
+                          <p>These next questions will concern the vocabulary list. Note that a score of '3' given for any question is a neutral response (ie. "neither agree nor disagree").</p>
+                          <dl class="dl-horizontal">
+
+                            <div class="controlRow-s">
+                              <dt>Was it easy to use and navigate?</dt>
+                              <dd>
+                                <div class="col-xs-4">
+                                  <label style="font-weight:normal">
+                                    <span class="col-xs-12" style="text-align:center;">No comment</span>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.ease" ng-click="formData.ease = 0" value="0"></span><br>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
+                                  </label>
+                                </div>
+                                <div class="col-xs-8">
+                                  <span class="col-xs-6">←Hard</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Easy→</span>
+                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.ease === 0}" ng-model="formData.ease" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                </div>
+                              </dd>
+                            </div>
+
+                            <div class="controlRow-s">
+                              <dt>Regardless of the quiz results, do you feel it helped you understand the topic?</dt>
+                              <dd>
+                                <div class="col-xs-4">
+                                  <label style="font-weight:normal">
+                                    <span class="col-xs-12" style="text-align:center;">No comment</span>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.helpedLearn" ng-click="formData.helpedLearn = 0" value="0"></span><br>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
+                                  </label>
+                                </div>
+                                <div class="col-xs-8">
+                                  <span class="col-xs-6">←Hindered</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Helped→</span>
+                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.helpedLearn === 0}" ng-model="formData.helpedLearn" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                </div>
+                                <small class="helpy"><em>'Hindered' would mean that you could have spent the time better by learning in another way.</em></small>
+                              </dd>
+                            </div>
+
+                            <div class="controlRow-s">
+                              <dt>What do you feel improves your understanding of a topic more: studying with this system*, or trying to read articles/texts directly?</dt>
+                              <dd>
+                                <div class="col-xs-4">
+                                  <label style="font-weight:normal">
+                                    <span class="col-xs-12" style="text-align:center;">No comment</span>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.effectiveness" ng-click="formData.effectiveness = 0" value="0"></span><br>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
+                                  </label>
+                                </div>
+<!--                                 <div class="col-xs-3">
+                                  <label style="font-weight:normal">
+                                    <span class="col-xs-12" style="text-align:center;">Incomparable</span>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.effectiveness" ng-click="formData.effectiveness = -1" value="-1"></span><br>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(eg. you never study technical/topic-specific vocabulary)</em></small></span>
+                                  </label>
+                                </div> -->
+                                <div class="col-xs-8">
+                                  <span class="col-xs-6">←Direct reading</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">This system→</span>
+                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.effectiveness < 1}" ng-model="formData.effectiveness" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                </div>
+                                <small class="helpy"><em>* 'this system' here refers to the vocabulary list.</em></small>
+                              </dd>
+                            </div>
+
+                            <div class="controlRow-s">
+                              <dt>As it is now, would you use it again in the future?</dt>
+                              <dd>
+                                <div class="col-xs-4">
+                                  <label style="font-weight:normal">
+                                    <span class="col-xs-12" style="text-align:center;">No comment</span>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.useAgain" ng-click="formData.useAgain = 0" value="0"></span><br>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
+                                  </label>
+                                </div>
+                                <div class="col-xs-8">
+                                  <span class="col-xs-6">←Definitely not</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Definitely→</span>
+                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.useAgain === 0}" ng-model="formData.useAgain" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                </div>
+                              </dd>
+                            </div>
+
+                            <div class="controlRow-s">
+                              <dt>Would you use it for learning another language (including English)?</dt>
+                              <dd>
+                                <div class="col-xs-4">
+                                  <label style="font-weight:normal">
+                                    <span class="col-xs-12" style="text-align:center;">No comment</span>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.useOtherLang" ng-click="formData.useOtherLang = 0" value="0"></span><br>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
+                                  </label>
+                                </div>
+                                <div class="col-xs-8">
+                                  <span class="col-xs-6">←Definitely not</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Definitely→</span>
+                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.useOtherLang === 0}" ng-model="formData.useOtherLang" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                </div>
+                              </dd>
+                            </div>
+
+                          </dl>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">Other</div>
+                        <div class="panel-body">
+                          <!-- <p>Other </p> -->
+
+                          <dl class="dl-horizontal">
+                            <div class="controlRow-s">
+                              <dt>How much did you study from the list before taking this quiz?</dt>
+                              <dd>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="nocomment">No comment<p><em>(skips question)</em></p></label>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="brief">0-29 minutes<p><em>(eg. looked briefly through the list, then soon afterwards took the test)</em></p></label>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="some">30-59 minutes<p><em>(eg. crammed for the test)</em></p></label>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="high">One or more hours (can be spread over multiple days)<p><em>(eg. reinforced memory over several sessions of revision for the test)</em></p></label>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="other">Other</label>
+                              </dd>
+                            </div>
+                          </dl>
+
+                          <div class="controlRow-s">
+                            <dt>Comments</dt>
+                            <dd>
+                              <span>If you have anything to comment on (be they issues with the quizzes, forms, or vocabulary list, or just positive feedback), you comment on it below.</span><br>
+                              <textarea class="form-control" rows="6" ng-model="formData.comments" maxlength="600" placeholder="Input any comments here - maximum of 600 characters."></textarea>
+                            </dd>
+                          </div>
+
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="alert alert-info">
+                    <div ng-show="feedbackPending">
+                      <span>Once you have completed the feedback form, please press 'OK' to continue to the final step: results submission.</span>
+                      <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.feedbackPending = false" ng-disabled="!$parent.feedbackPending">OK</button>
+                    </div>
+                    
+                    <span ng-if="!$parent.feedbackPending">Please scroll down!</span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section ng-if="ready && practised && !feedbackPending">
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-primary">
                 <div class="panel-heading">Submission of results</div>
                 <div class="panel-body">
-                <span>Once you have finished the quiz, press 'submit' to send your answers to the researcher.</span>
+                  <span>Once you have finished the quiz, press 'submit' to send your answers to the researcher.</span>
                   <button type="submit" style="margin-left: 1em;" class ="btn btn-info" ng-click="reportScores()" ng-disabled="reportSent">Submit</button>
                   <div ng-if="reportSent">
                     <div ng-if="!postmanError && stage === 'quizAPending'" class="alert alert-success">
                       <p>Test results successfully submitted.</p>
                       <!-- <p>Your user id is: <span ng-bind="uid"></span></p> -->
-                      <p>Part 2/3: <a href="#/list?uid={{uid}}" class="alert-link">Access the vocabulary list from which to study here!</a></p>
+                      <p>Proceed to part 2/3: <a href="#/list?uid={{uid}}" class="alert-link">Access the vocabulary list from which to study here!</a></p>
                     </div>
                     <div ng-if="!postmanError && stage === 'quizBPending'" class="alert alert-success">
                       <p>Test results successfully submitted.</p>
@@ -244,9 +426,11 @@
                     <div ng-if="postmanError" class="alert alert-danger">
                       <p>Submission of test results failed.</p>
                     </div>
+
                   </div>
 
                 </div>
+
               </div>
             </div>
           </div>

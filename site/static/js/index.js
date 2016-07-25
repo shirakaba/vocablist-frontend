@@ -135,6 +135,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
                     /** Generates the main JSON and report via postman(). */
                     sc.generate = function(cat) {
+                        console.log('input proficiency was:' + sc.formData.proficiency);
                         if(cat == null) {
                             console.log("category was null.");
                             sc.$apply(function() {
@@ -147,7 +148,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             +'partition='+encodeURIComponent(250)
                             +'&makequiz='+encodeURIComponent(true)
                             +'&maxarticles='+encodeURIComponent(1)
-                            +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.proficiency))
+                            +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.formData.proficiency))
                             +'&egs='+encodeURIComponent(2)
                             +'&limit='+encodeURIComponent(100.0)
                             +'&minyield='+encodeURIComponent(0.0)
@@ -160,7 +161,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                     sc.finishedSearch = true;
                                     sc.uid = sc.generateUid();
 
-                                    console.log(sc.uid);
+                                    console.log('reported proficiency was:' + sc.formData.proficiency);
                                     var report = {
                                         "uid": sc.uid,
                                         "gender": sc.formData.gender,
@@ -213,10 +214,10 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
             // state for search partial.
             .state({
                 name: 'list',
-                url: "/list",
+                url: "/list?uid",
                 templateUrl: "partials/list.html",
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
-                controller: ["$scope", "$http", function(sc, $http) {
+                controller: ["$scope", "$http", "$stateParams", "$state", function(sc, $http, $stateParams, $state) {
                     angular.extend(sc, {
                         // articles: ["", ""],
                         limit: 100,
@@ -226,31 +227,36 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         filtering: 0,
                         maxArticles: 1,
                         makeQuiz: true,
-                        fundChecked: true,
-                        n1Checked: true,
-                        n2Checked: true,
-                        n3Checked: true,
-                        n4Checked: true,
-                        n5Checked: true,
+                        f: {
+                            fundChecked: true,
+                            n1Checked: true,
+                            n2Checked: true,
+                            n3Checked: true,
+                            n4Checked: true,
+                            n5Checked: true
+                        },
                         showEg: false,
+                        showFirstEg: true,
                         qScore: 0,
+                        ready: false,
+                        $state: $state,
                         fundamentalsFilter: function(item) {
-                            return sc.fundChecked || !item.fundamental;
+                            return sc.f.fundChecked || !item.fundamental;
                         },
                         n1Filter: function(item) {
-                            return sc.n1Checked || !item.n1;
+                            return sc.f.n1Checked || !item.n1;
                         },
                         n2Filter: function(item) {
-                            return sc.n2Checked || !item.n2;
+                            return sc.f.n2Checked || !item.n2;
                         },
                         n3Filter: function(item) {
-                            return sc.n3Checked || !item.n3;
+                            return sc.f.n3Checked || !item.n3;
                         },
                         n4Filter: function(item) {
-                            return sc.n4Checked || !item.n4;
+                            return sc.f.n4Checked || !item.n4;
                         },
                         n5Filter: function(item) {
-                            return sc.n5Checked || !item.n5;
+                            return sc.f.n5Checked || !item.n5;
                         },
                         filteringEnum: function(value) {
                             switch(value){
@@ -272,6 +278,26 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                     return "mandatory";
                             }
                         },
+                        filteringEnumR: function(label) {
+                            switch(label){
+                                case "mandatory":
+                                    return 0;
+                                case "fundamental":
+                                    return 1;
+                                case "n5":
+                                    return 2;
+                                case "n4":
+                                    return 3;
+                                case "n3":
+                                    return 4;
+                                case "n2":
+                                    return 5;
+                                case "n1":
+                                    return 6;
+                                default:
+                                    return 0;
+                            }
+                        },
                         mySearch: "東方Project",
                         currentRow: [],
                         kanjidicReadingResults: [],
@@ -280,10 +306,65 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             return sentence
                             .split('{{{').join('<span class="sentence-bold">')
                             .split('}}}').join('</span>');
+                        },
+                        readI : function(uid, extension){
+                            sc.readError = false;
+                            sc.uid = uid; // Redundant except for when landing on the page without giving a uid.
+
+                            $.ajax({
+                                url        : "http://127.0.0.1:3000/quiz",
+                                dataType   : 'json',
+                                contentType: 'application/json; charset=UTF-8',
+                                data       : JSON.stringify({
+                                    "uid": uid,
+                                    "extension": extension
+                                }),
+                                type       : 'POST'
+                            })
+                            .done(function(contents, textStatus, jqXHR) {
+                                // console.log("reading.");
+                                // console.log(contents);
+                                sc.$apply(function() {
+                                    // var fullResponse = JSON.parse(contents);
+
+                                    if(extension === '.status'){
+                                        sc.stage = contents.stage;
+                                        // console.log("status read.");
+                                    }
+                                    if(extension === '.json'){
+                                        // can access sc.stage √
+                                        sc.readError = false;
+                                        sc.initI(contents, sc.stage);
+                                        sc.ready = true;
+                                        // console.log("JSON read.");
+                                        // sc.reportScores(); // TODO: move this to a sensible place rather than its current on-read place.
+                                    }
+                                });
+
+                            })
+                            .fail(function(jqXHR, textStatus, errorThrown) {
+                                sc.$apply(function() {
+                                    sc.readError = true;
+                                    sc.ready = false;
+                                });
+                                console.error(arguments);
+                            })
+                        ;
                         }
                     });
 
+                    /** Initialises the quiz based on a JSON. */
+                    sc.initI = function(jsonParsedresponse){
+                        sc.x = jsonParsedresponse.list;
+                        sc.topic = jsonParsedresponse.topic;
+                        sc.articles = jsonParsedresponse.successfulArticles;
+                        sc.prefiltering = jsonParsedresponse.prefiltering;
+                    }
 
+
+                    // THESE START ON PAGE LOAD:
+                    sc.uid = $stateParams['uid'];
+                    if(sc.uid != null) sc.readI(sc.uid, '.json');
                 }]
             })
 
@@ -294,18 +375,27 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                 templateUrl: "partials/quiz.html",
                 uidSelected: false,
                 // // The '$scope' directive is injected in as a dependency. By mutating the controller's $scope, you can mutate the webpage's view.
-                controller: ["$scope", "$http", "$stateParams", function(sc, $http, $stateParams) {
+                controller: ["$scope", "$http", "$stateParams", "$state", function(sc, $http, $stateParams, $state) {
                     angular.extend(sc, {
                         finishedAlready: false,
                         ready: false,
                         practised: false,
                         readError: false,
                         qScore: 0,
+                        $state: $state,
                         sampleTestr: {"answers":[{"bucket": []},{"bucket": []},{"bucket": []},{"bucket": []}],"testType":"kanji","eleType":"kanjiOne","tierAlpha":"One","allowedTypes":["kanjiOne"],"qus":[{"info":"補完","target":"supplementation ･ complementation ･ completion"},{"info":"作画","target":"taking photographs ･ drawing pictures"},{"info":"初期","target":"(1) early (days) ･ initial stage;  (2) initial"},{"info":"東急","target":"[fem] Noboru ･ [surname] Toukyuu ･ [unclass] Noboru"}]}
                         ,
                         sampleTestrw: {"testType":"kanji","eleType":"kanjiOne","tierAlpha":"One","allowedTypes":["kanjiOne"],"qus":[{"info":"貞","target":"[given] Misao ･ [given] Tadashi ･ [fem,surname] Sada ･ [unclass] Sadanori ･ [given] Takashi ･ [fem,surname] Tei ･ [given] Sadamu ･ [unclass] Sadatsugu ･ [unclass] Teiji ･ [fem] Misao ･ [given] Tadasu ･ [fem] Teiko ･ [unclass] Sadaji ･ [unclass] Sadazumi ･ [unclass] Sadayuki"},{"info":"補完","target":"supplementation ･ complementation ･ completion"},{"info":"作画","target":"taking photographs ･ drawing pictures"},{"info":"綾","target":"(1) figure ･ design;  (2) twill weave ･ pattern of diagonal stripes;  (3) style (of writing) ･ figure (of speech);  (4) plan ･ plot ･ design;  (5) minor market fluctuation ･ technical correction;  (6) cat's cradle;  (7) lease rod (in a loom)"},{"info":"初期","target":"(1) early (days) ･ initial stage;  (2) initial"},{"info":"東急","target":"[fem] Noboru ･ [surname] Toukyuu ･ [unclass] Noboru"}]}
                         ,
-                        // stage: 'quizAPending',
+                        formData: {
+                            ease: 0,
+                            helpedLearn: 0,
+                            effectiveness: 0,
+                            effectiveness: 0,
+                            useAgain: 0,
+                            useOtherLang: 0,
+                            effort: 'nocomment'
+                        },
                         /** 
                           * Looks up file name corresponding to uid stored on the host machine, with two modes:
                           * (1) if extension is '.json', reads the main JSON file.
@@ -323,7 +413,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 type       : 'POST'
                             })
                             .done(function(contents, textStatus, jqXHR) {
-                                console.log("reading.");
+                                // console.log("reading.");
                                 // console.log(contents);
                                 sc.$apply(function() {
                                     // var fullResponse = JSON.parse(contents);
@@ -407,6 +497,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         else if(sc.stage === 'quizBPending') sc.rw = jsonParsedresponse.quizB;
                         else if(sc.stage === 'finished') sc.finishedAlready = true;
                         else alert("Error: uid.status file didn't contain a recognised 'stage' of quiz progression.");
+                        if(sc.stage === 'quizBPending') sc.feedbackPending = true;
                         // console.log(sc.rw);
                         sc.dummy = jsonParsedresponse.quizC;
                         sc.r = JSON.parse(JSON.stringify(sc.rw));
@@ -566,7 +657,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
                     /** Generates the main JSON and report via postmanQ(). Currently being triggered inside read(). */
                     sc.reportScores = function() {
-                        var report = sc.quizResultsObj(sc.r);
+                        var report;
 
                         // var report = {
                         //                 "tierOneK": sc.calculateTestScore(sc.r[0].tests[0].qus, sc.r[0].tests[0].answers) + ' / ' + sc.r[0].tests[0].qus.length,
@@ -582,11 +673,16 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             stage = { "stage": 'quizBPending' };
                             st = 'A';
                             sc.postmanQ(sc.uid, '.status', stage, '');
+                            report = sc.quizResultsObj(sc.r);
                         }
                         if(sc.stage === 'quizBPending'){
                             stage = { "stage": 'finished' };
                             st = 'B';  
                             sc.postmanQ(sc.uid, '.status', stage, '');
+                            report = {
+                                'quiz': sc.quizResultsObj(sc.r),
+                                'feedback': sc.formData
+                            };
                         }
 
                         sc.postmanQ(sc.uid, '.txt', report, '/*=== Quiz' + st + ' results ===*/\n'); // The report
