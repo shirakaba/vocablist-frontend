@@ -233,14 +233,14 @@
               <div class="panel panel-primary">
                 <div class="panel-heading">Feedback</div>
                 <div class="panel-body">
-                  <span>Feedback goes here.</span>
+                  <p>If you have finished the quiz above, please complete this short feedback form before submitting your results.</p>
 
                   <div class="row">
                     <div class="col-xs-12">
                       <div class="panel panel-default">
                         <div class="panel-heading">The vocabulary list</div>
                         <div class="panel-body">
-                          <p>These next questions will concern the vocabulary list.</p>
+                          <p>These next questions will concern the vocabulary list. Note that a score of '3' given for any question is a neutral response (ie. "neither agree nor disagree").</p>
                           <dl class="dl-horizontal">
 
                             <div class="controlRow-s">
@@ -262,7 +262,7 @@
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>Do you feel it helped you understand the topic?</dt>
+                              <dt>Regardless of the quiz results, do you feel it helped you understand the topic?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
@@ -276,11 +276,12 @@
                                   <span class="col-xs-6" style="text-align:right;" ng-style="">Helped→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.helpedLearn === 0}" ng-model="formData.helpedLearn" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
+                                <small class="helpy"><em>'Hindered' would mean that you could have spent the time better by learning in another way.</em></small>
                               </dd>
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>Was it more effective than your usual study regime for learning topic-specic vocabulary?</dt>
+                              <dt>Was it more effective than your usual study regime for learning topic-specific vocabulary?</dt>
                               <dd>
                                 <div class="col-xs-2">
                                   <label style="font-weight:normal">
@@ -324,7 +325,6 @@
 
                           </dl>
 
-                          <!-- <div class="alert" ng-class="{'alert-info': calculateTestScore(sampleTestr.qus, sampleTestr.answers) < 4, 'alert-success': calculateTestScore(sampleTestr.qus, sampleTestr.answers) == 4 }"> -->
                         </div>
                       </div>
                     </div>
@@ -336,7 +336,20 @@
                       <div class="panel panel-default">
                         <div class="panel-heading">The idea</div>
                         <div class="panel-body">
-                          <span>The idea.</span>
+                          <p>The idea.</p>
+
+                          <dl class="dl-horizontal">
+                            <div class="controlRow-s">
+                              <dt>How much did you study from the list before taking this quiz?</dt>
+                              <dd>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="nocomment">No comment<p><em>(skips question)</em></p></label>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="brief">0-29 minutes<p><em>(eg. looked briefly through the list, then soon afterwards took the test)</em></p></label>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="some">30-59 minutes<p><em>(eg. crammed for the test)</em></p></label>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="high">One or more hours (can be spread over multiple days)<p><em>(eg. reinforced memory over several sessions of revision for the test)</em></p></label>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="other">Other</label>
+                              </dd>
+                            </div>
+                          </dl>
 
                           
                         </div>
