@@ -24,7 +24,7 @@
                           <dt>Topic</dt>
                           <dd><span ng-bind="topic"></span></dd>
                           <dt>Pre-filtering</dt>
-                          <dd>Any words of level <strong><span class="text-uppercase" ng-bind="prefiltering"></span></strong> or below were excluded</dd>
+                          <dd>Any words of level <strong><span class="text-uppercase" ng-bind="prefiltering"></span></strong> or below were excluded.</dd>
                           <!-- The list of articles. -->
                           <dt>List of articles</dt>
                           <dd>
@@ -32,7 +32,11 @@
                           </dd>
                         </dl>
                     </div>
-                      <!-- <h2>Topic: <span ng-bind="topic"></span></h2> -->
+
+                    <div class="alert alert-info" ng-show="ready">
+                      <p>Part 3/3: After you are satisfied you have studied the vocabulary list to your satisfaction (the amount of time is up to you: be it cramming for 30 minutes or studying regularly over a period of days), you may take the second quiz at any time at <a href="#/quiz?uid={{uid}}" class="alert-link">this link</a>.</p>
+                    </div>
+
                   </div>
               </div>
           </div>
