@@ -106,12 +106,16 @@
                     </div>
 
                       
-                  </div>
                 </div>
-                      <div class="alert" ng-class="{'alert-info': calculateTestScore(sampleTestr.qus, sampleTestr.answers) < 4, 'alert-success': calculateTestScore(sampleTestr.qus, sampleTestr.answers) == 4 }">
-                        <span>Once you understand how to operate this quiz, please click the 'OK' button to proceed to the real quiz. Please note that it is not timed: </span>
-                        <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.practised = true" ng-disabled="practised">OK</button>
-                      </div>
+              </div>
+              <div class="alert" ng-class="{'alert-info': calculateTestScore(sampleTestr.qus, sampleTestr.answers) < 4, 'alert-success': calculateTestScore(sampleTestr.qus, sampleTestr.answers) == 4 }">
+                <div ng-show="!$parent.practised">
+                  <span>Once you understand how to operate this quiz, please click the 'OK' button to proceed to the real quiz. Please note that it is not timed: </span>
+                  <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.practised = true" ng-disabled="practised">OK</button>
+                </div>
+
+                <span ng-if="$parent.practised">Please scroll down!</span>
+              </div>
             </div>
           </div>
         </section>
@@ -281,7 +285,7 @@
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>What do you feel improves your understanding of a topic more: studying with this system, or trying to read articles/texts directly?</dt>
+                              <dt>What do you feel improves your understanding of a topic more: studying with this system*, or trying to read articles/texts directly?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
@@ -302,12 +306,12 @@
                                   <span class="col-xs-6" style="text-align:right;" ng-style="">This system→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.effectiveness < 1}" ng-model="formData.effectiveness" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
-                                <!-- <small class="helpy"><em>I would not classify studying for the JLPT as studying 'technical'</em></small> -->
+                                <small class="helpy"><em>* 'this system' here refers to the vocabulary list.</em></small>
                               </dd>
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>Would you use it again in the future?</dt>
+                              <dt>As it is now, would you use it again in the future?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
@@ -324,6 +328,24 @@
                               </dd>
                             </div>
 
+                            <div class="controlRow-s">
+                              <dt>Would you use it for learning another language (including English)?</dt>
+                              <dd>
+                                <div class="col-xs-4">
+                                  <label style="font-weight:normal">
+                                    <span class="col-xs-12" style="text-align:center;">No comment</span>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.useOtherLang" ng-click="formData.useOtherLang = 0" value="0"></span><br>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
+                                  </label>
+                                </div>
+                                <div class="col-xs-8">
+                                  <span class="col-xs-6">←Definitely not</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Definitely→</span>
+                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.useOtherLang === 0}" ng-model="formData.useOtherLang" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                </div>
+                              </dd>
+                            </div>
+
                           </dl>
 
                         </div>
@@ -335,9 +357,9 @@
                   <div class="row">
                     <div class="col-xs-12">
                       <div class="panel panel-default">
-                        <div class="panel-heading">The idea</div>
+                        <div class="panel-heading">Other</div>
                         <div class="panel-body">
-                          <p>The idea.</p>
+                          <!-- <p>Other </p> -->
 
                           <dl class="dl-horizontal">
                             <div class="controlRow-s">
@@ -352,6 +374,14 @@
                             </div>
                           </dl>
 
+                          <div class="controlRow-s">
+                            <dt>Comments</dt>
+                            <dd>
+                              <span>If you have anything to comment on (be they issues with the quizzes, forms, or vocabulary list, or just positive feedback), you comment on it below.</span><br>
+                              <textarea class="form-control" rows="6" ng-model="formData.comments" maxlength="600" placeholder="Input any comments here - maximum of 600 characters."></textarea>
+                            </dd>
+                          </div>
+
                           
                         </div>
                       </div>
@@ -359,8 +389,12 @@
                   </div>
 
                   <div class="alert alert-info">
-                    <span>Once you have completed the feedback form, please press 'OK' to continue to the final step: results submission.</span>
-                    <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.feedbackPending = false" ng-disabled="!$parent.feedbackPending">OK</button>
+                    <div ng-show="feedbackPending">
+                      <span>Once you have completed the feedback form, please press 'OK' to continue to the final step: results submission.</span>
+                      <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.feedbackPending = false" ng-disabled="!$parent.feedbackPending">OK</button>
+                    </div>
+                    
+                    <span ng-if="!$parent.feedbackPending">Please scroll down!</span>
                   </div>
 
                 </div>

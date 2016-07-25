@@ -393,6 +393,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             effectiveness: 0,
                             effectiveness: 0,
                             useAgain: 0,
+                            useOtherLang: 0,
                             effort: 'nocomment'
                         },
                         /** 
@@ -656,7 +657,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
                     /** Generates the main JSON and report via postmanQ(). Currently being triggered inside read(). */
                     sc.reportScores = function() {
-                        var report = sc.quizResultsObj(sc.r);
+                        var report;
 
                         // var report = {
                         //                 "tierOneK": sc.calculateTestScore(sc.r[0].tests[0].qus, sc.r[0].tests[0].answers) + ' / ' + sc.r[0].tests[0].qus.length,
@@ -672,11 +673,16 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             stage = { "stage": 'quizBPending' };
                             st = 'A';
                             sc.postmanQ(sc.uid, '.status', stage, '');
+                            report = sc.quizResultsObj(sc.r);
                         }
                         if(sc.stage === 'quizBPending'){
                             stage = { "stage": 'finished' };
                             st = 'B';  
                             sc.postmanQ(sc.uid, '.status', stage, '');
+                            report = {
+                                'quiz': sc.quizResultsObj(sc.r),
+                                'feedback': sc.formData
+                            };
                         }
 
                         sc.postmanQ(sc.uid, '.txt', report, '/*=== Quiz' + st + ' results ===*/\n'); // The report

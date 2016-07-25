@@ -101,7 +101,5 @@ app.post('/quiz', function(request, response){
 	  // console.log(contents);
 	  response.json(o);
 	});
-
-
 });
 
