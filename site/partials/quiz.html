@@ -14,7 +14,7 @@
                   <div ng-if="stage === 'finished' && !readError && !ready" class="alert alert-danger">
                     <p>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</p>
                   </div>
-                  <div ng-if="stage !== 'finished' && !readError" style="margin-top:21px" class="alert alert-info" ng-switch="stage">
+                  <div ng-if="!readError && (stage === 'quizAPending' || stage === 'quizBPending')" style="margin-top:21px" class="alert alert-info" ng-switch="stage">
                     <span ng-switch-when="quizAPending"><span>After an opportunity to practice, you will be completing quiz <strong>one</strong> out of two (the before-studying quiz, which gauges your current level of vocabulary comprehension).</span></span>
                     <span ng-switch-when="quizBPending"><span>After an opportunity to practice, you will be completing quiz <strong>two</strong> out of two (the after-studying quiz, which gauges whether your vocabulary comprehension improved after study).</span></span>
                     <span ng-switch-when="finished"><span>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</span></span>
@@ -227,19 +227,32 @@
           </div>
         </section>
 
+        <section ng-if="ready && practised && stage === 'quizBPending'">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="panel panel-primary">
+                <div class="panel-heading">Feedback</div>
+                <div class="panel-body">
+                  <span>Feedback goes here.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section ng-if="ready && practised">
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-primary">
                 <div class="panel-heading">Submission of results</div>
                 <div class="panel-body">
-                <span>Once you have finished the quiz, press 'submit' to send your answers to the researcher.</span>
+                  <span>Once you have finished the quiz, press 'submit' to send your answers to the researcher.</span>
                   <button type="submit" style="margin-left: 1em;" class ="btn btn-info" ng-click="reportScores()" ng-disabled="reportSent">Submit</button>
                   <div ng-if="reportSent">
                     <div ng-if="!postmanError && stage === 'quizAPending'" class="alert alert-success">
                       <p>Test results successfully submitted.</p>
                       <!-- <p>Your user id is: <span ng-bind="uid"></span></p> -->
-                      <p>Part 2/3: <a href="#/list?uid={{uid}}" class="alert-link">Access the vocabulary list from which to study here!</a></p>
+                      <p>Proceed to part 2/3: <a href="#/list?uid={{uid}}" class="alert-link">Access the vocabulary list from which to study here!</a></p>
                     </div>
                     <div ng-if="!postmanError && stage === 'quizBPending'" class="alert alert-success">
                       <p>Test results successfully submitted.</p>
@@ -253,6 +266,7 @@
                   </div>
 
                 </div>
+
               </div>
             </div>
           </div>
