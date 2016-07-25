@@ -489,6 +489,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         else if(sc.stage === 'quizBPending') sc.rw = jsonParsedresponse.quizB;
                         else if(sc.stage === 'finished') sc.finishedAlready = true;
                         else alert("Error: uid.status file didn't contain a recognised 'stage' of quiz progression.");
+                        if(sc.stage === 'quizBPending') sc.feedbackPending = true;
                         // console.log(sc.rw);
                         sc.dummy = jsonParsedresponse.quizC;
                         sc.r = JSON.parse(JSON.stringify(sc.rw));

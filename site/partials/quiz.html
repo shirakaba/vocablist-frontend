@@ -15,8 +15,8 @@
                     <p>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</p>
                   </div>
                   <div ng-if="!readError && (stage === 'quizAPending' || stage === 'quizBPending')" style="margin-top:21px" class="alert alert-info" ng-switch="stage">
-                    <span ng-switch-when="quizAPending"><span>After an opportunity to practice, you will be completing quiz <strong>one</strong> out of two (the before-studying quiz, which gauges your current level of vocabulary comprehension).</span></span>
-                    <span ng-switch-when="quizBPending"><span>After an opportunity to practice, you will be completing quiz <strong>two</strong> out of two (the after-studying quiz, which gauges whether your vocabulary comprehension improved after study).</span></span>
+                    <span ng-switch-when="quizAPending"><span>After an opportunity to practice, you will be completing quiz <strong>1</strong> out of 2 (the before-studying quiz, which gauges your current level of vocabulary comprehension).</span></span>
+                    <span ng-switch-when="quizBPending"><span>After an opportunity to practice, you will be completing quiz <strong>2</strong> out of 2 (the after-studying quiz, which gauges whether your vocabulary comprehension improved after study).</span></span>
                     <span ng-switch-when="finished"><span>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</span></span>
                     <span ng-switch-default>Stage not recognised.</span>
                   </div>
@@ -234,13 +234,46 @@
                 <div class="panel-heading">Feedback</div>
                 <div class="panel-body">
                   <span>Feedback goes here.</span>
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">User experience</div>
+                        <div class="panel-body">
+                          <span>User experience.</span>
+
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">The idea</div>
+                        <div class="panel-body">
+                          <span>The idea.</span>
+
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="alert alert-info">
+                    <span>Once you have completed the feedback form, please press 'OK' to continue to the final step: results submission.</span>
+                    <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.feedbackPending = false" ng-disabled="!$parent.feedbackPending">OK</button>
+                  </div>
+
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section ng-if="ready && practised">
+        <section ng-if="ready && practised && !feedbackPending">
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-primary">
@@ -263,6 +296,7 @@
                     <div ng-if="postmanError" class="alert alert-danger">
                       <p>Submission of test results failed.</p>
                     </div>
+
                   </div>
 
                 </div>
