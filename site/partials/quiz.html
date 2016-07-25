@@ -242,9 +242,9 @@
                         <div class="panel-body">
                           <p>These next questions will concern the vocabulary list.</p>
                           <dl class="dl-horizontal">
-                          
+
                             <div class="controlRow-s">
-                              <dt>Was it easy to use?</dt>
+                              <dt>Was it easy to use and navigate?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
@@ -254,15 +254,15 @@
                                   </label>
                                 </div>
                                 <div class="col-xs-8">
-                                  <span class="col-xs-6"><-Hard</span>
-                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Easy-></span>
+                                  <span class="col-xs-6">←Hard</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Easy→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.ease === 0}" ng-model="formData.ease" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
                               </dd>
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>Do you feel it helped you learn?</dt>
+                              <dt>Do you feel it helped you understand the topic?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
@@ -272,27 +272,34 @@
                                   </label>
                                 </div>
                                 <div class="col-xs-8">
-                                  <span class="col-xs-6"><-Hindered</span>
-                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Helped-></span>
+                                  <span class="col-xs-6">←Hindered</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Helped→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.helpedLearn === 0}" ng-model="formData.helpedLearn" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
                               </dd>
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>Was it more effective than your usual study regime?</dt>
+                              <dt>Was it more effective than your usual study regime for learning topic-specic vocabulary?</dt>
                               <dd>
-                                <div class="col-xs-4">
+                                <div class="col-xs-2">
                                   <label style="font-weight:normal">
                                     <span class="col-xs-12" style="text-align:center;">No comment</span>
                                     <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.effectiveness" ng-click="formData.effectiveness = 0" value="0"></span><br>
                                     <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
                                   </label>
                                 </div>
-                                <div class="col-xs-8">
-                                  <span class="col-xs-6"><-Less effective</span>
-                                  <span class="col-xs-6" style="text-align:right;" ng-style="">More effective-></span>
-                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.effectiveness === 0}" ng-model="formData.effectiveness" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                <div class="col-xs-3">
+                                  <label style="font-weight:normal">
+                                    <span class="col-xs-12" style="text-align:center;">Incomparable</span>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.effectiveness" ng-click="formData.effectiveness = -1" value="-1"></span><br>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(eg. you never study topic-specific vocabulary)</em></small></span>
+                                  </label>
+                                </div>
+                                <div class="col-xs-7">
+                                  <span class="col-xs-6">←Less effective</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">More effective→</span>
+                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.effectiveness < 1}" ng-model="formData.effectiveness" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
                               </dd>
                             </div>
@@ -308,8 +315,8 @@
                                   </label>
                                 </div>
                                 <div class="col-xs-8">
-                                  <span class="col-xs-6"><-Definitely not</span>
-                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Definitely-></span>
+                                  <span class="col-xs-6">←Definitely not</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Definitely→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.useAgain === 0}" ng-model="formData.useAgain" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
                               </dd>
