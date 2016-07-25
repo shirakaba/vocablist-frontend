@@ -245,9 +245,17 @@
                             <div class="controlRow-s">
                               <dt>Was it easy to use?</dt>
                               <dd>
-                                <span class="col-xs-6"><-Harder</span>
-                                <span class="col-xs-5" style="text-align:right;">Easier-></span>
-                                <slider class="col-xs-11" ng-model="formData.age" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider><span class="col-xs-1"></span><br>
+                                <div class="col-xs-4">
+                                  <span class="col-xs-12" style="text-align:center;">No comment</span>
+                                  <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.ease" ng-click="formData.ease = 0" value="0"></span><br>
+                                  <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
+                                </div>
+                                <div class="col-xs-8">
+                                  <span class="col-xs-6"><-Harder</span>
+                                  <span class="col-xs-6" style="text-align:right;">Easier-></span>
+                                  <slider class="col-xs-12" ng-model="formData.ease" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                </div>
+
                               </dd>
                           </dl>
 
