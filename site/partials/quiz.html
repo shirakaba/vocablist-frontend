@@ -238,9 +238,18 @@
                   <div class="row">
                     <div class="col-xs-12">
                       <div class="panel panel-default">
-                        <div class="panel-heading">User experience</div>
+                        <div class="panel-heading">The vocabulary list</div>
                         <div class="panel-body">
-                          <span>User experience.</span>
+                          <p>These next questions will concern the vocabulary list.</p>
+                          <dl class="dl-horizontal">
+                            <div class="controlRow-s">
+                              <dt>Was it easy to use?</dt>
+                              <dd>
+                                <span class="col-xs-6"><-Harder</span>
+                                <span class="col-xs-5" style="text-align:right;">Easier-></span>
+                                <slider class="col-xs-11" ng-model="formData.age" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider><span class="col-xs-1"></span><br>
+                              </dd>
+                          </dl>
 
                           
                         </div>

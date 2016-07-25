@@ -387,7 +387,9 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         ,
                         sampleTestrw: {"testType":"kanji","eleType":"kanjiOne","tierAlpha":"One","allowedTypes":["kanjiOne"],"qus":[{"info":"貞","target":"[given] Misao ･ [given] Tadashi ･ [fem,surname] Sada ･ [unclass] Sadanori ･ [given] Takashi ･ [fem,surname] Tei ･ [given] Sadamu ･ [unclass] Sadatsugu ･ [unclass] Teiji ･ [fem] Misao ･ [given] Tadasu ･ [fem] Teiko ･ [unclass] Sadaji ･ [unclass] Sadazumi ･ [unclass] Sadayuki"},{"info":"補完","target":"supplementation ･ complementation ･ completion"},{"info":"作画","target":"taking photographs ･ drawing pictures"},{"info":"綾","target":"(1) figure ･ design;  (2) twill weave ･ pattern of diagonal stripes;  (3) style (of writing) ･ figure (of speech);  (4) plan ･ plot ･ design;  (5) minor market fluctuation ･ technical correction;  (6) cat's cradle;  (7) lease rod (in a loom)"},{"info":"初期","target":"(1) early (days) ･ initial stage;  (2) initial"},{"info":"東急","target":"[fem] Noboru ･ [surname] Toukyuu ･ [unclass] Noboru"}]}
                         ,
-                        // stage: 'quizAPending',
+                        formData: {
+                            // userExperience
+                        },
                         /** 
                           * Looks up file name corresponding to uid stored on the host machine, with two modes:
                           * (1) if extension is '.json', reads the main JSON file.
