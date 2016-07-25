@@ -281,27 +281,28 @@
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>Was it more effective than your usual study regime for learning topic-specific vocabulary?</dt>
+                              <dt>What do you feel improves your understanding of a topic more: studying with this system, or trying to read articles/texts directly?</dt>
                               <dd>
-                                <div class="col-xs-2">
+                                <div class="col-xs-4">
                                   <label style="font-weight:normal">
                                     <span class="col-xs-12" style="text-align:center;">No comment</span>
                                     <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.effectiveness" ng-click="formData.effectiveness = 0" value="0"></span><br>
                                     <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
                                   </label>
                                 </div>
-                                <div class="col-xs-3">
+<!--                                 <div class="col-xs-3">
                                   <label style="font-weight:normal">
                                     <span class="col-xs-12" style="text-align:center;">Incomparable</span>
                                     <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.effectiveness" ng-click="formData.effectiveness = -1" value="-1"></span><br>
-                                    <span class="col-xs-12" style="text-align:center;"><small><em>(eg. you never study topic-specific vocabulary)</em></small></span>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(eg. you never study technical/topic-specific vocabulary)</em></small></span>
                                   </label>
-                                </div>
-                                <div class="col-xs-7">
-                                  <span class="col-xs-6">←Less effective</span>
-                                  <span class="col-xs-6" style="text-align:right;" ng-style="">More effective→</span>
+                                </div> -->
+                                <div class="col-xs-8">
+                                  <span class="col-xs-6">←Direct reading</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">This system→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.effectiveness < 1}" ng-model="formData.effectiveness" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
+                                <!-- <small class="helpy"><em>I would not classify studying for the JLPT as studying 'technical'</em></small> -->
                               </dd>
                             </div>
 
