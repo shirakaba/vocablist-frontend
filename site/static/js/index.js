@@ -389,6 +389,10 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         ,
                         formData: {
                             ease: 0,
+                            helpedLearn: 0,
+                            effectiveness: 0,
+                            effectiveness: 0,
+                            useAgain: 0
                         },
                         /** 
                           * Looks up file name corresponding to uid stored on the host machine, with two modes:
