@@ -248,20 +248,40 @@
                           <dl class="dl-horizontal">
 
                             <div class="controlRow-s">
-                              <dt>Was it easy to use and navigate?</dt>
+                              <dt>Was it intuitive/clear how to use it?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
                                     <span class="col-xs-12" style="text-align:center;">No comment</span>
-                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.ease" ng-click="formData.ease = 0" value="0"></span><br>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.intuitive" ng-click="formData.intuitive = 0" value="0"></span><br>
+                                    <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
+                                  </label>
+                                </div>
+                                <div class="col-xs-8">
+                                  <span class="col-xs-6">←Unintuitive</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Intuitive→</span>
+                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.intuitive === 0}" ng-model="formData.intuitive" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                </div>
+                              </dd>
+                              <small class="helpy"><em>eg. with the instructions provided, was it possible to: 1) operate all the features of the list; and 2) understand all the data presented?</em></small>
+                            </div>
+
+                            <div class="controlRow-s">
+                              <dt>Was it easy to navigate?</dt>
+                              <dd>
+                                <div class="col-xs-4">
+                                  <label style="font-weight:normal">
+                                    <span class="col-xs-12" style="text-align:center;">No comment</span>
+                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.navigation" ng-click="formData.navigation = 0" value="0"></span><br>
                                     <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
                                   </label>
                                 </div>
                                 <div class="col-xs-8">
                                   <span class="col-xs-6">←Hard</span>
                                   <span class="col-xs-6" style="text-align:right;" ng-style="">Easy→</span>
-                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.ease === 0}" ng-model="formData.ease" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.navigation === 0}" ng-model="formData.navigation" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
+                                <small class="helpy"><em>eg. was the layout and design accommodating in locating all the information that was important to you? Or was there too much irrelevant information, or distracting elements of the design?</em></small>
                               </dd>
                             </div>
 
