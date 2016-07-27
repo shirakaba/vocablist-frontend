@@ -14,13 +14,17 @@
                   <div ng-if="stage === 'finished' && !readError && !ready" class="alert alert-danger">
                     <p>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</p>
                   </div>
-                  <div ng-if="!readError && (stage === 'quizAPending' || stage === 'quizBPending')" style="margin-top:21px" class="alert alert-info" ng-switch="stage">
+                  <div ng-if="!readError && (stage.indexOf('quizAPending') == 0 || stage.indexOf('quizBPending') == 0)" style="margin-top:21px" class="alert alert-info" ng-switch="stage">
                     <span ng-switch-when="quizAPending"><span>After an opportunity to practice, you will be completing quiz <strong>1</strong> out of 2 (the before-studying quiz, which gauges your current level of vocabulary comprehension).</span></span>
+                    <span ng-switch-when="quizAPendingControl"><span>After an opportunity to practice, you will be completing quiz <strong>1</strong> out of 2 (the before-studying quiz, which gauges your current level of vocabulary comprehension).</span></span>
                     <span ng-switch-when="quizBPending"><span>After an opportunity to practice, you will be completing quiz <strong>2</strong> out of 2 (the after-studying quiz, which gauges whether your vocabulary comprehension improved after study).</span></span>
+                    <span ng-switch-when="quizBPendingControl"><span>After an opportunity to practice, you will be completing quiz <strong>2</strong> out of 2 (the after-studying quiz, which gauges whether your vocabulary comprehension improved after study).</span></span>
                     <span ng-switch-when="finished"><span>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</span></span>
                     <span ng-switch-default>Stage not recognised.</span>
                   </div>
-                  <!-- <button ng-click="add()">Add</button> -->
+                  <div ng-if="stage.indexOf('quiz') == 0" class="alert alert-warning">
+                    <p>For users of Safari: If no panel is visible below this one, and you haven't finished both your quizzes yet, then please refresh the page.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -231,7 +235,7 @@
           </div>
         </section>
 
-        <section ng-if="ready && practised && stage === 'quizBPending'">
+        <section ng-if="ready && practised && stage.indexOf('quizBPending') == 0">
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-primary">
@@ -383,13 +387,12 @@
 
                           <dl class="dl-horizontal">
                             <div class="controlRow-s">
-                              <dt>How much did you study from the list before taking this quiz?</dt>
+                              <dt>How much did you study in preparation to take this quiz?</dt>
                               <dd>
                                 <label class="radio"><input type="radio" ng-model="formData.effort" value="nocomment">No comment<p><em>(skips question)</em></p></label>
-                                <label class="radio"><input type="radio" ng-model="formData.effort" value="brief">0-29 minutes<p><em>(eg. looked briefly through the list, then soon afterwards took the test)</em></p></label>
+                                <label class="radio"><input type="radio" ng-model="formData.effort" value="brief">0-29 minutes<p><em>(eg. studied briefly, then soon afterwards took the test)</em></p></label>
                                 <label class="radio"><input type="radio" ng-model="formData.effort" value="some">30-59 minutes<p><em>(eg. crammed for the test)</em></p></label>
                                 <label class="radio"><input type="radio" ng-model="formData.effort" value="high">One or more hours (can be spread over multiple days)<p><em>(eg. reinforced memory over several sessions of revision for the test)</em></p></label>
-                                <label class="radio"><input type="radio" ng-model="formData.effort" value="other">Other</label>
                               </dd>
                             </div>
                           </dl>
@@ -408,14 +411,14 @@
                     </div>
                   </div>
 
-                  <div class="alert alert-info">
+<!--                   <div class="alert alert-info">
                     <div ng-show="feedbackPending">
                       <span>Once you have completed the feedback form, please press 'OK' to continue to the final step: results submission.</span>
                       <button type="submit" style="margin-left: 1em;" class ="btn btn-default" ng-click="$parent.feedbackPending = false" ng-disabled="!$parent.feedbackPending">OK</button>
                     </div>
                     
                     <span ng-if="!$parent.feedbackPending">Please scroll down!</span>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -423,7 +426,7 @@
           </div>
         </section>
 
-        <section ng-if="ready && practised && !feedbackPending">
+        <section ng-if="ready && practised">
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-primary">
@@ -432,12 +435,12 @@
                   <span>Once you have finished the quiz, press 'submit' to send your answers to the researcher.</span>
                   <button type="submit" style="margin-left: 1em;" class ="btn btn-info" ng-click="reportScores()" ng-disabled="reportSent">Submit</button>
                   <div ng-if="reportSent">
-                    <div ng-if="!postmanError && stage === 'quizAPending'" class="alert alert-success">
+                    <div ng-if="!postmanError && stage.indexOf('quizAPending') == 0" class="alert alert-success">
                       <p>Test results successfully submitted.</p>
                       <!-- <p>Your user id is: <span ng-bind="uid"></span></p> -->
                       <p>Proceed to part 2/3: <a href="#/list?uid={{uid}}" class="alert-link">Access the vocabulary list from which to study here!</a></p>
                     </div>
-                    <div ng-if="!postmanError && stage === 'quizBPending'" class="alert alert-success">
+                    <div ng-if="!postmanError && stage.indexOf('quizBPending') == 0" class="alert alert-success">
                       <p>Test results successfully submitted.</p>
                       <!-- <p>Your user id is: <span ng-bind="uid"></span></p> -->
                       <p>You've finished the study! Thank you very much :)</p>

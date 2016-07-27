@@ -33,8 +33,15 @@
                         </dl>
                     </div>
 
-                    <div class="alert alert-info" ng-show="ready">
-                      <p>Proceed to part 3/3: After you are satisfied you have studied the vocabulary list to your satisfaction (the amount of time is up to you: be it cramming for 30 minutes or studying regularly over a period of days), you may take the second (final) quiz at any time at <a href="#/quiz?uid={{uid}}" class="alert-link">this link</a>.</p>
+                    <div class="alert alert-warning" ng-if="ready && stage === 'finished'">
+                      <p ng-if="stage === 'finished'">Note: you've already finished both quizzes, but you may continue to view this vocabulary list until the server turns off (around late August).</p>
+                    </div>
+                    <div class="alert alert-info" ng-if="ready && stage !== 'finished'">
+                      <p ng-if="!control">Proceed to part 3/3: After you are satisfied you have studied this topic, using the vocabulary list as reference, to your satisfaction (the amount of time is up to you: be it cramming for 30 minutes or studying regularly over a period of days), you may take the second (final) quiz at any time at <a href="#/quiz?uid={{uid}}" class="alert-link">this link</a>.</p>
+                      <p ng-if="control">Proceed to part 3/3: After you are satisfied you have studied this topic, using these articles as reference, to your satisfaction (the amount of time is up to you: be it cramming for 30 minutes or studying regularly over a period of days), you may take the second (final) quiz at any time at <a href="#/quiz?uid={{uid}}" class="alert-link">this link</a>.</p>
+                    </div>
+                    <div ng-if="ready && (stage === 'quizAPending' || stage === 'quizBPending')" class="alert alert-warning">
+                      <p>For users of Safari: If no panel is visible below this one, and you haven't finished both your quizzes yet, then please refresh the page.</p>
                     </div>
 
                   </div>
@@ -53,7 +60,7 @@
             </div>
         </section> -->
 </nav>
-    <article ng-show="ready">
+    <article ng-if="ready && !control">
     <!-- The control sliders -->
 <!--         <section class="row">
             <div class="col-xs-12">

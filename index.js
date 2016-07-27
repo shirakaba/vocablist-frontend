@@ -1,11 +1,15 @@
 var fs = require('fs'); // file system for reading/writing to computer
 var express = require('express');
+var basicAuth = require('basic-auth-connect');
 var bodyParser = require('body-parser'); // allows you to parse JSON.
 var app = express();
 var cors = require('cors') // makes this backend allow frontend traffic (eg. for AJAX requests) from any domain.
 app.use(cors());
 app.use(bodyParser.json({limit: '50mb'})); // gives our application support for JSON-formatted PUT or POST requests.
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
+// authenticator
+app.use(basicAuth('testUser', 'testPass'));
 
 /* Creates a mapping between your filesystem, and the filesystem you pretend exists.
  * If you ask for the first parameter to be just '', then no extra folder is inserted in front of the 'images' in the URL presented to the user.

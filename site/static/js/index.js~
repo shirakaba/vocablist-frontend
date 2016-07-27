@@ -32,7 +32,6 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             source: "other",
                             issues: "",
                             ownchoice: false,
-                            group: 'list',
                             // category: null,
                             proficiency: 2
                         },
@@ -142,10 +141,12 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
                     /** Generates the main JSON and report via postman(). */
                     sc.generate = function(cat) {
-                        // console.log('input proficiency was:' + sc.formData.proficiency);
+                        console.log('input proficiency was:' + sc.formData.proficiency);
                         if(cat == null) {
-                            // console.log("category was null.");
-                            sc.startedSearch = false;
+                            console.log("category was null.");
+                            sc.$apply(function() {
+                                sc.startedSearch = false;
+                            });
                             return;
                         }
                         $http.get(
@@ -181,17 +182,11 @@ headers: {
                                         "proficiency": sc.filteringEnum(sc.formData.proficiency),
                                         "source": sc.formData.source,
                                         "issues": sc.formData.issues,
-                                        "category": sc.category,
-                                        "group": sc.formData.group
+                                        "category": sc.category
                                     };
-                                    console.log('group is:' + sc.formData.group);
-                                    var pendingMessage;
-                                    if(sc.formData.group === 'list') pendingMessage = 'quizAPending';
-                                    else if(sc.formData.group === 'control') pendingMessage = 'quizAPendingControl'
                                     var stage = {
-                                        "stage": pendingMessage
+                                        "stage": 'quizAPending'
                                     };
-                                    console.log(stage);
                                     console.log(report);
                                     sc.postman(sc.uid, '.json', response.data, ''); // The JSON
                                     sc.postman(sc.uid, '.txt', report, '/*=== First contents ===*/\n'); // The report
@@ -353,8 +348,7 @@ headers: {
                                     if(extension === '.json'){
                                         // can access sc.stage √
                                         sc.readError = false;
-                                        // sc.initI(contents, sc.stage);
-                                        sc.initI(contents);
+                                        sc.initI(contents, sc.stage);
                                         sc.ready = true;
                                         // console.log("JSON read.");
                                         // sc.reportScores(); // TODO: move this to a sensible place rather than its current on-read place.
@@ -375,16 +369,7 @@ headers: {
 
                     /** Initialises the quiz based on a JSON. */
                     sc.initI = function(jsonParsedresponse){
-                        if(sc.stage === 'quizBPending' || sc.stage === 'finished'){
-                            sc.x = jsonParsedresponse.list;
-                            sc.control = false;
-                        }
-                        if(sc.stage === 'quizBPendingControl' || sc.stage.indexOf('quizAPending') == 0){
-                            sc.x = {};
-                            sc.control = true;
-                        }
-
-                        sc.ready = true;
+                        sc.x = jsonParsedresponse.list;
                         sc.topic = jsonParsedresponse.topic;
                         sc.articles = jsonParsedresponse.successfulArticles;
                         sc.prefiltering = jsonParsedresponse.prefiltering;
@@ -393,10 +378,7 @@ headers: {
 
                     // THESE START ON PAGE LOAD:
                     sc.uid = $stateParams['uid'];
-                    if(sc.uid != null){
-                        sc.readI(sc.uid, '.status'); // this sets sc.stage
-                        sc.readI(sc.uid, '.json');
-                    }
+                    if(sc.uid != null) sc.readI(sc.uid, '.json');
                 }]
             })
 
@@ -424,6 +406,7 @@ headers: {
                             navigation: 0,
                             helpedLearn: 0,
                             effectiveness: 0,
+                            effectiveness: 0,
                             useAgain: 0,
                             useOtherLang: 0,
                             effort: 'nocomment'
@@ -435,7 +418,7 @@ headers: {
                           * */
                         read : function(uid, extension){
                             $.ajax({
-                                url        : "http://82.37.79.52:80/quiz",
+                                url        : "http://82.37.79.52:8080/quiz",
                                 dataType   : 'json',
                                 contentType: 'application/json; charset=UTF-8',
 				username: 'testUser',
@@ -527,13 +510,11 @@ headers: {
                         
                         sc.x = jsonParsedresponse.list;
                         sc.articles = ["article1", "article2", "article3"];
-                        if(sc.stage === 'quizAPendingControl' || sc.stage === 'quizBPendingControl') sc.formData.group = 'control';
-
-                        if(sc.stage.indexOf('quizAPending') == 0)  sc.rw = jsonParsedresponse.quizA;
-                        else if(sc.stage.indexOf('quizBPending') == 0) sc.rw = jsonParsedresponse.quizB;
+                        if(sc.stage === 'quizAPending') sc.rw = jsonParsedresponse.quizA;
+                        else if(sc.stage === 'quizBPending') sc.rw = jsonParsedresponse.quizB;
                         else if(sc.stage === 'finished') sc.finishedAlready = true;
                         else alert("Error: uid.status file didn't contain a recognised 'stage' of quiz progression.");
-                        if(sc.stage.indexOf('quizBPending') == 0) sc.feedbackPending = true;
+                        if(sc.stage === 'quizBPending') sc.feedbackPending = true;
                         // console.log(sc.rw);
                         sc.dummy = jsonParsedresponse.quizC;
                         sc.r = JSON.parse(JSON.stringify(sc.rw));
@@ -713,13 +694,7 @@ headers: {
                             sc.postmanQ(sc.uid, '.status', stage, '');
                             report = sc.quizResultsObj(sc.r);
                         }
-                        if(sc.stage === 'quizAPendingControl'){
-                            stage = { "stage": 'quizBPendingControl' };
-                            st = 'A';
-                            sc.postmanQ(sc.uid, '.status', stage, '');
-                            report = sc.quizResultsObj(sc.r);
-                        }
-                        if(sc.stage === 'quizBPending' ){
+                        if(sc.stage === 'quizBPending'){
                             stage = { "stage": 'finished' };
                             st = 'B';  
                             sc.postmanQ(sc.uid, '.status', stage, '');
@@ -728,17 +703,6 @@ headers: {
                                 'feedback': sc.formData
                             };
                         }
-                        if(sc.stage === 'quizBPendingControl'){
-                        stage = { "stage": 'finished' };
-                        st = 'B';  
-                        sc.postmanQ(sc.uid, '.status', stage, '');
-                        report = {
-                            'quiz': sc.quizResultsObj(sc.r),
-                            'feedback': sc.formData
-                            };
-                        }
-                        console.log('report following...');
-                        console.log(report);
 
                         sc.postmanQ(sc.uid, '.txt', report, '/*=== Quiz' + st + ' results ===*/\n'); // The report
                     };

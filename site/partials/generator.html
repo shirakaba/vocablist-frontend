@@ -2,6 +2,10 @@
 
   <section class="row">
       <div class="col-xs-12">
+          <div class="alert alert-warning">
+            <p>Note: If your web browser is years out of date, please update it before using this website!</p>
+            <p>Also: It is generally impossible to use this website properly on a mobile device.</p>
+          </div>
           <div class="panel panel-default">
               <div class="panel-heading"><span>Study info</span></div>
               <div class="panel-body">
@@ -107,21 +111,34 @@
               <div class="panel-heading"><span>Vocabulary of interest</span></div>
               <div class="panel-body">
                 <div style="padding-bottom: 2em">
-                  <p>Please specify what level of Japanese language you already generally understand, so that any vocabulary that is too simple can be excluded from your vocabulary list and proficiency quiz. General approximations are provided beside each level on the slider below, although a detailed summary of the JLPT grades can be found <a href="http://www.jlpt.jp/e/about/levelsummary.html">here</a>.</p>
-                  <dt >Ignore vocabulary from: <span class="text-uppercase" ng-bind="filteringEnum(formData.proficiency)"></span> and below.</dt>
-                  <dd>
-                    <div class="col-xs-12">
-                      <slider class="col-xs-11" tooltip="hide" ng-model="formData.proficiency" ticks="[2, 3, 4, 5, 6]"
-                  ticks-labels='["N5 (basic)", "N4 (basic+)", "N3 (everyday)", "N2 (business)", "N1 (business+)"]'></slider>
-                      <span class="col-xs-1"></span>
-                    </div>
-                    <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
-                  </dd>
-                </div>
+                    <p>Please select which research group you would like to participate in. An equal balance of participants spread between both is ideal, and you may even participate once in each group.</p>
 
-                <p>Please select a vocabulary area of interest. Generating the vocabulary list and quizzes is data-intensive and may thus take up to five minutes.</p>
+                    <dl class="dl-horizontal">
+                      <dt>Research group</dt>
+                      <dd>
+                        <label class="radio"><input type="radio" ng-model="formData.group" value="list">Study from generated vocabulary list</label>
+                        <label class="radio"><input type="radio" ng-model="formData.group" value="control">Study in own style from list of Wikipedia articles</label>
+                        <p><em>(The 'own style' group is the control group for this research project.)</em></p>
 
-                </div>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div style="padding-bottom: 2em">
+                    <p>Please specify what level of Japanese language you already generally understand, so that any vocabulary that is too simple can be excluded from your vocabulary list and proficiency quiz. General approximations are provided beside each level on the slider below, although a detailed summary of the JLPT grades can be found <a href="http://www.jlpt.jp/e/about/levelsummary.html">here</a>.</p>
+                    <dt >Ignore vocabulary from: <span class="text-uppercase" ng-bind="filteringEnum(formData.proficiency)"></span> and below.</dt>
+                    <dd>
+                      <div class="col-xs-12">
+                        <slider class="col-xs-11" tooltip="hide" ng-model="formData.proficiency" ticks="[2, 3, 4, 5, 6]"
+                    ticks-labels='["N5 (basic)", "N4 (basic+)", "N3 (everyday)", "N2 (business)", "N1 (business+)"]'></slider>
+                        <span class="col-xs-1"></span>
+                      </div>
+                      <small class="helpy"><em>Note: if you are unsure of your proficiency level and have selected 'some environmental exposure', then please select 'N3'. If you have selected 'high environmental exposure', please select 'N1'.</em></small>
+                    </dd>
+                  </div>
+
+                  <p>Please select a vocabulary area of interest. Generating the vocabulary list and quizzes is data-intensive and may thus take up to five minutes.</p>
+
+                  </div>
 
                 <div class="row">
                   <div class="col-xs-12">
