@@ -19,7 +19,7 @@
                         <p>Loading...</p>
                     </div>
                     <div ng-show="ready">
-                      <p ng-if="stage === 'quizAPending' || stage === 'quizBPending'">Below is a vocabulary list from which to study the below stated topic. It is limited to a maximum cumulative (total) frequency of 57.14% (because this is as high as the user will be tested to), and to 450 entries (so that it doesn't consume more than 200MB of RAM to render!).</p>
+                      <p ng-if="stage === 'quizAPending' || stage === 'quizBPending'">Below is a vocabulary list from which to study the below stated topic - it includes only tokens above your stated proficiency level. 'Lone' frequency represents how often the token appeared throughout the texts sampled (out of all tokens above one's proficiency level), and 'total' is the cumulative count of each lone frequency value added to the one before it. The list's data is limited to a maximum cumulative (total) frequency of 57.14% (because this is as high as the user will be assessed to), and to 450 entries (so that it doesn't consume more than 200MB of RAM to render the webpage!).</p>
                         
                         <dl class="dl-horizontal">
                           <dt>Topic</dt>
