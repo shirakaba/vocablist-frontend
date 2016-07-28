@@ -2,7 +2,7 @@
         <section class="row">
             <div class="col-xs-12">
               <div class="panel panel-default">
-                <div class="panel-heading"><span>Set-up</span></div>
+                <div class="panel-heading text-uppercase"><span>Set-up</span></div>
                 <div class="panel-body">
                   <span>Input your user id here and press 'enter'.</span>
                   <form data-ng-submit="$state.go('quiz', {'uid':uid})">
@@ -33,7 +33,7 @@
         <section ng-if="ready" class="row">
           <div class="col-xs-12">
             <div class="panel panel-default" style="margin-bottom: 0px;">
-                <div class="panel-heading"><span>Practice area: sample kanji test</span></div>
+                <div class="panel-heading text-uppercase"><span>Practice area: sample kanji test</span></div>
                 <div class="panel-body">
                   <p>Answer each question in the <strong>Questions</strong> column <em>(in this case consisting of four kanji-related questions)</em> by dragging across the corresponding information for it from the <strong>Choices</strong> column <em>(in this case consisting of six dictionary definitions)</em>. Incorrect answers do not subtract from score.</p>
                   
@@ -130,7 +130,7 @@
             <!-- <h1>Quiz score: <span ng-bind="calculateQuizScore(r)"></span></h1> -->
             <div class="panel panel-primary" ng-repeat="tier in r">
             <!-- <div class="panel panel-primary"> -->
-              <div class="panel-heading">
+              <div class="panel-heading text-uppercase">
                 <!-- <h3 class="panel-title">Tier <span ng-bind="$index + 1"></span></h3> -->
                 <h3 class="panel-title">
 
@@ -150,7 +150,7 @@
                 <!-- Kanji test (all tiers) -->
                 <div ng-repeat="test in tier.tests">
                   <div class="panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-heading text-uppercase">
                       <!-- <span ng-bind="test.testType"></span> test -->
                       <span ng-switch="test.testType">
                         <span ng-switch-when="kanji"><span>Kanji test</span></span>
@@ -239,14 +239,14 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-primary">
-                <div class="panel-heading">Feedback</div>
+                <div class="panel-heading text-uppercase">Feedback</div>
                 <div class="panel-body">
                   <p>If you have finished the quiz above, please complete this short feedback form before submitting your results.</p>
 
                   <div class="row">
                     <div class="col-xs-12">
                       <div class="panel panel-default">
-                        <div class="panel-heading">The vocabulary list</div>
+                        <div class="panel-heading text-uppercase">The vocabulary list</div>
                         <div class="panel-body">
                           <p>These next questions will concern the vocabulary list. Note that a score of '3' given for any question is a neutral response (ie. "neither agree nor disagree").</p>
                           <dl class="dl-horizontal">
@@ -381,7 +381,7 @@
                   <div class="row">
                     <div class="col-xs-12">
                       <div class="panel panel-default">
-                        <div class="panel-heading">Other</div>
+                        <div class="panel-heading text-uppercase">Other</div>
                         <div class="panel-body">
                           <!-- <p>Other </p> -->
 
@@ -430,7 +430,7 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="panel panel-primary">
-                <div class="panel-heading">Submission of results</div>
+                <div class="panel-heading text-uppercase">Submission of results</div>
                 <div class="panel-body">
                   <span>Once you have finished the quiz, press 'submit' to send your answers to the researcher.</span>
                   <button type="submit" style="margin-left: 1em;" class ="btn btn-info" ng-click="reportScores()" ng-disabled="reportSent">Submit</button>

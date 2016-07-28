@@ -7,7 +7,7 @@
             <p>Also: It is generally impossible to use this website properly on a mobile device.</p>
           </div>
           <div class="panel panel-default">
-              <div class="panel-heading"><span>Study info</span></div>
+              <div class="panel-heading text-uppercase"><span>Study info</span></div>
               <div class="panel-body">
                 <p>This study is being conducted by <strong>Jamie Birch</strong> <em>(correspondence: <u>jb15339+vocab</u> <u>[at]</u> <u>my.bristol.ac.uk</u>)</em> for the evaluation of his MSc Computer Science dissertation project on <strong>optimising the study of technical/topic-specific vocabulary in Japanese</strong>. He is a student in the Engineering Department of the <a href="http://www.bristol.ac.uk/">University of Bristol</a>, under the supervision of <a href="https://www.cs.bris.ac.uk/~flach/">Prof. Peter Flach.</a></p>
                 <p>The study consists of three parts:</p>
@@ -26,7 +26,7 @@
   <section class="row">
       <div class="col-xs-12">
           <div class="panel panel-default">
-              <div class="panel-heading"><span>Data protection</span></div>
+              <div class="panel-heading text-uppercase"><span>Data protection</span></div>
               <div class="panel-body">
                 <p>All data begins and will remain anonymous (eg. phrasing in the dissertation will resemble the format of: "participant #3, who claimed a high level of environmental exposure to Japanese") and confidential. Data will be stored on my password-protected home computer, which is accessible only by myself.</p>
                 <p>Participants may request a PDF copy of the final dissertation, which is scheduled to be submitted on 15th September and - to my understanding - will be stored in print in the University of Bristol library.</p>
@@ -55,7 +55,7 @@
       <div class="col-xs-12">
 
           <div class="panel panel-default">
-              <div class="panel-heading"><span>Demographic info</span></div>
+              <div class="panel-heading text-uppercase"><span>Demographic info</span></div>
               <div class="panel-body">
 
                   <dl class="dl-horizontal">
@@ -108,7 +108,7 @@
   <section class="row" data-ng-if="formData.consent">
       <div class="col-xs-12">
           <div class="panel panel-default">
-              <div class="panel-heading"><span>Topic of interest</span></div>
+              <div class="panel-heading text-uppercase"><span>Topic of interest</span></div>
               <div class="panel-body">
                 <div style="padding-bottom: 2em">
                     <p>Please select which research group you would like to participate in, and therefore the manner in which you will study your topic of interest - participation in either group is valuable to the research project.</p>
@@ -141,14 +141,14 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="input-group well well-sm">
-                      <form data-ng-submit="generate(formData.category)">
+                      <form data-ng-submit="generate()">
                         <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
                         <div class="row">
                           <div class="col-xs-10" style="padding-right: 0px;">
                             <input type="text" class="form-control" title="submitbutton" data-ng-model="formData.category" ng-disabled="startedSearch" placeholder="Category name in Japanese, eg. 科学">
                           </div>
                           <span class="input-group-btn col-xs-1" style="vertical-align: bottom; padding-left: 0px;" ng-hide="startedSearch">
-                            <input type="submit" name = "button1" value = "" class ="btn" ng-click="startedSearch = true"/>
+                            <input type="submit" name = "button1" value = "" class ="btn"/>
                           </span>
                           <span class="input-group-btn spinner col-xs-1" style="padding-left: 0px" ng-show="startedSearch && !finishedSearch">
                             <i class="glyphicon glyphicon-refresh spinning"></i>

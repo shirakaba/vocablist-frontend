@@ -33,7 +33,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             issues: "",
                             ownchoice: false,
                             group: 'list',
-                            // category: null,
+                            category: null,
                             proficiency: 2
                         },
                         uid: "",
@@ -141,11 +141,14 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     },
 
                     /** Generates the main JSON and report via postman(). */
-                    sc.generate = function(cat) {
+                    sc.generate = function() {
+                        sc.startedSearch = true;
                         // console.log('input proficiency was:' + sc.formData.proficiency);
-                        if(cat == null) {
+                        if(!sc.formData.category) {
                             // console.log("category was null.");
                             sc.startedSearch = false;
+                            alert("category chosen was null! List generated will be meaningless. Please refresh and start again.");
+                            // console.log('confirmed null');
                             return;
                         }
                         $http.get(
@@ -182,7 +185,7 @@ headers: {
                                         "proficiency": sc.filteringEnum(sc.formData.proficiency),
                                         "source": sc.formData.source,
                                         "issues": sc.formData.issues,
-                                        "category": sc.category,
+                                        "category": sc.formData.category,
                                         "group": sc.formData.group
                                     };
                                     console.log('group is:' + sc.formData.group);
@@ -216,6 +219,7 @@ headers: {
 
                                 function(response) {
                                     console.error(response);
+                                    sc.startedSearch = false;
                                 }
                             );
                     };
