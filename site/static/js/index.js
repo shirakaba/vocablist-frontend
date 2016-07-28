@@ -107,7 +107,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                     sc.postman = function(uid, extension, input, separator){
                         // HTTP.POST is the angular version, 
                         $.ajax({
-                                url        : "http://82.37.79.52:80/generator",
+                                url        : "http://topicdict.ddns.net:80/generator",
                                 // dataType   : 'json', // this is the expected payload type. Doesn't like response.status(200).end()
                                 contentType: 'application/json; charset=UTF-8',
 				username: 'thesis',
@@ -149,7 +149,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             return;
                         }
                         $http.get(
-                            'http://82.37.79.52:8080/generate?'
+                            // 'http://82.37.79.52:8080/generate?'
+                            'http://topicdict.ddns.net:8080/generate?'
                             +'partition='+encodeURIComponent(250)
                             +'&makequiz='+encodeURIComponent(true)
                             +'&maxarticles='+encodeURIComponent(32)
@@ -329,7 +330,7 @@ headers: {
                             sc.uid = uid; // Redundant except for when landing on the page without giving a uid.
 
                             $.ajax({
-                                url        : "http://82.37.79.52:80/quiz",
+                                url        : "http://topicdict.ddns.net:80/quiz",
                                 dataType   : 'json',
                                 contentType: 'application/json; charset=UTF-8',
 				username: 'thesis',
@@ -435,7 +436,7 @@ headers: {
                           * */
                         read : function(uid, extension){
                             $.ajax({
-                                url        : "http://82.37.79.52:80/quiz",
+                                url        : "http://topicdict.ddns.net:80/quiz",
                                 dataType   : 'json',
                                 contentType: 'application/json; charset=UTF-8',
 				username: 'thesis',
@@ -599,7 +600,7 @@ headers: {
                     /** Two modes: Append to the user's report, or make main JSON. */
                     sc.postmanQ = function(uid, extension, input, separator){
                         $.ajax({
-                                url        : "http://82.37.79.52:80/generator", // using the generator address is actually correct presently.
+                                url        : "http://topicdict.ddns.net:80/generator", // using the generator address is actually correct presently.
                                 // dataType   : 'json', // this is the expected payload type. Doesn't like response.status(200).end()
                                 contentType: 'application/json; charset=UTF-8',
 				username: 'thesis',

@@ -166,7 +166,7 @@
                           <small class="helpy col-xs-12"><em>The category provided must be a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{formData.category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em><br></small>
                         </div>
                       </form>
-                      <div ng-if="startedSearch && !finishedSearch" class="alert alert-info" ng-show="startedSearch">
+                      <div ng-if="startedSearch && !finishedSearch && !postmanError" class="alert alert-info" ng-show="startedSearch">
                         <span>Now generating the vocabulary list and corresponding quizzes.</span>
                         <timer finish-callback="overTime()" countdown="120" interval="1000"> Estimated remaining time : {{countdown}} second{{secondsS}} ({{progressBar}}% done).
                         </timer>
