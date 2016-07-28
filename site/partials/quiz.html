@@ -23,7 +23,7 @@
                     <span ng-switch-default>Stage not recognised.</span>
                   </div>
                   <div ng-if="stage.indexOf('quiz') == 0" class="alert alert-warning">
-                    <p>For users of Safari: If no panel is visible below this one, and you haven't finished both your quizzes yet, then please refresh the page.</p>
+                    <p>Note: If no panel is visible below this one, and you haven't finished both your quizzes yet, then please refresh the page.</p>
                   </div>
                 </div>
               </div>
@@ -135,11 +135,11 @@
                 <h3 class="panel-title">
 
                   <span ng-switch="$index">
-                    <span ng-switch-when="0"><span>Tier one: 50th percentile of word usage</span></span>
-                    <span ng-switch-when="1"><span>Tier two: 50th-75th percentile of word usage</span></span>
-                    <span ng-switch-when="2"><span>Tier three: 75th-88th percentile of word usage</span></span>
-                    <span ng-switch-when="3"><span>Tier four: 88th-94th percentile of word usage</span></span>
-                    <span ng-switch-default>Tier <span ng-bind="$index +1"/>: [undefined percentile of word usage]</span>
+                    <span ng-switch-when="0"><span>Tier one: 37th percentile of word usage beyond stated proficiency</span></span>
+                    <span ng-switch-when="1"><span>Tier two: 37th-50th percentile of word usage beyond stated proficiency</span></span>
+                    <span ng-switch-when="2"><span>Tier three: 50th-55th percentile of word usage beyond stated proficiency</span></span>
+                    <span ng-switch-when="3"><span>Tier four: 55th-57th percentile of word usage beyond stated proficiency</span></span>
+                    <span ng-switch-default>Tier <span ng-bind="$index +1"/>: [undefined percentile of word usage beyond proficiency]</span>
                   </span>
 
                 </h3>
