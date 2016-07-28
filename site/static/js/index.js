@@ -154,12 +154,12 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         $http.get(
                             // 'http://82.37.79.52:8080/generate?'
                             'http://topicdict.ddns.net:8080/generate?'
-                            +'partition='+encodeURIComponent(250)
+                            +'partition='+encodeURIComponent(450)
                             +'&makequiz='+encodeURIComponent(true)
                             +'&maxarticles='+encodeURIComponent(32)
                             +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.formData.proficiency))
                             +'&egs='+encodeURIComponent(2)
-                            +'&limit='+encodeURIComponent(100.0)
+                            +'&limit='+encodeURIComponent(57.14)
                             +'&minyield='+encodeURIComponent(0.0)
                             +'&input='+encodeURIComponent(sc.formData.category)
 ,

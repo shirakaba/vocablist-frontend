@@ -33,7 +33,7 @@
         <section ng-if="ready" class="row">
           <div class="col-xs-12">
             <div class="panel panel-default" style="margin-bottom: 0px;">
-                <div class="panel-heading text-uppercase"><span>Practice area: sample kanji test</span></div>
+                <div class="panel-heading"><span class="text-uppercase">Practice area:</span><span> Sample kanji test</span></div>
                 <div class="panel-body">
                   <p>Answer each question in the <strong>Questions</strong> column <em>(in this case consisting of four kanji-related questions)</em> by dragging across the corresponding information for it from the <strong>Choices</strong> column <em>(in this case consisting of six dictionary definitions)</em>. Incorrect answers do not subtract from score.</p>
                   
@@ -130,15 +130,15 @@
             <!-- <h1>Quiz score: <span ng-bind="calculateQuizScore(r)"></span></h1> -->
             <div class="panel panel-primary" ng-repeat="tier in r">
             <!-- <div class="panel panel-primary"> -->
-              <div class="panel-heading text-uppercase">
+              <div class="panel-heading">
                 <!-- <h3 class="panel-title">Tier <span ng-bind="$index + 1"></span></h3> -->
                 <h3 class="panel-title">
 
                   <span ng-switch="$index">
-                    <span ng-switch-when="0"><span>Tier one: 37th percentile of word usage beyond stated proficiency</span></span>
-                    <span ng-switch-when="1"><span>Tier two: 37th-50th percentile of word usage beyond stated proficiency</span></span>
-                    <span ng-switch-when="2"><span>Tier three: 50th-55th percentile of word usage beyond stated proficiency</span></span>
-                    <span ng-switch-when="3"><span>Tier four: 55th-57th percentile of word usage beyond stated proficiency</span></span>
+                    <span ng-switch-when="0"><span class="text-uppercase">Tier one:</span><span> 37th percentile of word usage beyond stated proficiency</span></span>
+                    <span ng-switch-when="1"><span class="text-uppercase">Tier two:</span><span> 37th-50th percentile of word usage beyond stated proficiency</span></span>
+                    <span ng-switch-when="2"><span class="text-uppercase">Tier three:</span><span> 50th-55th percentile of word usage beyond stated proficiency</span></span>
+                    <span ng-switch-when="3"><span class="text-uppercase">Tier four:</span><span> 55th-57th percentile of word usage beyond stated proficiency</span></span>
                     <span ng-switch-default>Tier <span ng-bind="$index +1"/>: [undefined percentile of word usage beyond proficiency]</span>
                   </span>
 
@@ -164,7 +164,7 @@
 
                     <div ng-if="test.qus.length === 0" class="alert alert-dismissible alert-info">
                       <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-                      <span><small><em>This test contains no questions – this is because too few eligible words (eg. ones with unambiguous definitions) were found to create a test with, for the size of the vocabulary list generated and the amount of filtering applied. Don't worry – no points will be lost here!</em></small></span>
+                      <span><small><em>This test contains no questions – this is because too few eligible words (eg. ones with single entries in the dictionary) were found to create a test with, for the topic chosen, the size of the vocabulary list generated and the amount of filtering applied. Don't worry – no points will be lost here!</em></small></span>
                     </div>
 
                     <!-- <span><i>Answer the questions by dragging the appropriate choice into each question's answer slot.</i></span> -->
@@ -252,7 +252,7 @@
                           <dl class="dl-horizontal">
 
                             <div class="controlRow-s">
-                              <dt>Was it intuitive/clear how to use it?</dt>
+                              <dt>Was it intuitive/clear how to use the list?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
@@ -266,8 +266,8 @@
                                   <span class="col-xs-6" style="text-align:right;" ng-style="">Intuitive→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.intuitive === 0}" ng-model="formData.intuitive" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
+                                <small class="helpy"><em>eg. with the instructions provided, was it possible to: 1) operate all the features of the list; and 2) understand all the data presented?</em></small>
                               </dd>
-                              <small class="helpy"><em>eg. with the instructions provided, was it possible to: 1) operate all the features of the list; and 2) understand all the data presented?</em></small>
                             </div>
 
                             <div class="controlRow-s">
@@ -285,12 +285,12 @@
                                   <span class="col-xs-6" style="text-align:right;" ng-style="">Easy→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.navigation === 0}" ng-model="formData.navigation" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
-                                <small class="helpy"><em>eg. was the layout and design accommodating in locating all the information that was important to you? Or was there too much irrelevant information, or distracting elements of the design?</em></small>
+                                <small class="helpy"><em>eg. was the layout and design accommodating in locating all the information that was important to you? Or was there too much irrelevant information, or distracting elements of the design? Additionally, did the list run quickly enough in your browser?</em></small>
                               </dd>
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>Regardless of the quiz results, do you feel it helped you understand the topic?</dt>
+                              <dt>Regardless of the quiz results, do you feel the list helped you understand the topic?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
@@ -309,7 +309,7 @@
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>What do you feel improves your understanding of a topic more: studying with this system*, or trying to read articles/texts directly?</dt>
+                              <dt>What do you feel improves your understanding of a topic in Japanese more: studying with this list, or trying to read articles/texts directly?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
@@ -327,15 +327,14 @@
                                 </div> -->
                                 <div class="col-xs-8">
                                   <span class="col-xs-6">←Direct reading</span>
-                                  <span class="col-xs-6" style="text-align:right;" ng-style="">This system→</span>
+                                  <span class="col-xs-6" style="text-align:right;" ng-style="">This list→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.effectiveness < 1}" ng-model="formData.effectiveness" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
-                                <small class="helpy"><em>* 'this system' here refers to the vocabulary list.</em></small>
                               </dd>
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>As it is now, would you use it again in the future?</dt>
+                              <dt>As the system* is now, would you use it again in the future (for any language)?</dt>
                               <dd>
                                 <div class="col-xs-4">
                                   <label style="font-weight:normal">
@@ -349,24 +348,35 @@
                                   <span class="col-xs-6" style="text-align:right;" ng-style="">Definitely→</span>
                                   <slider class="col-xs-12" ng-class="{'nocomment': formData.useAgain === 0}" ng-model="formData.useAgain" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
                                 </div>
+                                <small class="helpy"><em>* 'the system' here refers to 1) the interface for generating the vocabulary list; and also 2) the vocabulary list itself. The language needn't be for Japanese, however.</em></small>
                               </dd>
                             </div>
 
                             <div class="controlRow-s">
-                              <dt>Would you use it for learning another language (including English)?</dt>
+                              <dt>Would you use the system* again for learning another language (including English)?</dt>
                               <dd>
-                                <div class="col-xs-4">
-                                  <label style="font-weight:normal">
-                                    <span class="col-xs-12" style="text-align:center;">No comment</span>
-                                    <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.useOtherLang" ng-click="formData.useOtherLang = 0" value="0"></span><br>
-                                    <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
-                                  </label>
+                                <div class="col-xs-12">
+                                  <div class="col-xs-2">
+                                    <label style="font-weight:normal">
+                                      <span class="col-xs-12" style="text-align:center;">No comment</span>
+                                      <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.useOtherLang" ng-click="formData.useOtherLang = 0" value="0"></span><br>
+                                      <span class="col-xs-12" style="text-align:center;"><small><em>(skips question)</em></small></span>
+                                    </label>
+                                  </div>
+                                  <div class="col-xs-3">
+                                    <label style="font-weight:normal">
+                                      <span class="col-xs-12" style="text-align:center;">N/A</span>
+                                      <span class="col-xs-12" style="text-align:center; line-height:0px;"><input type="radio" ng-model="formData.useOtherLang" ng-click="formData.useOtherLang = -1" value="-1"></span><br>
+                                      <span class="col-xs-12" style="text-align:center;"><small><em>(eg. you are not studying other languages)</em></small></span>
+                                    </label>
+                                  </div>
+                                  <div class="col-xs-7">
+                                    <span class="col-xs-6">←Definitely not</span>
+                                    <span class="col-xs-6" style="text-align:right;" ng-style="">Definitely→</span>
+                                    <slider class="col-xs-12" ng-class="{'nocomment': formData.useOtherLang < 1}" ng-model="formData.useOtherLang" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
+                                  </div>
                                 </div>
-                                <div class="col-xs-8">
-                                  <span class="col-xs-6">←Definitely not</span>
-                                  <span class="col-xs-6" style="text-align:right;" ng-style="">Definitely→</span>
-                                  <slider class="col-xs-12" ng-class="{'nocomment': formData.useOtherLang === 0}" ng-model="formData.useOtherLang" min="1" step="1" max="4" ticks="[1, 2, 3, 4, 5]" ticks-labels='[1, 2, 3, 4, 5]'></slider>
-                                </div>
+                                  <small class="helpy"><em>* 'the system' here refers to 1) the interface for generating the vocabulary list; and also 2) the vocabulary list itself.</em></small>
                               </dd>
                             </div>
 

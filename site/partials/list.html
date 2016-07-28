@@ -2,7 +2,7 @@
       <section class="row">
           <div class="col-xs-12">
               <div class="panel panel-default">
-                  <div class="panel-heading">Info</div>
+                  <div class="panel-heading text-uppercase">Info</div>
 
                   <div class="panel-body">
                     <div ng-if="readError || uid == null">
@@ -19,6 +19,7 @@
                         <p>Loading...</p>
                     </div>
                     <div ng-show="ready">
+                      <p ng-if="stage === 'quizAPending' || stage === 'quizBPending'">Below is a vocabulary list from which to study the below stated topic. It is limited to a maximum cumulative (total) frequency of 57.14% (because this is as high as the user will be tested to), and to 450 entries (so that it doesn't consume more than 200MB of RAM to render!).</p>
                         
                         <dl class="dl-horizontal">
                           <dt>Topic</dt>
@@ -37,11 +38,11 @@
                       <p ng-if="stage === 'finished'">Note: you've already finished both quizzes, but you may continue to view this vocabulary list until the server turns off (around late August).</p>
                     </div>
                     <div class="alert alert-info" ng-if="ready && stage !== 'finished'">
-                      <p ng-if="!control">Proceed to part 3/3: After you are satisfied you have studied this topic, using the vocabulary list as reference, to your satisfaction (the amount of time is up to you: be it cramming for 30 minutes or studying regularly over a period of days), you may take the second (final) quiz at any time at <a href="#/quiz?uid={{uid}}" class="alert-link">this link</a>.</p>
-                      <p ng-if="control">Proceed to part 3/3: After you are satisfied you have studied this topic, using these articles as reference, to your satisfaction (the amount of time is up to you: be it cramming for 30 minutes or studying regularly over a period of days), you may take the second (final) quiz at any time at <a href="#/quiz?uid={{uid}}" class="alert-link">this link</a>.</p>
+                      <p ng-if="!control">When you'd like to proceed to part 3/3: After you are satisfied you have studied this topic, using the vocabulary list as reference, to your satisfaction (the amount of time is up to you: be it cramming for 30 minutes or studying regularly over a period of days), you may take the second (final) quiz at any time at <a href="#/quiz?uid={{uid}}" class="alert-link">this link</a>.</p>
+                      <p ng-if="control">When you'd like to proceed to part 3/3: After you are satisfied you have studied this topic in your own style, using these Wikipedia articles as reference, to your satisfaction (the amount of time is up to you: be it cramming for 30 minutes or studying regularly over a period of days), you may take the second (final) quiz at any time at <a href="#/quiz?uid={{uid}}" class="alert-link">this link</a>.</p>
                     </div>
                     <div ng-if="ready && (stage === 'quizAPending' || stage === 'quizBPending')" class="alert alert-warning">
-                      <p>If no panel is visible below this one, and you haven't finished both your quizzes yet, then please refresh the page.</p>
+                      <p>If you don't see a 'display' panel and a vocabulary list below, please refresh the page.</p>
                     </div>
 
                   </div>
@@ -112,13 +113,13 @@
         <section class="row">
           <div class="col-xs-12">
               <div class="panel panel-primary">
-                  <div class="panel-heading">Display</div>
+                  <div class="panel-heading text-uppercase">Display</div>
 
                   <div class="panel-body">
                     <p>Adjust these options to reduce or increase the amount of information displayed in the list below.</p>
                     <dl class="dl-horizontal">
 
-                      <dt>Tokens</dt>
+                      <dt ng-if="filteringEnumR(prefiltering) < 6">Tokens</dt>
                       <dd>
                         <label style="font-weight:normal" ng-if="filteringEnumR(prefiltering) < 1">Fundamental: <input type="checkbox" style="margin-right: 1em" id="fundamental" ng-model="f.fundChecked"/></label>
                         <label style="font-weight:normal" ng-if="filteringEnumR(prefiltering) < 2">N5: <input type="checkbox" style="margin-right: 1em" id="n5" ng-model="f.n5Checked"/></label>
