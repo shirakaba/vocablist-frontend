@@ -152,12 +152,12 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                             'http://82.37.79.52:8080/generate?'
                             +'partition='+encodeURIComponent(250)
                             +'&makequiz='+encodeURIComponent(true)
-                            +'&maxarticles='+encodeURIComponent(1)
+                            +'&maxarticles='+encodeURIComponent(32)
                             +'&filtering='+encodeURIComponent(sc.filteringEnum(sc.formData.proficiency))
                             +'&egs='+encodeURIComponent(2)
                             +'&limit='+encodeURIComponent(100.0)
                             +'&minyield='+encodeURIComponent(0.0)
-                            +'&input='+encodeURIComponent(sc.category)
+                            +'&input='+encodeURIComponent(sc.formData.category)
 ,
 				{
 headers: {
