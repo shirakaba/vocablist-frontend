@@ -176,7 +176,7 @@ headers: {
                                     sc.finishedSearch = true;
                                     sc.uid = sc.generateUid();
 
-                                    console.log('reported proficiency was:' + sc.formData.proficiency);
+                                    // console.log('reported proficiency was:' + sc.formData.proficiency);
                                     var report = {
                                         "uid": sc.uid,
                                         "gender": sc.formData.gender,
@@ -188,15 +188,15 @@ headers: {
                                         "category": sc.formData.category,
                                         "group": sc.formData.group
                                     };
-                                    console.log('group is:' + sc.formData.group);
+                                    // console.log('group is:' + sc.formData.group);
                                     var pendingMessage;
                                     if(sc.formData.group === 'list') pendingMessage = 'quizAPending';
                                     else if(sc.formData.group === 'control') pendingMessage = 'quizAPendingControl'
                                     var stage = {
                                         "stage": pendingMessage
                                     };
-                                    console.log(stage);
-                                    console.log(report);
+                                    // console.log(stage);
+                                    // console.log(report);
                                     sc.postman(sc.uid, '.json', response.data, ''); // The JSON
                                     sc.postman(sc.uid, '.txt', report, '/*=== First contents ===*/\n'); // The report
                                     sc.postman(sc.uid, '.status', stage, ''); // The report
@@ -742,8 +742,8 @@ headers: {
                             'feedback': sc.formData
                             };
                         }
-                        console.log('report following...');
-                        console.log(report);
+                        // console.log('report following...');
+                        // console.log(report);
 
                         sc.postmanQ(sc.uid, '.txt', report, '/*=== Quiz' + st + ' results ===*/\n'); // The report
                     };
