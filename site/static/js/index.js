@@ -161,7 +161,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 ,
 				{
 headers: {
-'Authorization': 'Basic '+btoa('user:password')
+'Authorization': 'Basic '+btoa('topicdictSpring:deadlineapproachingSpring')
 }
 }
                             )
