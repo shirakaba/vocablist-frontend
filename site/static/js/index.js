@@ -13,7 +13,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
 
 		$httpProvider.defaults.useXDomain = true;
 
-//		$httpProvider.defaults.headers.common['Authorization'] = 'Basic '+ btoa('testUser:testPass');
+//		$httpProvider.defaults.headers.common['Authorization'] = 'Basic '+ btoa('topicdict:deadlineapproaching');
 
             $stateProvider
             // state for generator partial.
@@ -110,8 +110,8 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                                 url        : "http://82.37.79.52:80/generator",
                                 // dataType   : 'json', // this is the expected payload type. Doesn't like response.status(200).end()
                                 contentType: 'application/json; charset=UTF-8',
-				username: 'testUser',
-				password: 'testPass',
+				username: 'topicdict',
+				password: 'deadlineapproaching',
                                 data       : JSON.stringify({
                                     "uid": uid,
                                     "input": input,
@@ -332,8 +332,8 @@ headers: {
                                 url        : "http://82.37.79.52:80/quiz",
                                 dataType   : 'json',
                                 contentType: 'application/json; charset=UTF-8',
-				username: 'testUser',
-				password: 'testPass',
+				username: 'topicdict',
+				password: 'deadlineapproaching',
                                 data       : JSON.stringify({
                                     "uid": uid,
                                     "extension": extension
@@ -438,8 +438,8 @@ headers: {
                                 url        : "http://82.37.79.52:80/quiz",
                                 dataType   : 'json',
                                 contentType: 'application/json; charset=UTF-8',
-				username: 'testUser',
-				password: 'testPass',
+				username: 'topicdict',
+				password: 'deadlineapproaching',
                                 data       : JSON.stringify({
                                     "uid": uid,
                                     "extension": extension
@@ -602,8 +602,8 @@ headers: {
                                 url        : "http://82.37.79.52:80/generator", // using the generator address is actually correct presently.
                                 // dataType   : 'json', // this is the expected payload type. Doesn't like response.status(200).end()
                                 contentType: 'application/json; charset=UTF-8',
-				username: 'testUser',
-				password: 'testPass',
+				username: 'topicdict',
+				password: 'deadlineapproaching',
                                 data       : JSON.stringify({
                                     "uid": uid,
                                     "input": input,

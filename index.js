@@ -9,7 +9,7 @@ app.use(bodyParser.json({limit: '50mb'})); // gives our application support for 
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // authenticator
-app.use(basicAuth('testUser', 'testPass'));
+app.use(basicAuth('topicdict', 'deadlineapproaching'));
 
 /* Creates a mapping between your filesystem, and the filesystem you pretend exists.
  * If you ask for the first parameter to be just '', then no extra folder is inserted in front of the 'images' in the URL presented to the user.
