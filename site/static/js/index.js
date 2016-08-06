@@ -26,10 +26,7 @@ angular.module('kanjiApp', ['ngAnimate', 'ui.router', 'ui.bootstrap-slider', 'dn
                         // http://stackoverflow.com/questions/12618342/ng-model-does-not-update-controller-value
                         formData: {
                             consent: false,
-                            gender: "other",
-                            age: 100,
                             exposure: "low",
-                            source: "other",
                             issues: "",
                             ownchoice: false,
                             group: 'list',
@@ -184,11 +181,8 @@ headers: {
                                     // console.log('reported proficiency was:' + sc.formData.proficiency);
                                     var report = {
                                         "uid": sc.uid,
-                                        "gender": sc.formData.gender,
-                                        "age": sc.ageReport(sc.formData.age),
                                         "exposure": sc.formData.exposure,
                                         "proficiency": sc.filteringEnum(sc.formData.proficiency),
-                                        "source": sc.formData.source,
                                         "issues": sc.formData.issues,
                                         "category": sc.formData.category,
                                         "group": sc.formData.group
