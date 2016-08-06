@@ -29,7 +29,7 @@
               <div class="panel-heading text-uppercase"><span>Data protection</span></div>
               <div class="panel-body">
                 <p>All data begins and will remain anonymous (eg. phrasing in the dissertation will resemble the format of: "participant #3, who claimed a high level of environmental exposure to Japanese") and confidential. Data will be stored on my password-protected home computer, which is accessible only by myself.</p>
-                <p>Participants may request a PDF copy of the final dissertation, which is scheduled to be submitted on 15th September and - to my understanding - will be stored in print in the University of Bristol library.</p>
+                <p>Participants may request a PDF copy of the final dissertation, which is scheduled to be submitted on 12th September and - to my understanding - will be stored in print in the University of Bristol library.</p>
                 <p>Participants have a right to have their data withdrawn from the study upon request until 20th August, whereupon the data shall be considered usable in the final dissertation write-up.</p>
                 <p>Please indicate whether you:</p>
                 <ol>
@@ -69,12 +69,14 @@
 
                     <div class="controlRow-s">
                       <dt>Age = <span ng-bind="ageReport(formData.age)"/></dt>
-                      <dd><slider class="col-xs-11" ng-model="formData.age" min="10" step="1" max="100" ticks="[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]" ticks-labels='[10, 20, 30, 40, 50, 60, 70, 80, 90, "Unspecified"]'></slider><span class="col-xs-1"></span></dd>
+                      <dd><slider class="col-xs-11" ng-model="formData.age" min="17" step="1" max="100" ticks="[17, 20, 30, 40, 50, 60, 70, 80, 90, 100]" ticks-labels='[17, 20, 30, 40, 50, 60, 70, 80, 90, "Unspecified"]'></slider><span class="col-xs-1"></span>
+                      <small class="helpy col-xs-12"><em>Only adults (people aged over 16) may participate.</em></small>
+                      </dd>
                     </div>
 
                     <dt>Japanese language exposure</dt>
                     <dd>
-                      <label class="radio"><input type="radio" ng-model="formData.exposure" ng-click="formData.proficiency = 2" value="low">Low environmental exposure <p><em>(eg. have spent no more than one year living in a primarily Japanese language environment*)</em></p></label>
+                      <label class="radio"><input type="radio" ng-model="formData.exposure" ng-click="formData.proficiency = 2" value="low">Low (or no) environmental exposure <p><em>(eg. have spent no more than one year living in a primarily Japanese language environment*)</em></p></label>
                       <label class="radio"><input type="radio" ng-model="formData.exposure" ng-click="formData.proficiency = 4" value="some">Some environmental exposure <p><em>(eg. have spent some years in a primarily Japanese language environment*, but have completed no more than a junior high school education there; or comprehend at least high school-level Chinese, as it helps with Japanese recognition)</em></p></label>
                       <label class="radio"><input type="radio" ng-model="formData.exposure" ng-click="formData.proficiency = 6" value="high">High environmental exposure <p><em>(eg. have completed at least a high school education in a primarily Japanese language environment*)</em></p></label>
                       <small class="helpy"><em>* This may include international schools outside of Japan.</em></small>
@@ -83,9 +85,10 @@
                     <div class="controlRow-s">
                       <dt>How did you find out about this study?</dt>
                       <dd>
-                        <label class="radio"><input type="radio" ng-model="formData.source" value="uni">Recruited directly by researcher</label>
-                        <label class="radio"><input type="radio" ng-model="formData.source" value="reddit">Recruited by a Reddit post</label>
-                        <label class="radio"><input type="radio" ng-model="formData.source" value="koohii">Recruited by a Koohii post</label>
+                        <label class="radio"><input type="radio" ng-model="formData.source" value="personal">Informed of study by researcher</label>
+                        <label class="radio"><input type="radio" ng-model="formData.source" value="uni">University society post</label>
+                        <label class="radio"><input type="radio" ng-model="formData.source" value="reddit">Reddit post</label>
+                        <label class="radio"><input type="radio" ng-model="formData.source" value="koohii">Koohii post</label>
                         <label class="radio"><input type="radio" ng-model="formData.source" value="other">Other/unspecified</label>
                       </dd>
                     </div>
@@ -145,7 +148,7 @@
                         <label class="control-label" for="inputDefault">Wikipedia category of choice</label>
                         <div class="row">
                           <div class="col-xs-10" style="padding-right: 0px;">
-                            <input type="text" class="form-control" title="submitbutton" data-ng-model="formData.category" ng-disabled="startedSearch" placeholder="Category name in Japanese, eg. 科学">
+                            <input type="text" class="form-control" title="submitbutton" data-ng-model="formData.category" ng-disabled="startedSearch" placeholder="Valid (see helper text) Wikipedia category name written in JAPANESE, eg. 科学">
                           </div>
                           <span class="input-group-btn col-xs-1" style="vertical-align: bottom; padding-left: 0px;" ng-hide="startedSearch">
                             <input type="submit" name = "button1" value = "" class ="btn"/>
@@ -155,12 +158,12 @@
                           </span>
                           <small class="helpy col-xs-12">
                             <em>Click to input examples: 
-                              <a href="javascript:void(0);" data-ng-click="formData.category = '科学'">Science</a>, 
-                              <a href="javascript:void(0);" data-ng-click="formData.category = '経済'">Economics</a>, 
-                              <a href="javascript:void(0);" data-ng-click="formData.category = '政治'">Politics</a>, 
-                              <a href="javascript:void(0);" data-ng-click="formData.category = '歴史'">History</a>, 
-                              <a href="javascript:void(0);" data-ng-click="formData.category = '数学'">Maths</a>, 
-                              <a href="javascript:void(0);" data-ng-click="formData.category = 'アニメ'">Anime</a>. Please click the search button to start the search.
+                              <a href="javascript:void(0);" data-ng-click="formData.category = '科学'">科学</a>, 
+                              <a href="javascript:void(0);" data-ng-click="formData.category = '経済'">経済</a>, 
+                              <a href="javascript:void(0);" data-ng-click="formData.category = '政治'">政治</a>, 
+                              <a href="javascript:void(0);" data-ng-click="formData.category = '歴史'">歴史</a>, 
+                              <a href="javascript:void(0);" data-ng-click="formData.category = '数学'">数学</a>, 
+                              <a href="javascript:void(0);" data-ng-click="formData.category = 'アニメ'">アニメ</a>. Please click the search button to start the search.
                             </em>
                           </small>
                           <small class="helpy col-xs-12"><em>The category provided must be a valid <a href="https://ja.wikipedia.org/wiki/">Japanese-language Wikipedia</a> category (these are displayed at the bottom of articles, with the word "カテゴリ: _____ "). If you don't have an article in mind, you can try entering any broad Japanese word in the input field and check whether it is a valid category by visiting <a href="https://ja.wikipedia.org/wiki/Category:{{formData.category}}">this dynamically-generated link</a>. If the first line of information for that page says "ウィキペディアには現在この名前のカテゴリはありません", then the category is invalid. If valid, it should show a list of the category's member articles.</em><br></small>

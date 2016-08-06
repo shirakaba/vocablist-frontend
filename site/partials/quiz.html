@@ -4,7 +4,8 @@
               <div class="panel panel-default">
                 <div class="panel-heading text-uppercase"><span>Set-up</span></div>
                 <div class="panel-body">
-                  <span>Input your user id here and press 'enter'.</span>
+                  <span ng-hide="ready">Input your user id here and press 'enter'.</span>
+                  <span ng-show="ready">User id:</span>
                   <form data-ng-submit="$state.go('quiz', {'uid':uid})">
                     <input type="text" class="form-control" title="submitbutton" data-ng-model="uid" ng-disabled="ready" placeholder="User id, eg. abcdef123">
                   </form>
@@ -22,6 +23,9 @@
                     <span ng-switch-when="finished"><span>You've already submitted a 'before' and 'after' quiz for this user id! You're finished :)</span></span>
                     <span ng-switch-default>Stage not recognised.</span>
                   </div>
+                  <!-- <div ng-if="stage.indexOf('quiz') == 0" class="alert alert-warning">
+                    <p>Caution: if there are no questions in any of the quizzes, then the category you chose to generate the list with was not a valid Wikipedia category; please ensure that it is written in Japanese, and follow the helper text to determine whether the category is valid or not.</p>
+                  </div> -->
                   <div ng-if="stage.indexOf('quiz') == 0" class="alert alert-warning">
                     <p>Note: If no 'practice area' panel is visible below this one, then please refresh the page.</p>
                   </div>

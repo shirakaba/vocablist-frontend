@@ -172,6 +172,11 @@ headers: {
 
                             .then(
                                 function (response) {
+                                    if(response.data.successfulArticles.length === 0) {
+                                        sc.startedSearch = false;
+                                        alert("Category chosen was not a valid Japanese Wikipedia category! It should be in Japanese, and be an existing category (not merely an article name - although sometimes article names are the same as category names).\n\nTry navigating to a Japanese Wikipedia article (a link is provided in the helper text), then picking a category from the listed 'カテゴリ: _____' at the bottom of the article (when viewing in desktop, not mobile mode).");
+                                        return;
+                                    }
                                     // For some reason, this is enclosed by sc.$apply() from elsewhere, so another is unneeded.
                                     sc.finishedSearch = true;
                                     sc.uid = sc.generateUid();
@@ -219,6 +224,7 @@ headers: {
 
                                 function(response) {
                                     console.error(response);
+
                                     sc.startedSearch = false;
                                 }
                             );
