@@ -37,14 +37,16 @@
                   <li>... understand that participation in this study is voluntary and unforced;</li>
                   <li>... permit the researcher to hold and use the data as specified in <strong>Study info</strong>;</li>
                   <li>... understand that the researcher will ensure the anonymity and confidentiality of said data, as specified in <strong>Data protection</strong>;</li>
-                  <li>... and also understand that you have the right to withdraw your participation in this study up until 20th August, as specified in <strong>Data protection</strong>.</li>
+                  <li>... understand that you have the right to withdraw your participation in this study up until 20th August, as specified in <strong>Data protection</strong>;</li>
+                  <li>... and are also of the adult age (above 16) necessary to give informed consent.</li>
                 </ol>
                 <dl class="dl-horizontal">
                   <dt>Consent to participate</dt>
                   <dd>
-                    <label class="radio-inline"><input type="radio" ng-model="formData.consent" data-ng-value="true">Yes (I consent)</label>
-                    <label class="radio-inline" ng-hide="consent"><input type="radio" ng-model="formData.consent" data-ng-value="false">No (I don't consent)</label>
+                    <label class="radio-inline"><input type="radio" ng-model="formData.consent" data-ng-value="true">Yes (I consent, and am of adult age*)</label>
+                    <label class="radio-inline" ng-hide="consent"><input type="radio" ng-model="formData.consent" data-ng-value="false">No (I don't consent - or I am not of adult age*)</label>
                   </dd>
+                    <small class="helpy"><em>* Adult age is defined to be "above 16".</em></small>
               </div>
           </div>
       </div>
@@ -55,24 +57,8 @@
       <div class="col-xs-12">
 
           <div class="panel panel-default">
-              <div class="panel-heading text-uppercase"><span>Demographic info</span></div>
+              <div class="panel-heading text-uppercase"><span>Environmental exposure</span></div>
               <div class="panel-body">
-
-                  <dl class="dl-horizontal">
-
-                    <dt>Gender</dt>
-                    <dd>
-                      <label class="radio-inline"><input type="radio" ng-model="formData.gender" value="male">Male</label>
-                      <label class="radio-inline"><input type="radio" ng-model="formData.gender" value="female">Female</label>
-                      <label class="radio-inline"><input type="radio" ng-model="formData.gender" value="other">Other category/unspecified</label>
-                    </dd>
-
-                    <div class="controlRow-s">
-                      <dt>Age = <span ng-bind="ageReport(formData.age)"/></dt>
-                      <dd><slider class="col-xs-11" ng-model="formData.age" min="17" step="1" max="100" ticks="[17, 20, 30, 40, 50, 60, 70, 80, 90, 100]" ticks-labels='[17, 20, 30, 40, 50, 60, 70, 80, 90, "Unspecified"]'></slider><span class="col-xs-1"></span>
-                      <small class="helpy col-xs-12"><em>Only adults (people aged over 16) may participate.</em></small>
-                      </dd>
-                    </div>
 
                     <dt>Japanese language exposure</dt>
                     <dd>
@@ -81,17 +67,6 @@
                       <label class="radio"><input type="radio" ng-model="formData.exposure" ng-click="formData.proficiency = 6" value="high">High environmental exposure <p><em>(eg. have completed at least a high school education in a primarily Japanese language environment*)</em></p></label>
                       <small class="helpy"><em>* This may include international schools outside of Japan.</em></small>
                     </dd>
-
-                    <div class="controlRow-s">
-                      <dt>How did you find out about this study?</dt>
-                      <dd>
-                        <label class="radio"><input type="radio" ng-model="formData.source" value="personal">Informed of study by researcher</label>
-                        <label class="radio"><input type="radio" ng-model="formData.source" value="uni">University society post</label>
-                        <label class="radio"><input type="radio" ng-model="formData.source" value="reddit">Reddit post</label>
-                        <label class="radio"><input type="radio" ng-model="formData.source" value="koohii">Koohii post</label>
-                        <label class="radio"><input type="radio" ng-model="formData.source" value="other">Other/unspecified</label>
-                      </dd>
-                    </div>
 
                     <div class="controlRow-s">
                       <dt>Other</dt>
