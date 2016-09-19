@@ -1,0 +1,277 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.nocomment .slider-handle {
+  background-image: none !important;
+  background-color: grey !important;
+}
+
+/* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently not supported by any browser */
+}
+
+.spinner {
+  float: none;
+  vertical-align: middle;
+  text-align: center;
+  padding-left: 0px;
+  padding-top: 5px;
+  padding-right: 0px;
+  font-size: xx-large;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(192, 192, 192);
+}
+.glyphicon.glyphicon-refresh {
+  font-size: xx-large;
+}
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+@-webkit-keyframes spin2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+/* ============== */
+
+label.radio {
+  font-weight: normal;
+}
+
+.controlRow {
+  padding-top: 3.5em;
+}
+.controlRow-s {
+  padding-top: 2em;
+}
+
+.number {
+  color: black;
+  text-align: right;
+}
+
+.alpha {
+  color: black;
+  text-align: left;
+}
+
+.massive{
+    color:black;
+    /*font-family: "MS PGothic", sans-serif;*/
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    font-size:18em;
+    line-height: 1em;
+    width: 18em;
+}
+
+.bg{
+  height: 100%;
+  width: 100%;
+  position:fixed;
+  background-image: url("img/bg.png");
+  background-repeat: no-repeat;
+  z-index: -1;
+  background-position: center bottom;
+  opacity: 0.85;
+}
+
+.massiveimg{
+    max-width: 18em;
+    max-height: 18em;
+}
+
+.maxdocwidth{
+    max-width: 1000px;
+}
+
+.houdini {
+    overflow:hidden;
+}
+
+.clicked a {
+    cursor: default !important;
+}
+
+.eg {
+  color: darkslateblue;
+}
+
+/*tr:first-child .eg {
+  border-top: 1px solid black;
+}*/
+
+table.definitions {
+  width:100%;
+}
+
+.definitions tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 1.0);
+}
+
+.definitions-column {
+  color: rgb(43, 43, 43);
+  background-color: rgb(245, 245, 245);
+  padding: 0px !important;
+  /* Consider restricting this to just vertical padding */
+  vertical-align: top !important;
+}
+
+.tokens-column {
+  min-width: 8em;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  vertical-align: top !important;
+}
+
+.info-column {
+  min-width: 8.2em;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  vertical-align: top !important;
+}
+
+.percent-column {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  vertical-align: top !important;
+}
+
+tr.ruled {
+  border-top:1px solid black;
+}
+
+/*table.topruled tr:first-child {
+  border-top:1px solid black;
+}*/
+
+/*.footer-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  vertical-align: bottom;
+}*/
+
+.footer {
+  position: fixed;
+  /*height: 200px;*/
+  width: 100%;
+  bottom:0px;
+  /*background-color: red;*/
+}
+
+.sentence-bold {
+  /*text-decoration: underline;*/
+  /*font-weight: 900;*/
+  background-color: yellow;
+}
+
+.v-container{
+    height: 100%;
+    white-space: nowrap;
+    text-align: left;
+}
+.v-container:before{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    /* adjust for white space between pseudo element and next sibling */
+    margin-right: -.25em;
+    /* stretch line height */
+    height: 100%; 
+}
+.v-box{
+    vertical-align: middle;
+    white-space: normal;
+}
+
+.panel-body .v-stable{
+  min-height: 250px;
+}
+
+
+
+/* Below here: for angular-drag-and-drop-lists. */
+/**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+.simpleDemo ul[dnd-list],
+.simpleDemo ul[dnd-list] > li {
+  position: relative;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+.simpleDemo ul[dnd-list] {
+    min-height: 42px;
+    padding-left: 0px;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+.simpleDemo ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+.simpleDemo ul[dnd-list] .dndPlaceholder {
+    display: block;
+    background-color: #ddd;
+    min-height: 42px;
+}
+
+/**
+ * The dnd-lists's child elements currently MUST have
+ * position: relative. Otherwise we can not determine
+ * whether the mouse pointer is in the upper or lower
+ * half of the element we are dragging over. In other
+ * browsers we can use event.offsetY for this.
+ */
+.simpleDemo ul[dnd-list] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+}
+
+/**
+ * Show selected elements in green
+ */
+.simpleDemo ul[dnd-list] li.selected {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
